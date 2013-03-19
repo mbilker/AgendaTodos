@@ -1,4 +1,4 @@
 #!/usr/bin/env node
 
-var Server = require('./lib/server');
-Server.start();
+var App = require('./lib/app');
+App.start();
