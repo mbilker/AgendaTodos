@@ -8,6 +8,7 @@
     "mongoose": "~3.6.0",
     "connect-mongodb": "~1.1.5",
     "jade": "~0.28.2",
-    "connect-timeout": "0.0.1"
+    "connect-timeout": "0.0.1",
+    "stylus": "~0.32.1"
   }
 }

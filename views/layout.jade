@@ -1,0 +1,24 @@
+!!!
+html
+  head
+    title= 'Agenda Book'
+    link(rel='stylesheet', href='/css/style.css')
+    script(type='text/javascript', src='/components/jquery/jquery.js')
+    script(type='text/javascript', src='/components/lodash/lodash.js')
+    script(type='text/javascript', src='/components/backbone/backbone.js')
+  body
+    .app
+      #header
+        h1
+          a(href='/') Agenda Book v0.0.1
+        - if (typeof error !== 'undefined')
+          div.error
+            p #{error}
+        ul
+          - if (typeof currentUser !== 'undefined')
+            li.right
+              a#logout(href='/sessions') Log Out
+            li.right
+              form.search(action='/search')
+                input(name='s', value='Search')
+      block content

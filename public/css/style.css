@@ -1,0 +1,52 @@
+.app {
+  background: rgba(0,0,0,0.1);
+  border-radius: 3px;
+  padding: 10px 15px;
+  width: 500px;
+  margin: auto auto;
+}
+.app a {
+  text-decoration: none;
+}
+.app p {
+  padding: 5px 0;
+  margin: 0;
+}
+.app h1,
+.app h2,
+.app h3,
+.app h4,
+.app h5 {
+  margin: 5px 0;
+  font-family: "Helvetica Neue", "Helvetica";
+}
+.app h1 {
+  font-size: 24px;
+}
+.app .success,
+.app .warning,
+.app .error {
+  border: 1px solid;
+  margin: 0 0 0 0;
+  padding: 15px 10px 15px 50px;
+  background-repeat: no-repeat;
+  background-position: 10px center;
+}
+.app .error {
+  color: #d8000c;
+  background-color: #ffbaba;
+}
+form.users {
+  background: rgba(0,0,0,0.1);
+  border-radius: 3px;
+  padding: 10px 15px;
+}
+form.users div {
+  clear: left;
+}
+form.users label {
+  width: 140px;
+  float: left;
+  clear: right;
+  font-weight: bold;
+}
