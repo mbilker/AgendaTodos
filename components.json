@@ -1,0 +1,10 @@
+{
+  "name": "todos-agenda-book",
+  "version": "0.0.1",
+  "main": "./path/to/main.css",
+  "dependencies": {
+    "jquery": "~1.9.1",
+    "backbone": "~0.9.10",
+    "lodash": "~1.0.1"
+  }
+}

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Agenda Book</title>
+  <link rel="stylesheet" href="/css/todos.css"></link>
+  <script type="text/javascript" src="/components/jquery/jquery.js"></script>
+  <script type="text/javascript" src="/components/lodash/lodash.js"></script>
+  <script type="text/javascript" src="/components/backbone/backbone.js"></script>
+  <script type="text/javascript" src="/js/todos.js"></script>
+</head>
+<body>
+
+  <div id="todoapp">
+    <header>
+      <h1>Todos</h1>
+      <input id="new-todo" type="text" placeholder="What needs to be done?">
+    </header>
+
+    <section id="main">
+      <input id="toggle-all" type="checkbox">
+      <label for="toggle-all">Mark all as complete</label>
+      <ul id="todo-list"></ul>
+    </section>
+
+    <footer>
+      <a id="clear-completed">Clear completed</a>
+      <div id="todo-count"></div>
+    </footer>
+
+  </div>
+
+  <div id="instructions">
+    Double-click to edit a todo.
+  </div>
+
+  <div id="credits">
+    Created by
+    <br />
+    <a href="http://jgn.me/">J&eacute;r&ocirc;me Gravel-Niquet</a>.
+  </div>
+
+</body>
+</html>
