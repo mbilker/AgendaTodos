@@ -35,6 +35,7 @@
 .app .error {
   color: #d8000c;
   background-color: #ffbaba;
+  background-image: url("/img/error.png");
 }
 form.users {
   background: rgba(0,0,0,0.1);
