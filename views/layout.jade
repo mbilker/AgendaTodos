@@ -20,11 +20,6 @@ html
           each message in error
             div.error
               p #{message}
-        ul
-          - if (typeof currentUser !== 'undefined')
-            li.right
-              a#logout(href='/sessions') Log Out
-            li.right
-              form.search(action='/search')
-                input(name='s', value='Search')
+        - if (typeof currentUser !== 'undefined')
+          a#logout(href='/sessions') Log Out
       block content

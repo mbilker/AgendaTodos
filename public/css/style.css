@@ -6,6 +6,7 @@
   margin: auto auto;
 }
 .app a {
+  color: #333;
   text-decoration: none;
 }
 .app p {
