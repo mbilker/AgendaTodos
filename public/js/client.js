@@ -1,4 +1,19 @@
-$(document).ready(function() {
+var Test;
+
+$(function() {
+  var TestModel = Backbone.Model.extend({
+    initialize: function() {
+      console.log('initialized new model');
+    }
+  });
+
+  var TestCollection = Backbone.Collection.extend({
+    model: TestModel,
+    url: '/assignments.json'
+  });
+
+  Test = new TestCollection();
+
   $('#logout').click(function(e) {
     e.preventDefault();
     if (confirm('Are you sure you want to log out?')) {
