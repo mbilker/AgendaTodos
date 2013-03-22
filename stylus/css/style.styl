@@ -1,9 +1,33 @@
-.app
-  background: rgba(0, 0, 0, 0.1)
-  border-radius: 3px
-  padding: 10px 15px
-  width: 600px
-  margin: auto auto
+border-radius()
+  -webkit-border-radius 0 0 arguments arguments
+  -moz-border-radius 0 0 arguments arguments
+  -ms-border-radius 0 0 arguments arguments 
+  -o-border-radius 0 0 arguments arguments
+  border-radius 0 0 arguments arguments
+
+html, body
+  margin 0
+  padding 0
+
+body
+  font: 14px "Helvetica Neue", Helvetica, Arial, sans-serif
+  line-height: 1.4em
+  background: #eeeeee
+  color: #333333
+  width: 520px
+  margin: 0 auto
+  -webkit-font-smoothing: antialiased
+
+#app
+  background: #fff
+  padding: 20px
+  margin-bottom: 40px
+  -webkit-box-shadow: rgba(0, 0, 0, 0.2) 0 2px 6px 0
+  -moz-box-shadow: rgba(0, 0, 0, 0.2) 0 2px 6px 0
+  -ms-box-shadow: rgba(0, 0, 0, 0.2) 0 2px 6px 0
+  -o-box-shadow: rgba(0, 0, 0, 0.2) 0 2px 6px 0
+  box-shadow: rgba(0, 0, 0, 0.2) 0 2px 6px 0
+  border-radius(5px)
 
   a
     color: #333

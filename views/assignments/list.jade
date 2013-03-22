@@ -3,5 +3,21 @@ extends ../layout
 block content
   script(type='text/javascript', src='/templates/templates.js')
   div#list
-    ul
-      li Hello
+    header
+      input(id='new-assignment', type='text', placeholder='What needs to be done?')
+    section#main
+      input(id='toggle-all', type='checkbox')
+      label(for='toggle-all') Mark all as complete
+    footer
+      a#clear-completed Clear Completed
+      div#assignment-count
+  div#instructions
+    Double-click to edit an assignment.
+  div#credits
+    | Modified by
+    br
+    a(href='http://mbilker.us/') mbilker
+    br
+    | Created originally by
+    br
+    a(href='http://jgn.me/') J&eacute;r&ocirc;me Gravel-Niquet
