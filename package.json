@@ -10,10 +10,11 @@
     "jade": "~0.28.2",
     "connect-timeout": "0.0.1",
     "stylus": "~0.32.1",
-    "connect-flash": "~0.1.0"
+    "connect-flash": "~0.1.0",
+    "lodash": "~1.0.1"
   },
   "engines": {
     "node": "0.10.x",
-    "npm":  "1.2.x"
+    "npm": "1.2.x"
   }
 }

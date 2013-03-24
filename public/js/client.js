@@ -1,7 +1,12 @@
 var App, Assignments;
 
 $(function() {
+  //Backbone.emulateHTTP = true;
+  //Backbone.emulateJSON = true;
+
   var Assignment = Backbone.Model.extend({
+    urlRoot: '/assignments/sync',
+    idAttribute: '_id',
     defaults: {
       title: "empty assignment...",
       completed: false
@@ -62,6 +67,7 @@ $(function() {
         this.clear();
       } else {
         this.model.save({title: value});
+        console.log(this.model.isNew());
         this.$el.removeClass("editing");
       }
     },
