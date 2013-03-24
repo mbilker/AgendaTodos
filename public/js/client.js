@@ -1,4 +1,4 @@
-var App;
+var App, Assignments;
 
 $(function() {
   var Assignment = Backbone.Model.extend({
@@ -27,7 +27,7 @@ $(function() {
     }
   });
 
-  var Assignments = new AssignmentList();
+  Assignments = new AssignmentList();
 
   var AssignmentView = Backbone.View.extend({
     tagName:  "li",
@@ -45,7 +45,7 @@ $(function() {
     },
     render: function() {
       this.$el.html(this.template(this.model.toJSON()));
-      this.$el.toggleClass('done', this.model.get('done'));
+      this.$el.toggleClass('done', this.model.get('completed'));
       this.input = this.$('.edit');
       return this;
     },
@@ -74,7 +74,7 @@ $(function() {
   });
 
   var AppView = Backbone.View.extend({
-    el: $("#container"),
+    el: $("#app"),
     statsTemplate: _.template($('#stats-template').html()),
     events: {
       "keypress #new-assignment":  "createOnEnter",
@@ -85,6 +85,7 @@ $(function() {
 
       this.input = this.$("#new-assignment");
       this.allCheckbox = this.$("#toggle-all")[0];
+      console.log(this.allCheckbox);
 
       this.listenTo(Assignments, 'add', this.addOne);
       this.listenTo(Assignments, 'reset', this.addAll);
@@ -99,7 +100,7 @@ $(function() {
       var done = Assignments.done().length;
       var remaining = Assignments.remaining().length;
 
-      if (Todos.length) {
+      if (Assignments.length) {
         this.main.show();
         this.footer.show();
         this.footer.html(this.statsTemplate({done: done, remaining: remaining}));
@@ -115,7 +116,7 @@ $(function() {
       this.$("#assignment-list").append(view.render().el);
     },
     addAll: function() {
-      Todos.each(this.addOne, this);
+      Assignments.each(this.addOne, this);
     },
     createOnEnter: function(e) {
       if (e.keyCode != 13) return;

@@ -8,10 +8,9 @@ html
     script(type='text/javascript', src='/js/backbone-min.js')
     script(type='text/javascript', src='/js/logout.js')
   body
-    .app
-      #header
-        h1
-          a(href='/') Agenda Book
+    #app
+      div#header
+        h1 Agenda Book
         - if (info != undefined && info.length != 0)
           each message in info
             div.success
@@ -23,3 +22,4 @@ html
         - if (typeof currentUser !== 'undefined')
           a#logout(href='/sessions') Log Out
       block content
+    block footer
