@@ -29,6 +29,7 @@ block footer
     <div class="view">
       <input class="toggle" type="checkbox" <%= completed ? 'checked="checked"' : '' %> />
       <label><%- title %></label>
+      <em class="details">Due: <%- dueDate %></em>
       <a class="destroy"></a>
     </div>
     <input class="edit" type="text" value="<%- title %>" />

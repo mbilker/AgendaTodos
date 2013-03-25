@@ -13,8 +13,9 @@ $(function() {
     },
     initialize: function() {
       if (!this.get("title")) {
-        this.set({"title": this.defaults().title});
+        this.set({ title: this.defaults().title });
       }
+      this.set({ dueDate: new Date(this.get('dueDate')).toDateString() });
     },
     toggle: function() {
       this.save({completed: !this.get("completed")});
@@ -67,7 +68,6 @@ $(function() {
         this.clear();
       } else {
         this.model.save({title: value});
-        console.log(this.model.isNew());
         this.$el.removeClass("editing");
       }
     },
@@ -91,7 +91,6 @@ $(function() {
 
       this.input = this.$("#new-assignment");
       this.allCheckbox = this.$("#toggle-all")[0];
-      console.log(this.allCheckbox);
 
       this.listenTo(Assignments, 'add', this.addOne);
       this.listenTo(Assignments, 'reset', this.addAll);

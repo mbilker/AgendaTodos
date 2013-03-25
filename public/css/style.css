@@ -117,6 +117,9 @@ body {
 #assignment-list .destroy:hover {
   background-position: 0 -20px;
 }
+#assignment-list .details {
+  font-size: 12px;
+}
 #assignment-list li.editing {
   border-bottom: none;
   margin-top: -1px;
