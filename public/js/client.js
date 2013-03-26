@@ -15,7 +15,6 @@ $(function() {
       if (!this.get("title")) {
         this.set({ title: this.defaults().title });
       }
-      this.set({ dueDate: new Date(this.get('dueDate')).toDateString() });
     },
     toggle: function() {
       this.save({completed: !this.get("completed")});
