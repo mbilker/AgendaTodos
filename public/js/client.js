@@ -9,6 +9,8 @@ $(function() {
     idAttribute: '_id',
     defaults: {
       title: "empty assignment...",
+      dueDate: new Date(),
+      priority: 0,
       completed: false
     },
     initialize: function() {
@@ -89,6 +91,8 @@ $(function() {
     initialize: function() {
 
       this.input = this.$("#new-assignment");
+      this.dueDate = this.$("#dueDate");
+      this.priority = this.$("#priority");
       this.allCheckbox = this.$("#toggle-all")[0];
 
       this.listenTo(Assignments, 'add', this.addOne);
@@ -124,9 +128,14 @@ $(function() {
     },
     createOnEnter: function(e) {
       if (e.keyCode != 13) return;
-      if (!this.input.val()) return;
+      if (!this.input.val() || !this.dueDate.val()) return;
 
-      Assignments.create({title: this.input.val()});
+      var date = this.dueDate.val().split('-');
+      date = new Date(date[0], date[1] - 1, date[2]);
+
+      var priority = Number(this.priority.val()) || 0;
+
+      Assignments.create({ title: this.input.val(), dueDate: date, priority: priority });
       this.input.val('');
     },
     clearCompleted: function() {

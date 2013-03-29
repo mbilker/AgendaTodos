@@ -6,6 +6,10 @@ block content
   div#list
     header
       input(id='new-assignment', type='text', placeholder='What needs to be done?')
+      | Priority:
+      input(id='priority', type='number', min='0', max='9')
+      |  Due Date:
+      input(id='dueDate', type='date')
     section#main
       input(id='toggle-all', type='checkbox')
       label(for='toggle-all') Mark all as complete
@@ -29,7 +33,7 @@ block footer
     <div class="view">
       <input class="toggle" type="checkbox" <%= completed ? 'checked="checked"' : '' %> />
       <label><%- title %></label>
-      <em class="details">Due: <%= new Date(dueDate).toDateString() %></em>
+      <em class="details">Due: <%= new Date(dueDate).toDateString() %> - Priority: <%- priority %></em>
       <a class="destroy"></a>
     </div>
     <input class="edit" type="text" value="<%- title %>" />
