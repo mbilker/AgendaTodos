@@ -2,16 +2,20 @@
   "name": "todos-agenda-book",
   "description": "My agenda book for the web using backbone.js",
   "version": "0.0.1",
-  "main": "app",
+  "main": "bin/app",
+  "scripts": {
+    "start": "bin/app"
+  },
   "dependencies": {
     "express": "~3.1.0",
     "mongoose": "~3.6.0",
-    "connect-mongodb": "~1.1.5",
     "jade": "~0.28.2",
     "connect-timeout": "0.0.1",
     "stylus": "~0.32.1",
     "connect-flash": "~0.1.0",
-    "lodash": "~1.0.1"
+    "lodash": "~1.0.1",
+    "connect": "~2.7.5",
+    "connect-session-mongo": "0.0.8"
   },
   "engines": {
     "node": "0.10.x",
