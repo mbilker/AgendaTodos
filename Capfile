@@ -34,8 +34,8 @@ namespace :deploy do
   end
 
   task :restart, roles => :app do
-    sudo "systemctl stop #{application}.target"
-    sudo "systemctl disable #{application}.target"
+    sudo "systemctl stop #{application}.target; true"
+    sudo "systemctl disable #{application}.target; true"
     sudo "bash -c 'cd #{release_path} && bundle exec systemd-foreman export systemd #{systemd_conf_path} -d #{release_path} -l /var/log/#{application} -a #{application} -u #{user} -p #{base_port} -c #{concurrency}'"
     sudo "systemctl --system daemon-reload"
     sudo "systemctl enable #{application}.target"
