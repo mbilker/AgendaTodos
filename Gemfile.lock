@@ -1,0 +1,27 @@
+GIT
+  remote: http://gitlab.mbilker.us/mbilker/foreman-export-nginx.git
+  revision: 50d8deb2f0fb8835f4fcd8bbf11bbdc1b9dab6b1
+  specs:
+    foreman-export-nginx (0.0.22)
+      foreman
+
+GIT
+  remote: http://gitlab.mbilker.us/mbilker/foreman-export-systemd.git
+  revision: 10147f1a4ab8c2c412f76cdafc111f9c7ba96992
+  specs:
+    foreman-export-systemd (0.0.1)
+      foreman
+
+GEM
+  remote: https://rubygems.org/
+  specs:
+    foreman (0.62.0)
+      thor (>= 0.13.6)
+    thor (0.18.1)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  foreman-export-nginx!
+  foreman-export-systemd!
