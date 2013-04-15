@@ -131,7 +131,9 @@ $(function() {
       console.log(e);
       if (e.type == 'keypress' && e.keyCode != 13) return;
       if (!this.input.val()) return this.input.parents('.control-group').addClass('warning');
+      else this.input.parents('.control-group').removeClass('warning');
       if (!this.dueDate.val()) return this.dueDate.parents('.control-group').addClass('warning');
+      else this.dueDate.parents('.control-group').removeClass('warning');
 
       var date = this.dueDate.val().split('-');
       date = new Date(date[0], date[1] - 1, date[2]);
