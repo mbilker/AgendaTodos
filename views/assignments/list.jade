@@ -20,8 +20,9 @@ block content
           .controls
             input.btn(id='submit', type='button', value='Submit')
     section#main
-      input(id='toggle-all', type='checkbox')
-      p(style='display:inline-block', for='toggle-all') Mark all as complete
+      label.checkbox
+        input(id='toggle-all', type='checkbox')
+        |  Mark all as complete
       ul#assignment-list
     footer
       a#clear-completed Clear Completed
