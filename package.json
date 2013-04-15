@@ -15,9 +15,9 @@
     "connect-flash": "~0.1.0",
     "lodash": "~1.0.1",
     "connect": "~2.7.5",
-    "connect-session-mongo": "0.0.8",
     "systemd": "~0.2.2",
-    "autoquit": "~0.1.4"
+    "autoquit": "~0.1.4",
+    "connect-redis": "~1.4.5"
   },
   "engines": {
     "node": "0.10.x",
