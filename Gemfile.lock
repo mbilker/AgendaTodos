@@ -7,7 +7,7 @@ GIT
 
 GIT
   remote: http://gitlab.mbilker.us/mbilker/foreman-export-systemd.git
-  revision: d6a2bd5b4d194c8de6dd92b702a78da0a2f3fabd
+  revision: 5f3b491f3aeefb5f0e04e02dc0f8623d937fd900
   specs:
     foreman-export-systemd (0.0.1)
       foreman
