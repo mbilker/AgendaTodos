@@ -5,7 +5,7 @@ require 'rubygems'
 #
 
 default_run_options[:pty] = true
-set :application, "agendatodos"
+set :application, "todos"
 set :repository,  "git@mbilker.us:mbilker/agenda-todos.git"
 set :scm, :git
 set :branch, "master"
