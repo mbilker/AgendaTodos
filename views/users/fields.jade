@@ -1,12 +1,15 @@
-div
-  label Username:
-  input(name='user[name]', value=user.name || '')
+.control-group
+  label.control-label(for='username') Username
+  .controls
+    input#username(name='user[name]', type='text', value=user.name || '')
 
 - if (typeof register !== 'undefined')
-  div
-    label Email:
-    input(name='user[email]', value=user.email || '')
+  .control-group
+    label.control-label(for='email') Email
+    .controls
+      input#email(name='user[email]', type='text', value=user.email || '')
 
-div
-  label Password:
-  input(name='user[password]', value=user.password || '', type='password')
+.control-group
+  label.control-label(for='password') Password
+  .controls
+    input#password(name='user[password]', type='password', value=user.password || '')

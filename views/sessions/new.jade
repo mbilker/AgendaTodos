@@ -5,10 +5,12 @@ block content
     h2 Log In
     p
       a.button(href='/users/new') Create an account &rarr;
-    form.users#login(method='post', action='/sessions')
+    form.form-horizontal#login(method='post', action='/sessions')
       include ../users/fields
-      div
-        label(for='remember_me') Remember me:
-        input#remember_me(type='checkbox', name='remember_me')
-      div
-        input(type='submit', value='Log In')
+      .control-group
+        label.control-label(for='remember_me') Remember Me
+        .controls
+          input#remember_me(type='checkbox', name='remember_me')
+      .control-group
+        .controls
+          input.btn(type='submit', value='Log In')

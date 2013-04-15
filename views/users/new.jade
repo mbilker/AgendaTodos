@@ -4,9 +4,10 @@ block content
   .page
     h2 Register
 
-    form.users(method='post', action='/users')
+    form.form-horizontal(method='post', action='/users')
       include fields
-      div
-        input(type='submit', value='Register')
-        span or 
-          a(href='/sessions/new') Log In
+      .control-group
+        .controls
+          input.btn(type='submit', value='Register')
+          span  or 
+            a.btn(href='/sessions/new') Go to Log In
