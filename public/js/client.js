@@ -84,7 +84,8 @@ $(function() {
     el: $("#app"),
     statsTemplate: _.template($('#stats-template').html()),
     events: {
-      "keypress #new-assignment":  "createOnEnter",
+      "keypress #new-assignment": "createOnEnter",
+      "click #submit": "createOnEnter",
       "click #clear-completed": "clearCompleted",
       "click #toggle-all": "toggleAllComplete"
     },
@@ -127,8 +128,10 @@ $(function() {
       Assignments.each(this.addOne, this);
     },
     createOnEnter: function(e) {
-      if (e.keyCode != 13) return;
-      if (!this.input.val() || !this.dueDate.val()) return;
+      console.log(e);
+      if (e.type == 'keypress' && e.keyCode != 13) return;
+      if (!this.input.val()) return this.input.parents('.control-group').addClass('warning');
+      if (!this.dueDate.val()) return this.dueDate.parents('.control-group').addClass('warning');
 
       var date = this.dueDate.val().split('-');
       date = new Date(date[0], date[1] - 1, date[2]);
@@ -137,6 +140,8 @@ $(function() {
 
       Assignments.create({ title: this.input.val(), dueDate: date, priority: priority });
       this.input.val('');
+      this.priority.val('');
+      this.dueDate.val('');
     },
     clearCompleted: function() {
       _.invoke(Assignments.done(), 'destroy');

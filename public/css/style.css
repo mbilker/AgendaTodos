@@ -33,6 +33,7 @@ body {
   text-align: center;
   padding: 0 0 10px 0;
 }
+/*
 #app input[type="text"] {
   width: 466px;
   font-size: 24px;
@@ -51,6 +52,7 @@ body {
 #app input::-webkit-input-placeholder {
   font-style: italic;
 }
+*/
 #app footer {
   display: none;
   margin: 0 -20px -20px -20px;
@@ -66,6 +68,7 @@ body {
   -o-border-radius: 0 0 5px 5px;
   border-radius: 0 0 5px 5px;
 }
+/*
 #app .success,
 #app .warning,
 #app .error {
@@ -80,6 +83,7 @@ body {
   background-color: #ffbaba;
   background-image: url("/img/error.png");
 }
+*/
 #main {
   display: none;
 }
@@ -87,19 +91,7 @@ body {
   margin: 10px 0;
   padding: 0;
   list-style: none;
-}
-#assignment-list li {
-  padding: 18px 20px 18px 0;
-  position: relative;
-  font-size: 24px;
-  border-bottom: 1px solid #ccc;
-}
-#assignment-list li:last-child {
-  border-bottom: none;
-}
-#assignment-list li.done label {
-  color: #777;
-  text-decoration: line-through;
+  border-top: 1px solid #ccc;
 }
 #assignment-list .destroy {
   position: absolute;
@@ -111,6 +103,19 @@ body {
   height: 20px;
   background: url("/img/destroy.png") no-repeat;
 }
+#assignment-list li {
+  /* padding: 18px 20px 18px 0; */
+  position: relative;
+  /* font-size: 24px; */
+  border-bottom: 1px solid #ccc;
+}
+#assignment-list li:last-child {
+  border-bottom: none;
+}
+#assignment-list li.done label {
+  color: #777;
+  text-decoration: line-through;
+}
 #assignment-list li:hover .destroy {
   display: block;
 }
@@ -121,8 +126,8 @@ body {
   font-size: 12px;
 }
 #assignment-list li.editing {
-  border-bottom: none;
-  margin-top: -1px;
+  /* border-bottom: none; */
+  margin-top: 10px;
   padding: 0;
 }
 #assignment-list li.editing:last-child {
@@ -136,7 +141,7 @@ body {
 #assignment-list li.editing .view {
   display: none;
 }
-#assignment-list li .view label {
+#assignment-list li .view h4 {
   word-break: break-word;
 }
 #assignment-list li .edit {
