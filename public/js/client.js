@@ -5,7 +5,7 @@ $(function() {
   //Backbone.emulateJSON = true;
 
   $('#new-assignment').focus(function(ev) {
-    $('#expand').show();
+    $('#expand').slideDown();
   });
 
   var Assignment = Backbone.Model.extend({
