@@ -29,6 +29,22 @@ body {
   -ms-box-shadow: rgba(0,0,0,0.2) 0 2px 6px 0;
   -o-box-shadow: rgba(0,0,0,0.2) 0 2px 6px 0;
   box-shadow: rgba(0,0,0,0.2) 0 2px 6px 0;
+/*
+  input[type="text"]
+    width 466px
+    font-size 24px
+    font-family inherit
+    line-height 1.4em
+    border 0
+    outline none
+    padding 6px
+    border 1px solid #999999
+    vendor('box-shadow', rgba(0, 0, 0, 0.2) 0 1px 2px 0 inset)
+  */
+/*
+  input::-webkit-input-placeholder
+    font-style italic
+  */
 }
 #app h1 {
   font-size: 36px;
@@ -36,27 +52,6 @@ body {
   text-align: center;
   padding: 0 0 10px 0;
 }
-/*
-lol
-#app input[type="text"] {
-  width: 466px;
-  font-size: 24px;
-  font-family: inherit;
-  line-height: 1.4em;
-  border: 0;
-  outline: none;
-  padding: 6px;
-  border: 1px solid #999;
-  -webkit-box-shadow: rgba(0,0,0,0.2) 0 1px 2px 0 inset;
-  -moz-box-shadow: rgba(0,0,0,0.2) 0 1px 2px 0 inset;
-  -ms-box-shadow: rgba(0,0,0,0.2) 0 1px 2px 0 inset;
-  -o-box-shadow: rgba(0,0,0,0.2) 0 1px 2px 0 inset;
-  box-shadow: rgba(0,0,0,0.2) 0 1px 2px 0 inset;
-}
-#app input::-webkit-input-placeholder {
-  font-style: italic;
-}
-*/
 #app footer {
   display: none;
   margin: 0 -20px -20px -20px;
@@ -72,7 +67,6 @@ lol
   -o-border-radius: 0 0 5px 5px;
   border-radius: 0 0 5px 5px;
 }
-/*
 #app .success,
 #app .warning,
 #app .error {
@@ -87,7 +81,6 @@ lol
   background-color: #ffbaba;
   background-image: url("/img/error.png");
 }
-*/
 #main {
   display: none;
 }
@@ -95,7 +88,19 @@ lol
   margin: 10px 0;
   padding: 0;
   list-style: none;
-  border-top: 1px solid #ccc;
+}
+#assignment-list li {
+  padding: 18px 20px 18px 0;
+  position: relative;
+  font-size: 24px;
+  border-bottom: 1px solid #ccc;
+}
+#assignment-list li:last-child {
+  border-bottom: none;
+}
+#assignment-list li.done label {
+  color: #777;
+  text-decoration: line-through;
 }
 #assignment-list .destroy {
   position: absolute;
@@ -107,19 +112,6 @@ lol
   height: 20px;
   background: url("/img/destroy.png") no-repeat;
 }
-#assignment-list li {
-  /* padding: 18px 20px 18px 0; */
-  position: relative;
-  /* font-size: 24px; */
-  border-bottom: 1px solid #ccc;
-}
-#assignment-list li:last-child {
-  border-bottom: none;
-}
-#assignment-list li.done label {
-  color: #777;
-  text-decoration: line-through;
-}
 #assignment-list li:hover .destroy {
   display: block;
 }
@@ -130,8 +122,8 @@ lol
   font-size: 12px;
 }
 #assignment-list li.editing {
-  /* border-bottom: none; */
-  margin-top: 10px;
+  border-bottom: none;
+  margin-top: -1px;
   padding: 0;
 }
 #assignment-list li.editing:last-child {
@@ -145,7 +137,7 @@ lol
 #assignment-list li.editing .view {
   display: none;
 }
-#assignment-list li .view h4 {
+#assignment-list li .view label {
   word-break: break-word;
 }
 #assignment-list li .edit {
