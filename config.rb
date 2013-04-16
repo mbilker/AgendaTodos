@@ -1,7 +1,6 @@
 deploy_env = {
   'MONGODB_URL' => 'mongodb://node:1j24561b3b5j3@dharma.mongohq.com:10017/agenda-book',
   'LOG_TO_FILE' => 'true',
-  'NODE_ENV' => 'production',
 }
 
 env_lines = []

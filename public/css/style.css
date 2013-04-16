@@ -45,6 +45,19 @@ body {
   input::-webkit-input-placeholder
     font-style italic
   */
+/*
+  .success, .warning, .error
+    border: 1px solid
+    margin: 0 0 0 0
+    padding: 15px 10px 15px 50px
+    background-repeat: no-repeat
+    background-position: 10px center
+
+  .error
+    color: #D8000C
+    background-color: #FFBABA
+    background-image: url('/img/error.png')
+  */
 }
 #app h1 {
   font-size: 36px;
@@ -67,20 +80,6 @@ body {
   -o-border-radius: 0 0 5px 5px;
   border-radius: 0 0 5px 5px;
 }
-#app .success,
-#app .warning,
-#app .error {
-  border: 1px solid;
-  margin: 0 0 0 0;
-  padding: 15px 10px 15px 50px;
-  background-repeat: no-repeat;
-  background-position: 10px center;
-}
-#app .error {
-  color: #d8000c;
-  background-color: #ffbaba;
-  background-image: url("/img/error.png");
-}
 #main {
   display: none;
 }
@@ -90,9 +89,7 @@ body {
   list-style: none;
 }
 #assignment-list li {
-  padding: 18px 20px 18px 0;
   position: relative;
-  font-size: 24px;
   border-bottom: 1px solid #ccc;
 }
 #assignment-list li:last-child {
@@ -122,8 +119,7 @@ body {
   font-size: 12px;
 }
 #assignment-list li.editing {
-  border-bottom: none;
-  margin-top: -1px;
+  margin-top: 11px;
   padding: 0;
 }
 #assignment-list li.editing:last-child {
