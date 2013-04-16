@@ -4,6 +4,10 @@ $(function() {
   //Backbone.emulateHTTP = true;
   //Backbone.emulateJSON = true;
 
+  $('#new-assignment').focus(function(ev) {
+    $('#expand').show();
+  });
+
   var Assignment = Backbone.Model.extend({
     urlRoot: '/assignments/sync',
     idAttribute: '_id',
@@ -128,7 +132,6 @@ $(function() {
       Assignments.each(this.addOne, this);
     },
     createOnEnter: function(e) {
-      console.log(e);
       if (e.type == 'keypress' && e.keyCode != 13) return;
       if (!this.input.val()) return this.input.parents('.control-group').addClass('warning');
       else this.input.parents('.control-group').removeClass('warning');
@@ -144,6 +147,7 @@ $(function() {
       this.input.val('');
       this.priority.val('');
       this.dueDate.val('');
+      $('#expand').slideUp();
     },
     clearCompleted: function() {
       _.invoke(Assignments.done(), 'destroy');

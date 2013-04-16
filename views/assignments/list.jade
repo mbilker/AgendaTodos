@@ -7,18 +7,19 @@ block content
     header
       .control-group
         input.input-block-level(id='new-assignment', type='text', placeholder='What needs to be done?')
-      .form-horizontal
-        .control-group
-          label.control-label(for='priority') Priority
-          .controls
-            input.span1(id='priority', type='number', min='0', max='9', placeholder='0')
-        .control-group
-          label.control-label(for='dueDate') Due Date
-          .controls
-            input.span2(id='dueDate', class='span2', type='date')
-        .control-group
-          .controls
-            input.btn(id='submit', type='button', value='Submit')
+      #expand
+        .form-horizontal
+          .control-group
+            label.control-label(for='priority') Priority
+            .controls
+              input.span1(id='priority', type='number', min='0', max='9', placeholder='0')
+          .control-group
+            label.control-label(for='dueDate') Due Date
+            .controls
+              input.span2(id='dueDate', class='span2', type='date')
+          .control-group
+            .controls
+              input.btn(id='submit', type='button', value='Submit')
     section#main
       label.checkbox
         input(id='toggle-all', type='checkbox')
