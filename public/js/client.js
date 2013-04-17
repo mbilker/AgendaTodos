@@ -4,10 +4,6 @@ $(function() {
   //Backbone.emulateHTTP = true;
   //Backbone.emulateJSON = true;
 
-  $('#new-assignment').focus(function(ev) {
-    $('#expand').slideDown();
-  });
-
   var Assignment = Backbone.Model.extend({
     urlRoot: '/assignments/sync',
     idAttribute: '_id',
@@ -89,6 +85,8 @@ $(function() {
     statsTemplate: _.template($('#stats-template').html()),
     events: {
       "keypress #new-assignment": "createOnEnter",
+      "focus #new-assignment": "focusAssignment",
+      "blur #new-assignment": "blurAssignment",
       "click #submit": "createOnEnter",
       "click #clear-completed": "clearCompleted",
       "click #toggle-all": "toggleAllComplete"
@@ -99,6 +97,7 @@ $(function() {
       this.dueDate = this.$("#dueDate");
       this.priority = this.$("#priority");
       this.allCheckbox = this.$("#toggle-all")[0];
+      this.expand = this.$("#expand");
 
       this.listenTo(Assignments, 'add', this.addOne);
       this.listenTo(Assignments, 'reset', this.addAll);
@@ -147,7 +146,13 @@ $(function() {
       this.input.val('');
       this.priority.val('');
       this.dueDate.val('');
-      $('#expand').slideUp();
+      this.expand.slideUp();
+    },
+    focusAssignment: function() {
+      this.expand.slideDown();
+    },
+    blurAssignment: function() {
+      if (this.input.val() == '') this.expand.slideUp();
     },
     clearCompleted: function() {
       _.invoke(Assignments.done(), 'destroy');

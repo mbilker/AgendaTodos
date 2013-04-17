@@ -42,8 +42,9 @@ block footer
     a(href='http://jgn.me/') J&eacute;r&ocirc;me Gravel-Niquet
   script(type='text/template', id='item-template').
     <div class="view">
-      <input class="toggle" type="checkbox" <%= completed ? 'checked="checked"' : '' %> />
-      <h4 style="display:inline-block"><%- title %></h4>
+      <label class="checkbox">
+        <input class="toggle" type="checkbox" <%= completed ? 'checked="checked"' : '' %> /><%- title %>
+      </label>
       <p>Due: <%= new Date(dueDate).toDateString() %> - Priority: <%- priority %></p>
       <a class="destroy"></a>
     </div>
