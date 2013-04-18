@@ -33,8 +33,7 @@ $(function() {
       return this.without.apply(this, this.done());
     },
     comparator: function(assignment) {
-      var a = -(assignment.get('priority') + 1) && new Date(assignment.get('dueDate')).getTime();
-      console.log(a);
+      var a = -(assignment.get('priority') + 1) + new Date(assignment.get('dueDate')).getTime();
       return a;
     }
   });
@@ -104,9 +103,12 @@ $(function() {
       this.allCheckbox = this.$("#toggle-all")[0];
       this.expand = this.$("#expand");
 
-      this.listenTo(Assignments, 'add', this.addOne);
-      this.listenTo(Assignments, 'reset', this.addAll);
-      this.listenTo(Assignments, 'all', this.render);
+      //this.listenTo(Assignments, 'add', this.addOne);
+      //this.listenTo(Assignments, 'reset', this.addAll);
+      //this.listenTo(Assignments, 'all', this.render);
+      this.listenTo(Assignments, 'add', function() { Assignments.sort() });
+      this.listenTo(Assignments, 'reset', this.render);
+      this.listenTo(Assignments, 'sort', this.render);
 
       this.footer = this.$('footer');
       this.main = $('#main');
@@ -114,6 +116,7 @@ $(function() {
       Assignments.fetch();
     },
     render: function() {
+      console.log('render');
       var done = Assignments.done().length;
       var remaining = Assignments.remaining().length;
 
@@ -127,9 +130,12 @@ $(function() {
       }
 
       this.allCheckbox.checked = !remaining;
+
+      this.$("#assignment-list").html('');
+      this.addAll();
     },
     addOne: function(assignment) {
-      var view = new AssignmentView({model: assignment});
+      var view = new AssignmentView({ model: assignment });
       this.$("#assignment-list").append(view.render().el);
     },
     addAll: function() {
