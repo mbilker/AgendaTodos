@@ -5,6 +5,9 @@ vendor(prop, args)
   -o-{prop} args
   {prop} args
 
+priority(num)
+  background-color #ffffff - unit(num * 5, '%')
+
 html, body
   margin 0
   padding 0
@@ -88,7 +91,7 @@ body
   border-top 1px solid #cccccc
 
   li
-    padding 18px 20px 0px 0
+    padding 18px 20px 0 0
     position relative
     //font-size 24px
     border-bottom 1px solid #cccccc
@@ -137,6 +140,45 @@ body
 
   li.editing .view
     display none
+
+  .priority0
+    priority(0)
+
+  .priority1
+    priority(1)
+
+  .priority2
+    priority(2)
+
+  .priority3
+    priority(3)
+
+  .priority4
+    priority(4)
+
+  .priority5
+    priority(5)
+
+  .priority6
+    priority(6)
+
+  .priority7
+    priority(7)
+
+  .priority8
+    priority(8)
+
+  .priority9
+    priority(9)
+
+  .priority
+    position absolute
+    right 30px
+    top 20px
+    cursor pointer
+    width 20px
+    height 20px
+    border-radius 50%
 
   li .view label
     word-break break-word

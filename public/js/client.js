@@ -31,6 +31,11 @@ $(function() {
     },
     remaining: function() {
       return this.without.apply(this, this.done());
+    },
+    comparator: function(assignment) {
+      var a = -(assignment.get('priority') + 1) && new Date(assignment.get('dueDate')).getTime();
+      console.log(a);
+      return a;
     }
   });
 

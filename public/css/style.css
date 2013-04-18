@@ -91,7 +91,7 @@ body {
   border-top: 1px solid #ccc;
 }
 #assignment-list li {
-  padding: 18px 20px 0px 0;
+  padding: 18px 20px 0 0;
   position: relative;
   border-bottom: 1px solid #ccc;
 }
@@ -138,6 +138,45 @@ body {
 }
 #assignment-list li.editing .view {
   display: none;
+}
+#assignment-list .priority0 {
+  background-color: #fff;
+}
+#assignment-list .priority1 {
+  background-color: #f2f2f2;
+}
+#assignment-list .priority2 {
+  background-color: #e6e6e6;
+}
+#assignment-list .priority3 {
+  background-color: #d9d9d9;
+}
+#assignment-list .priority4 {
+  background-color: #ccc;
+}
+#assignment-list .priority5 {
+  background-color: #bfbfbf;
+}
+#assignment-list .priority6 {
+  background-color: #b3b3b3;
+}
+#assignment-list .priority7 {
+  background-color: #a6a6a6;
+}
+#assignment-list .priority8 {
+  background-color: #999;
+}
+#assignment-list .priority9 {
+  background-color: #8c8c8c;
+}
+#assignment-list .priority {
+  position: absolute;
+  right: 30px;
+  top: 20px;
+  cursor: pointer;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
 }
 #assignment-list li .view label {
   word-break: break-word;
