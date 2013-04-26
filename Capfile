@@ -57,14 +57,14 @@ namespace :deploy do
       "systemctl start #{application}.target"
     )
 
-    sudo systemd_commands.join(' && ')
+    sudo #{systemd_commands.join(' && ')}
 
     nginx_commands = %w(
       "bash -c 'cd #{release_path} && BASE_DOMAIN=#{base_domain} bundle exec nginx-foreman export nginx #{nginx_conf_path} -d #{release_path} -l /var/log/#{application} -a #{application} -u #{user} -p #{base_port} -c #{concurrency}'"
       "systemctl restart nginx"
     )
 
-    sudo nginx_commands.join(' && ')
+    sudo #{nginx_commands.join(' && ')}
   end
 end
 
