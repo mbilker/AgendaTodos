@@ -105,34 +105,36 @@ $(function() {
 
       //this.listenTo(Assignments, 'add', this.addOne);
       //this.listenTo(Assignments, 'reset', this.addAll);
-      //this.listenTo(Assignments, 'all', this.render);
-      this.listenTo(Assignments, 'add', function() { Assignments.sort() });
-      this.listenTo(Assignments, 'reset', this.render);
-      this.listenTo(Assignments, 'sort', this.render);
+      this.listenTo(Assignments, 'all', function(ev) { console.log('all:', ev); this.render(); });
+      this.listenTo(Assignments, 'reset', this.sortComplete);
+      this.listenTo(Assignments, 'sort', this.sortComplete);
 
       this.footer = this.$('footer');
       this.main = $('#main');
 
       Assignments.fetch();
     },
+    resort: function() {
+      Assignments.sort({ silent: true });
+    },
+    sortComplete: function() {
+      this.$("#assignment-list").empty();
+      this.addAll();
+    },
     render: function() {
-      console.log('render');
       var done = Assignments.done().length;
       var remaining = Assignments.remaining().length;
 
       if (Assignments.length) {
         this.main.show();
         this.footer.show();
-        this.footer.html(this.statsTemplate({done: done, remaining: remaining}));
+        this.footer.html(this.statsTemplate({ done: done, remaining: remaining }));
       } else {
         this.main.hide();
         this.footer.hide();
       }
 
       this.allCheckbox.checked = !remaining;
-
-      this.$("#assignment-list").html('');
-      this.addAll();
     },
     addOne: function(assignment) {
       var view = new AssignmentView({ model: assignment });
