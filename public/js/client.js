@@ -1,5 +1,12 @@
 var App, Assignments;
 
+function readScript(script) {
+  var xhr = new XMLHttpRequest();
+  xhr.open('GET', '/' + script, false);
+  var x = xhr.responseText;
+  return x;
+}
+
 $(function() {
   //Backbone.emulateHTTP = true;
   //Backbone.emulateJSON = true;
@@ -42,7 +49,7 @@ $(function() {
 
   var AssignmentView = Backbone.View.extend({
     tagName:  "li",
-    template: _.template($('#item-template').html()),
+    template: _.template(readScript('templates/item-template.js')),
     events: {
       "click .toggle"   : "toggleDone",
       "dblclick .view"  : "edit",
@@ -86,7 +93,7 @@ $(function() {
 
   var AppView = Backbone.View.extend({
     el: $("#app"),
-    statsTemplate: _.template($('#stats-template').html()),
+    statsTemplate: _.template(readScript('templates/stats-template')),
     events: {
       "keypress #new-assignment": "createOnEnter",
       "focus #new-assignment": "focusAssignment",
