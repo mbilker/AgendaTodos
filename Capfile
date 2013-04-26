@@ -73,9 +73,6 @@ after 'deploy:finalize_update', 'deploy:update_packages'
 
 before 'deploy:finalize_update' do
   run "cd #{release_path} && bundle install --deployment"
-
-  env_contents = mkconfig
-
-  put(env_contents, "#{release_path}/.env")
+  put(mkconfig, "#{release_path}/.env")
 end
 
