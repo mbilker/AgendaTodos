@@ -2,7 +2,8 @@ var App, Assignments;
 
 function readScript(script) {
   var xhr = new XMLHttpRequest();
-  xhr.open('GET', '/' + script, false);
+  xhr.open('GET', script, false);
+  xhr.send(null);
   var x = xhr.responseText;
   return x;
 }
@@ -49,7 +50,7 @@ $(function() {
 
   var AssignmentView = Backbone.View.extend({
     tagName:  "li",
-    template: _.template(readScript('templates/item-template.js')),
+    template: _.template(readScript('/templates/item-template.js')),
     events: {
       "click .toggle"   : "toggleDone",
       "dblclick .view"  : "edit",
@@ -93,7 +94,7 @@ $(function() {
 
   var AppView = Backbone.View.extend({
     el: $("#app"),
-    statsTemplate: _.template(readScript('templates/stats-template')),
+    statsTemplate: _.template(readScript('/templates/stats-template.js')),
     events: {
       "keypress #new-assignment": "createOnEnter",
       "focus #new-assignment": "focusAssignment",
