@@ -1,20 +1,21 @@
-var App, Assignments;
+var readScript;
 
-function readScript(script) {
-  var xhr = new XMLHttpRequest();
-  xhr.open('GET', script, false);
+readScript = function(script) {
+  var x, xhr;
+
+  xhr = new XMLHttpRequest();
+  xhr.open("GET", script, false);
   xhr.send(null);
-  var x = xhr.responseText;
+  x = xhr.responseText;
   return x;
-}
+};
 
 $(function() {
-  //Backbone.emulateHTTP = true;
-  //Backbone.emulateJSON = true;
+  var App, AppView, Assignment, AssignmentList, AssignmentView, Assignments;
 
-  var Assignment = Backbone.Model.extend({
-    urlRoot: '/assignments/sync',
-    idAttribute: '_id',
+  Assignment = Backbone.Model.extend({
+    urlRoot: "/assignments/sync",
+    idAttribute: "_id",
     defaults: {
       title: "empty assignment...",
       dueDate: new Date(),
@@ -23,78 +24,88 @@ $(function() {
     },
     initialize: function() {
       if (!this.get("title")) {
-        this.set({ title: this.defaults().title });
+        return this.set({
+          title: this.defaults().title
+        });
       }
     },
     toggle: function() {
-      this.save({completed: !this.get("completed")});
+      return this.save({
+        completed: !this.get("completed")
+      });
     }
   });
-
-  var AssignmentList = Backbone.Collection.extend({
+  AssignmentList = Backbone.Collection.extend({
     model: Assignment,
-    url: '/assignments/sync',
+    url: "/assignments/sync",
     done: function() {
-      return this.filter(function(assignment) { return assignment.get('completed'); });
+      return this.filter(function(assignment) {
+        return assignment.get("completed");
+      });
     },
     remaining: function() {
       return this.without.apply(this, this.done());
     },
     comparator: function(assignment) {
-      var a = -(assignment.get('priority') + 1) + new Date(assignment.get('dueDate')).getTime();
+      var a;
+
+      a = -(assignment.get("priority") + 1) + new Date(assignment.get("dueDate")).getTime();
       return a;
     }
   });
-
   Assignments = new AssignmentList();
-
-  var AssignmentView = Backbone.View.extend({
-    tagName:  "li",
-    template: _.template(readScript('/templates/item-template.js')),
+  AssignmentView = Backbone.View.extend({
+    tagName: "li",
+    template: _.template(readScript("/templates/item-template.js")),
     events: {
-      "click .toggle"   : "toggleDone",
-      "dblclick .view"  : "edit",
-      "click a.destroy" : "clear",
-      "keypress .edit"  : "updateOnEnter",
-      "blur .edit"      : "close"
+      "click .toggle": "toggleDone",
+      "dblclick .view": "edit",
+      "click a.destroy": "clear",
+      "keypress .edit": "updateOnEnter",
+      "blur .edit": "close"
     },
     initialize: function() {
-      this.listenTo(this.model, 'change', this.render);
-      this.listenTo(this.model, 'destroy', this.remove);
+      this.listenTo(this.model, "change", this.render);
+      return this.listenTo(this.model, "destroy", this.remove);
     },
     render: function() {
       this.$el.html(this.template(this.model.toJSON()));
-      this.$el.toggleClass('done', this.model.get('completed'));
-      this.input = this.$('.edit');
+      this.$el.toggleClass("done", this.model.get("completed"));
+      this.input = this.$(".edit");
       return this;
     },
     toggleDone: function() {
-      this.model.toggle();
+      return this.model.toggle();
     },
     edit: function() {
       this.$el.addClass("editing");
-      this.input.focus();
+      return this.input.focus();
     },
     close: function() {
-      var value = this.input.val();
+      var value;
+
+      value = this.input.val();
       if (!value) {
-        this.clear();
+        return this.clear();
       } else {
-        this.model.save({title: value});
-        this.$el.removeClass("editing");
+        this.model.save({
+          title: value
+        });
+        return this.$el.removeClass("editing");
       }
     },
     updateOnEnter: function(e) {
-      if (e.keyCode == 13) this.close();
+      if (e.keyCode === 13) {
+        return this.close();
+      }
     },
     clear: function() {
-      this.model.destroy();
+      return this.model.destroy();
     }
   });
-
-  var AppView = Backbone.View.extend({
+  AppView = Backbone.View.extend({
     el: $("#app"),
-    statsTemplate: _.template(readScript('/templates/stats-template.js')),
+    statsTemplate: _.template(readScript("/templates/stats-template.js")),
     events: {
       "keypress #new-assignment": "createOnEnter",
       "focus #new-assignment": "focusAssignment",
@@ -104,86 +115,112 @@ $(function() {
       "click #toggle-all": "toggleAllComplete"
     },
     initialize: function() {
-
       this.input = this.$("#new-assignment");
       this.dueDate = this.$("#dueDate");
       this.priority = this.$("#priority");
       this.allCheckbox = this.$("#toggle-all")[0];
       this.expand = this.$("#expand");
-
-      //this.listenTo(Assignments, 'add', this.addOne);
-      //this.listenTo(Assignments, 'reset', this.addAll);
-      this.listenTo(Assignments, 'all', function(ev) { console.log('all:', ev); this.render(); });
-      this.listenTo(Assignments, 'reset', this.sortComplete);
-      this.listenTo(Assignments, 'sort', this.sortComplete);
-
-      this.footer = this.$('footer');
-      this.main = $('#main');
-
-      Assignments.fetch();
+      this.listenTo(Assignments, "all", function(ev) {
+        console.log("all:", ev);
+        return this.render();
+      });
+      this.listenTo(Assignments, "reset", this.sortComplete);
+      this.listenTo(Assignments, "sort", this.sortComplete);
+      this.footer = this.$("footer");
+      this.main = $("#main");
+      return Assignments.fetch();
     },
     resort: function() {
-      Assignments.sort({ silent: true });
+      return Assignments.sort({
+        silent: true
+      });
     },
     sortComplete: function() {
       this.$("#assignment-list").empty();
-      this.addAll();
+      return this.addAll();
     },
     render: function() {
-      var done = Assignments.done().length;
-      var remaining = Assignments.remaining().length;
+      var done, remaining;
 
+      done = Assignments.done().length;
+      remaining = Assignments.remaining().length;
       if (Assignments.length) {
         this.main.show();
         this.footer.show();
-        this.footer.html(this.statsTemplate({ done: done, remaining: remaining }));
+        this.footer.html(this.statsTemplate({
+          done: done,
+          remaining: remaining
+        }));
       } else {
         this.main.hide();
         this.footer.hide();
       }
-
-      this.allCheckbox.checked = !remaining;
+      return this.allCheckbox.checked = !remaining;
     },
     addOne: function(assignment) {
-      var view = new AssignmentView({ model: assignment });
-      this.$("#assignment-list").append(view.render().el);
+      var view;
+
+      view = new AssignmentView({
+        model: assignment
+      });
+      return this.$("#assignment-list").append(view.render().el);
     },
     addAll: function() {
-      Assignments.each(this.addOne, this);
+      return Assignments.each(this.addOne, this);
     },
     createOnEnter: function(e) {
-      if (e.type == 'keypress' && e.keyCode != 13) return;
-      if (!this.input.val()) return this.input.parents('.control-group').addClass('warning');
-      else this.input.parents('.control-group').removeClass('warning');
-      if (!this.dueDate.val()) return this.dueDate.parents('.control-group').addClass('warning');
-      else this.dueDate.parents('.control-group').removeClass('warning');
+      var date, priority;
 
-      var date = this.dueDate.val().split('-');
+      if (e.type === "keypress" && e.keyCode !== 13) {
+        return;
+      }
+      if (!this.input.val()) {
+        return this.input.parents(".control-group").addClass("warning");
+      } else {
+        this.input.parents(".control-group").removeClass("warning");
+      }
+      if (!this.dueDate.val()) {
+        return this.dueDate.parents(".control-group").addClass("warning");
+      } else {
+        this.dueDate.parents(".control-group").removeClass("warning");
+      }
+      date = this.dueDate.val().split("-");
       date = new Date(date[0], date[1] - 1, date[2]);
-
-      var priority = Number(this.priority.val()) || 0;
-
-      Assignments.create({ title: this.input.val(), dueDate: date, priority: priority });
-      this.input.val('');
-      this.priority.val('');
-      this.dueDate.val('');
-      this.expand.slideUp();
+      priority = Number(this.priority.val()) || 0;
+      Assignments.create({
+        title: this.input.val(),
+        dueDate: date,
+        priority: priority
+      });
+      this.input.val("");
+      this.priority.val("");
+      this.dueDate.val("");
+      return this.expand.slideUp();
     },
     focusAssignment: function() {
-      this.expand.slideDown();
+      return this.expand.slideDown();
     },
     blurAssignment: function() {
-      if (this.input.val() == '') this.expand.slideUp();
+      if (this.input.val() === "") {
+        return this.expand.slideUp();
+      }
     },
     clearCompleted: function() {
-      _.invoke(Assignments.done(), 'destroy');
+      _.invoke(Assignments.done(), "destroy");
       return false;
     },
-    toggleAllComplete: function () {
-      var done = this.allCheckbox.checked;
-      Assignments.each(function(assignment) { assignment.save({'completed': done}); });
+    toggleAllComplete: function() {
+      var done;
+
+      done = this.allCheckbox.checked;
+      return Assignments.each(function(assignment) {
+        return assignment.save({
+          completed: done
+        });
+      });
     }
   });
-
   App = new AppView;
+  window.App = App;
+  window.Assignments = Assignments;
 });
