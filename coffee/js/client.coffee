@@ -140,7 +140,7 @@ $ ->
       Assignments.each @addOne, this
 
     createOnEnter: (e) ->
-      return  if e.type is "keypress" and e.keyCode isnt 13
+      return if e.type is "keypress" and e.keyCode isnt 13
       unless @input.val()
         return @input.parents(".control-group").addClass("warning")
       else
@@ -160,13 +160,22 @@ $ ->
       @input.val ""
       @priority.val ""
       @dueDate.val ""
-      @expand.slideUp()
+      @slide()
 
     focusAssignment: ->
-      @expand.slideDown()
+      @slide()
 
     blurAssignment: ->
-      @expand.slideUp()  if @input.val() is ""
+      @slide() if @input.val() is ""
+
+    slide: ->
+      #@expand.slideUp()
+      #@expand.slideDown()
+      @expand.toggleClass "unhide"
+      if @expand.hasClass "unhide"
+        @expand.slideDown()
+      else
+        @expand.slideUp()
 
     clearCompleted: ->
       _.invoke Assignments.done(), "destroy"

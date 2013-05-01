@@ -195,13 +195,21 @@ $(function() {
       this.input.val("");
       this.priority.val("");
       this.dueDate.val("");
-      return this.expand.slideUp();
+      return this.slide();
     },
     focusAssignment: function() {
-      return this.expand.slideDown();
+      return this.slide();
     },
     blurAssignment: function() {
       if (this.input.val() === "") {
+        return this.slide();
+      }
+    },
+    slide: function() {
+      this.expand.toggleClass("unhide");
+      if (this.expand.hasClass("unhide")) {
+        return this.expand.slideDown();
+      } else {
         return this.expand.slideUp();
       }
     },
