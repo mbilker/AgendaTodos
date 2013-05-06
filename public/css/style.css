@@ -14,11 +14,13 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 #expand {
-  -webkit-transition: max-height 0.5s;
-  -moz-transition: max-height 0.5s;
-  -ms-transition: max-height 0.5s;
-  -o-transition: max-height 0.5s;
-  transition: max-height 0.5s;
+  -webkit-transition: all 0.5s;
+  -moz-transition: all 0.5s;
+  -ms-transition: all 0.5s;
+  -o-transition: all 0.5s;
+  transition: all 0.5s;
+  display: none;
+  overflow: hidden;
 }
 #app {
   background: #fff;

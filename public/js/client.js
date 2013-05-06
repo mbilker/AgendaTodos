@@ -206,16 +206,27 @@ $(function() {
       }
     },
     slide: function() {
+      var _this = this;
+
       this.expand.toggleClass("unhide");
       if (this.expand.hasClass("unhide")) {
-        return this.expand.css({
-          'max-height': this.expand.actual("height")
+        this.expand.css({
+          'display': 'block',
+          'height': this.expand.actual("outerHeight")
         });
       } else {
-        return this.expand.css({
-          'max-height': '0px'
+        this.expand.css({
+          'height': '0px'
         });
       }
+      return this.expand.on('transitionend webkitTransitionEnd oTransitionEnd otransitionend MSTransitionEnd', function() {
+        if (!_this.expand.hasClass("unhide")) {
+          return _this.expand.css({
+            'display': 'none',
+            'height': ''
+          });
+        }
+      });
     },
     clearCompleted: function() {
       _.invoke(Assignments.done(), "destroy");

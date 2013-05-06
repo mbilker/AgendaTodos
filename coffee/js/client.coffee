@@ -176,12 +176,20 @@ $ ->
         #@expand.slideDown()
         @expand.css(
           'display': 'block'
+          'height': @expand.actual "outerHeight"
         )
       else
         #@expand.slideUp()
         @expand.css(
-          'display': 'none'
+          'height': '0px'
         )
+      @expand.on('transitionend webkitTransitionEnd oTransitionEnd otransitionend MSTransitionEnd', =>
+        if not @expand.hasClass "unhide"
+          @expand.css(
+            'display': 'none'
+            'height': ''
+          )
+      )
 
     clearCompleted: ->
       _.invoke Assignments.done(), "destroy"
