@@ -5,7 +5,7 @@ readScript = (script) ->
   x = xhr.responseText
   x
 
-$ ->  
+$ ->
   #Backbone.emulateHTTP = true;
   #Backbone.emulateJSON = true;
   Assignment = Backbone.Model.extend(
@@ -173,9 +173,15 @@ $ ->
       #@expand.slideDown()
       @expand.toggleClass "unhide"
       if @expand.hasClass "unhide"
-        @expand.slideDown()
+        #@expand.slideDown()
+        @expand.css(
+          'display': 'block'
+        )
       else
-        @expand.slideUp()
+        #@expand.slideUp()
+        @expand.css(
+          'display': 'none'
+        )
 
     clearCompleted: ->
       _.invoke Assignments.done(), "destroy"

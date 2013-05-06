@@ -23,13 +23,7 @@ body
   -webkit-font-smoothing antialiased
 
 #expand
-  display none
-
-.transition
-  -webkit-transition height 0.5s
-  -moz-transition height 0.5s
-  -o-transition height 0.5s
-  transition height 0.5s
+  vendor('transition', all 0.5s)
 
 #app
   background #fff

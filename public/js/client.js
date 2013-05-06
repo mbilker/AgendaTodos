@@ -208,9 +208,13 @@ $(function() {
     slide: function() {
       this.expand.toggleClass("unhide");
       if (this.expand.hasClass("unhide")) {
-        return this.expand.slideDown();
+        return this.expand.css({
+          'max-height': this.expand.actual("height")
+        });
       } else {
-        return this.expand.slideUp();
+        return this.expand.css({
+          'max-height': '0px'
+        });
       }
     },
     clearCompleted: function() {
