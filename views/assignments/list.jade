@@ -1,8 +1,10 @@
 extends ../layout
 
-block content
-  - //script(type='text/javascript', src='/templates/templates.js')
+append head
+  //script(type='text/javascript', src='/templates/templates.js')
   script(type='text/javascript', src='/js/client.js')
+
+block content
   div#list
     header
       .control-group
