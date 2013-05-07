@@ -103,7 +103,12 @@ $ ->
       @footer = @$("footer")
       @main = $("#main")
 
-      @dueDate.attr 'min', d.getFullYear() + '-' + (d.getMonth() < 10 ? "0" : "") + d.getMonth() + '-' + (d.getDay() < 10 ? "0" : "") + d.getDay()
+      d = new Date();
+      month = ((if d.getMonth() < 9 then "0" else "")) + (d.getMonth() + 1)
+      day = ((if d.getDate() < 9 then "0" else "")) + (d.getDate() + 1)
+      @minDate = d.getFullYear() + "-" + month + "-" + day
+      @dueDate.attr 'min', @minDate
+      @dueDate.val @minDate
       
       #@listenTo Assignments, 'add', @addOne
       #@listenTo Assignments, 'reset', @addAll
@@ -171,7 +176,7 @@ $ ->
 
       @input.val ""
       @priority.val ""
-      @dueDate.val ""
+      @dueDate.val @minDate
       @slide(false)
 
     focusAssignment: ->

@@ -115,20 +115,28 @@ $(function() {
       "click #toggle-all": "toggleAllComplete"
     },
     initialize: function() {
+      var d, day, month;
+
       _.bindAll(this, 'sortComplete', 'render', 'addOne', 'addAll', 'createOnEnter', 'backspace', 'focusAssignment', 'blurAssignment', 'onTransitionEnd', 'toggleAllComplete');
       this.input = this.$("#new-assignment");
       this.dueDate = this.$("#dueDate");
       this.priority = this.$("#priority");
       this.allCheckbox = this.$("#toggle-all")[0];
       this.expand = this.$("#expand");
+      this.footer = this.$("footer");
+      this.main = $("#main");
+      d = new Date();
+      month = (d.getMonth() < 9 ? "0" : "") + (d.getMonth() + 1);
+      day = (d.getDate() < 9 ? "0" : "") + (d.getDate() + 1);
+      this.minDate = d.getFullYear() + "-" + month + "-" + day;
+      this.dueDate.attr('min', this.minDate);
+      this.dueDate.val(this.minDate);
       this.listenTo(Assignments, "all", function(ev) {
         console.log("all:", ev);
         return this.render();
       });
       this.listenTo(Assignments, "reset", this.sortComplete);
       this.listenTo(Assignments, "sort", this.sortComplete);
-      this.footer = this.$("footer");
-      this.main = $("#main");
       Assignments.fetch();
       return this.expand.on('transitionend webkitTransitionEnd oTransitionEnd otransitionend MSTransitionEnd', this.onTransitionEnd);
     },
@@ -207,7 +215,7 @@ $(function() {
       });
       this.input.val("");
       this.priority.val("");
-      this.dueDate.val("");
+      this.dueDate.val(this.minDate);
       return this.slide(false);
     },
     focusAssignment: function() {
