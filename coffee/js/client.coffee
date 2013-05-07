@@ -85,30 +85,37 @@ $ ->
     statsTemplate: _.template(readScript("/templates/stats-template.js"))
     events:
       "keypress #new-assignment": "createOnEnter"
-      "focus #new-assignment": "focusAssignment"
+      "keyup #new-assignment": "backspace"
+      #"focus #new-assignment": "focusAssignment"
       "blur #new-assignment": "blurAssignment"
       "click #submit": "createOnEnter"
       "click #clear-completed": "clearCompleted"
       "click #toggle-all": "toggleAllComplete"
 
     initialize: ->
+      _.bindAll this, 'sortComplete', 'render', 'addOne', 'addAll', 'createOnEnter', 'backspace', 'focusAssignment', 'blurAssignment', 'onTransitionEnd', 'toggleAllComplete'
+
       @input = @$("#new-assignment")
       @dueDate = @$("#dueDate")
       @priority = @$("#priority")
       @allCheckbox = @$("#toggle-all")[0]
       @expand = @$("#expand")
+      @footer = @$("footer")
+      @main = $("#main")
+
+      @dueDate.attr 'min', d.getFullYear() + '-' + (d.getMonth() < 10 ? "0" : "") + d.getMonth() + '-' + (d.getDay() < 10 ? "0" : "") + d.getDay()
       
-      #this.listenTo(Assignments, 'add', this.addOne);
-      #this.listenTo(Assignments, 'reset', this.addAll);
+      #@listenTo Assignments, 'add', @addOne
+      #@listenTo Assignments, 'reset', @addAll
       @listenTo Assignments, "all", (ev) ->
         console.log "all:", ev
         @render()
 
       @listenTo Assignments, "reset", @sortComplete
       @listenTo Assignments, "sort", @sortComplete
-      @footer = @$("footer")
-      @main = $("#main")
       Assignments.fetch()
+
+      @expand.on 'transitionend webkitTransitionEnd oTransitionEnd otransitionend MSTransitionEnd', @onTransitionEnd
 
     resort: ->
       Assignments.sort silent: true
@@ -139,7 +146,12 @@ $ ->
     addAll: ->
       Assignments.each @addOne, this
 
+    backspace: (e) ->
+      return if e.type is 'keyup' and e.keyCode isnt 8
+      @slide(false) if @input.val() is ''
+
     createOnEnter: (e) ->
+      @slide(true) unless @expand.hasClass('unhide')
       return if e.type is "keypress" and e.keyCode isnt 13
       unless @input.val()
         return @input.parents(".control-group").addClass("warning")
@@ -160,36 +172,35 @@ $ ->
       @input.val ""
       @priority.val ""
       @dueDate.val ""
-      @slide()
+      @slide(false)
 
     focusAssignment: ->
-      @slide()
+      @slide(true)
 
     blurAssignment: ->
-      @slide() if @input.val() is ""
+      if @input.val() is ''
+        @slide(false)
+      else
+        @slide(true)
 
-    slide: ->
-      #@expand.slideUp()
-      #@expand.slideDown()
-      @expand.toggleClass "unhide"
-      if @expand.hasClass "unhide"
-        #@expand.slideDown()
+    slide: (show) ->
+      if show
+        @expand.addClass 'unhide'
         @expand.css(
           'display': 'block'
           'height': @expand.actual "outerHeight"
         )
       else
-        #@expand.slideUp()
+        @expand.removeClass 'unhide'
         @expand.css(
           'height': '0px'
         )
-      @expand.on('transitionend webkitTransitionEnd oTransitionEnd otransitionend MSTransitionEnd', =>
-        if not @expand.hasClass "unhide"
-          @expand.css(
-            'display': 'none'
-            'height': ''
-          )
-      )
+
+    onTransitionEnd: ->
+      if not @expand.hasClass "unhide"
+        @expand.css
+          'display': 'none'
+          'height': ''
 
     clearCompleted: ->
       _.invoke Assignments.done(), "destroy"

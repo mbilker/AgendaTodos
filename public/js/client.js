@@ -108,13 +108,14 @@ $(function() {
     statsTemplate: _.template(readScript("/templates/stats-template.js")),
     events: {
       "keypress #new-assignment": "createOnEnter",
-      "focus #new-assignment": "focusAssignment",
+      "keyup #new-assignment": "backspace",
       "blur #new-assignment": "blurAssignment",
       "click #submit": "createOnEnter",
       "click #clear-completed": "clearCompleted",
       "click #toggle-all": "toggleAllComplete"
     },
     initialize: function() {
+      _.bindAll(this, 'sortComplete', 'render', 'addOne', 'addAll', 'createOnEnter', 'backspace', 'focusAssignment', 'blurAssignment', 'onTransitionEnd', 'toggleAllComplete');
       this.input = this.$("#new-assignment");
       this.dueDate = this.$("#dueDate");
       this.priority = this.$("#priority");
@@ -128,7 +129,8 @@ $(function() {
       this.listenTo(Assignments, "sort", this.sortComplete);
       this.footer = this.$("footer");
       this.main = $("#main");
-      return Assignments.fetch();
+      Assignments.fetch();
+      return this.expand.on('transitionend webkitTransitionEnd oTransitionEnd otransitionend MSTransitionEnd', this.onTransitionEnd);
     },
     resort: function() {
       return Assignments.sort({
@@ -168,9 +170,20 @@ $(function() {
     addAll: function() {
       return Assignments.each(this.addOne, this);
     },
+    backspace: function(e) {
+      if (e.type === 'keyup' && e.keyCode !== 8) {
+        return;
+      }
+      if (this.input.val() === '') {
+        return this.slide(false);
+      }
+    },
     createOnEnter: function(e) {
       var date, priority;
 
+      if (!this.expand.hasClass('unhide')) {
+        this.slide(true);
+      }
       if (e.type === "keypress" && e.keyCode !== 13) {
         return;
       }
@@ -195,38 +208,39 @@ $(function() {
       this.input.val("");
       this.priority.val("");
       this.dueDate.val("");
-      return this.slide();
+      return this.slide(false);
     },
     focusAssignment: function() {
-      return this.slide();
+      return this.slide(true);
     },
     blurAssignment: function() {
-      if (this.input.val() === "") {
-        return this.slide();
+      if (this.input.val() === '') {
+        return this.slide(false);
+      } else {
+        return this.slide(true);
       }
     },
-    slide: function() {
-      var _this = this;
-
-      this.expand.toggleClass("unhide");
-      if (this.expand.hasClass("unhide")) {
-        this.expand.css({
+    slide: function(show) {
+      if (show) {
+        this.expand.addClass('unhide');
+        return this.expand.css({
           'display': 'block',
           'height': this.expand.actual("outerHeight")
         });
       } else {
-        this.expand.css({
+        this.expand.removeClass('unhide');
+        return this.expand.css({
           'height': '0px'
         });
       }
-      return this.expand.on('transitionend webkitTransitionEnd oTransitionEnd otransitionend MSTransitionEnd', function() {
-        if (!_this.expand.hasClass("unhide")) {
-          return _this.expand.css({
-            'display': 'none',
-            'height': ''
-          });
-        }
-      });
+    },
+    onTransitionEnd: function() {
+      if (!this.expand.hasClass("unhide")) {
+        return this.expand.css({
+          'display': 'none',
+          'height': ''
+        });
+      }
     },
     clearCompleted: function() {
       _.invoke(Assignments.done(), "destroy");
