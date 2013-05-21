@@ -59,7 +59,7 @@ $(function() {
     template: _.template(readScript("/templates/item-template.js")),
     events: {
       "click .toggle": "toggleDone",
-      "dblclick .view": "edit",
+      "click .title": "edit",
       "click a.destroy": "clear",
       "keypress .edit": "updateOnEnter",
       "blur .edit": "close"
@@ -77,9 +77,11 @@ $(function() {
     toggleDone: function() {
       return this.model.toggle();
     },
-    edit: function() {
+    edit: function(e) {
+      e.preventDefault();
       this.$el.addClass("editing");
-      return this.input.focus();
+      this.input.focus();
+      return false;
     },
     close: function() {
       var value;
@@ -242,7 +244,7 @@ $(function() {
         });
       }
     },
-    onTransitionEnd: function() {
+    onTransitionEnd: function(e) {
       if (!this.expand.hasClass("unhide")) {
         return this.expand.css({
           'display': 'none',

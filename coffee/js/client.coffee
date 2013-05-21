@@ -44,7 +44,7 @@ $ ->
     template: _.template(readScript("/templates/item-template.js"))
     events:
       "click .toggle": "toggleDone"
-      "dblclick .view": "edit"
+      "click .title": "edit"
       "click a.destroy": "clear"
       "keypress .edit": "updateOnEnter"
       "blur .edit": "close"
@@ -62,9 +62,11 @@ $ ->
     toggleDone: ->
       @model.toggle()
 
-    edit: ->
+    edit: (e) ->
+      e.preventDefault()
       @$el.addClass "editing"
       @input.focus()
+      false
 
     close: ->
       value = @input.val()
@@ -75,7 +77,7 @@ $ ->
         @$el.removeClass "editing"
 
     updateOnEnter: (e) ->
-      @close()  if e.keyCode is 13
+      @close() if e.keyCode is 13
 
     clear: ->
       @model.destroy()
@@ -201,7 +203,7 @@ $ ->
           'height': '0px'
         )
 
-    onTransitionEnd: ->
+    onTransitionEnd: (e) ->
       if not @expand.hasClass "unhide"
         @expand.css
           'display': 'none'
