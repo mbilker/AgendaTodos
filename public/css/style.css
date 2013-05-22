@@ -4,13 +4,8 @@ body {
   padding: 0;
 }
 body {
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  font-size: 14px;
-  line-height: 1.4em;
-  background: #eee;
-  color: #333;
-  width: 520px;
-  margin: 0 auto;
+  font-family: 'Lato', sans-serif;
+  background-color: #95a5a6;
   -webkit-font-smoothing: antialiased;
 }
 #expand {
@@ -23,19 +18,9 @@ body {
   overflow: hidden;
 }
 #app {
-  background: #fff;
+  width: 520px;
   padding: 20px;
-  margin-bottom: 40px;
-  -webkit-border-radius: 0 0 5px 5px;
-  -moz-border-radius: 0 0 5px 5px;
-  -ms-border-radius: 0 0 5px 5px;
-  -o-border-radius: 0 0 5px 5px;
-  border-radius: 0 0 5px 5px;
-  -webkit-box-shadow: rgba(0,0,0,0.2) 0 2px 6px 0;
-  -moz-box-shadow: rgba(0,0,0,0.2) 0 2px 6px 0;
-  -ms-box-shadow: rgba(0,0,0,0.2) 0 2px 6px 0;
-  -o-box-shadow: rgba(0,0,0,0.2) 0 2px 6px 0;
-  box-shadow: rgba(0,0,0,0.2) 0 2px 6px 0;
+  background-color: #bdc3c7;
 /*
   input[type="text"]
     width 466px
@@ -67,25 +52,16 @@ body {
   */
 }
 #app h1 {
-  font-size: 36px;
   font-weight: bold;
   text-align: center;
-  padding: 0 0 10px 0;
 }
 #app footer {
   display: none;
   margin: 0 -20px -20px -20px;
   overflow: hidden;
-  color: #555;
-  background: #f4fce8;
-  border-top: 1px solid #ededed;
+  background: #2ecc71;
   padding: 0 20px;
   line-height: 37px;
-  -webkit-border-radius: 0 0 5px 5px;
-  -moz-border-radius: 0 0 5px 5px;
-  -ms-border-radius: 0 0 5px 5px;
-  -o-border-radius: 0 0 5px 5px;
-  border-radius: 0 0 5px 5px;
 }
 #main {
   display: none;
@@ -130,50 +106,45 @@ body {
 #assignment-list .details {
   font-size: 12px;
 }
-#assignment-list li.editing {
-  margin-top: 14px;
-  padding: 0;
-}
 #assignment-list li.editing:last-child {
   margin-bottom: -1px;
 }
 #assignment-list li.editing .edit {
   display: block;
-  width: 444px;
-  padding: 13px 15px 14px 20px;
+  padding: 13px 15px 13px 20px;
 }
 #assignment-list li.editing .view {
   display: none;
 }
 #assignment-list .priority0 {
-  background-color: #fff;
+  background-color: #bdc3c7;
 }
 #assignment-list .priority1 {
-  background-color: #f2f2f2;
+  background-color: #b3b9be;
 }
 #assignment-list .priority2 {
-  background-color: #e6e6e6;
+  background-color: #a8b0b5;
 }
 #assignment-list .priority3 {
-  background-color: #d9d9d9;
+  background-color: #9ea6ac;
 }
 #assignment-list .priority4 {
-  background-color: #ccc;
+  background-color: #939da3;
 }
 #assignment-list .priority5 {
-  background-color: #bfbfbf;
+  background-color: #89939a;
 }
 #assignment-list .priority6 {
-  background-color: #b3b3b3;
+  background-color: #7e8a92;
 }
 #assignment-list .priority7 {
-  background-color: #a6a6a6;
+  background-color: #748088;
 }
 #assignment-list .priority8 {
-  background-color: #999;
+  background-color: #6b767e;
 }
 #assignment-list .priority9 {
-  background-color: #8c8c8c;
+  background-color: #626c73;
 }
 #assignment-list .priority {
   position: absolute;
@@ -227,21 +198,11 @@ body {
 #todo-count span {
   font-weight: bold;
 }
-#instructions {
+#footer {
   margin: 10px auto;
-  color: #777;
-  text-shadow: rgba(255,255,255,0.8) 0 1px 0;
+  color: #34495e;
   text-align: center;
 }
-#instructions a {
-  color: #369;
-}
-#credits {
-  margin: 30px auto;
-  color: #999;
-  text-shadow: rgba(255,255,255,0.8) 0 1px 0;
-  text-align: center;
-}
-#credits a {
-  color: #888;
+#footer a {
+  color: #2c3e50;
 }

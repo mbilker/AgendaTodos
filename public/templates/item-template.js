@@ -6,4 +6,4 @@
   <a class="priority priority<%- priority %>"></a>
   <a class="destroy"></a>
 </div>
-<input class="edit" type="text" value="<%- title %>" />
+<input class="edit input-block-level" type="text" value="<%- title %>" />
