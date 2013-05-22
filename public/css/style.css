@@ -103,7 +103,8 @@ body {
 #assignment-list .destroy:hover {
   background-position: 0 -20px;
 }
-#assignment-list .details {
+#assignment-list .details,
+#assignment-list .edit-text {
   font-size: 12px;
 }
 #assignment-list li.editing:last-child {

@@ -55,7 +55,7 @@ define(['jquery', 'backbone', 'jquery-actual'], function($, Backbone) {
       template: _.template(readScript("/templates/item-template.js")),
       events: {
         "click .toggle": "toggleDone",
-        "click .title": "edit",
+        "click .edit-text": "edit",
         "click a.destroy": "clear",
         "keypress .edit": "updateOnEnter",
         "blur .edit": "close"

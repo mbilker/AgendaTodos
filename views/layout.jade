@@ -7,20 +7,16 @@ html
       link(rel='stylesheet', href='/bootstrap/css/bootstrap.css', type='text/css')
       link(rel='stylesheet', href='/css/style.css', type='text/css')
       script(type='text/javascript', data-main='/js/require-config', src='/js/require.js')
-      //script(type='text/javascript', src='/js/modernizr.js')
-      //script(type='text/javascript', src='/bootstrap/js/bootstrap.js')
   body
     #app.container
       div#header
         h1 Agenda Book
         - if (info != undefined && info.length != 0)
           each message in info
-            div.success
-              p= message
+            span.label.label-info= message
         - if (error != undefined && error.length != 0)
           each message in error
-            div.error
-              p #{message}
+            span.label.label-important= message
         - if (typeof currentUser !== 'undefined')
           a#logout(href='/sessions') Log Out
       block content
