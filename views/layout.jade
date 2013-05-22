@@ -5,13 +5,41 @@ html
       title= 'Agenda Book'
       link(rel='stylesheet', href='/bootstrap/css/bootstrap.css')
       link(rel='stylesheet', href='/css/style.css')
-      script(type='text/javascript', src='/js/jquery.js')
-      script(type='text/javascript', src='/js/jquery.actual.js')
-      script(type='text/javascript', src='/js/modernizr.js')
-      script(type='text/javascript', src='/bootstrap/js/bootstrap.js')
-      script(type='text/javascript', src='/js/lodash.js')
-      script(type='text/javascript', src='/js/backbone.js')
-      script(type='text/javascript', src='/js/logout.js')
+      script(type='text/javascript', src='/js/require.js')
+      //script(type='text/javascript', src='/js/jquery.js')
+      //script(type='text/javascript', src='/js/jquery.actual.js')
+      //script(type='text/javascript', src='/js/modernizr.js')
+      //script(type='text/javascript', src='/bootstrap/js/bootstrap.js')
+      //script(type='text/javascript', src='/js/lodash.js')
+      //script(type='text/javascript', src='/js/backbone.js')
+      //script(type='text/javascript', src='/js/logout.js')
+      script(type='text/javascript').
+        requirejs.config({
+          enforceDefine: true,
+          baseURL: '/js',
+          paths: {
+            'domReady': '/js/domReady',
+            'jquery': '/js/jquery',
+            'jquery-actual': '/js/jquery.actual',
+            'backbone': '/js/backbone',
+            'underscore': '/js/lodash'
+          },
+          shim: {
+            'underscore': {
+              deps: [],
+              exports: '_'
+            },
+            'backbone': {
+              deps: ['jquery', 'underscore'],
+              exports: 'Backbone'
+            },
+            'jquery-actual': {
+              deps: ['jquery'],
+              exports: 'jQuery.fn.actual'
+            }
+          }
+        });
+        require(['/js/logout.js']);
   body
     #app
       div#header
