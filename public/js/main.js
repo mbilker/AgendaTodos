@@ -1,19 +1,13 @@
-define(['domReady', 'jquery', 'backbone', 'jquery-actual'], function(domReady, $, Backbone) {
-  var readScript;
-
-  readScript = function(script) {
-    var x, xhr;
-
-    xhr = new XMLHttpRequest();
+define(['jquery', 'backbone', 'jquery-actual'], function($, Backbone) {
+  function readScript(script) {
+    var xhr = new XMLHttpRequest();
     xhr.open("GET", script, false);
     xhr.send(null);
-    x = xhr.responseText;
-    return x;
-  };
-  domReady(function() {
-    var App, AppView, Assignment, AssignmentList, AssignmentView, Assignments;
+    return xhr.responseText;
+  }
 
-    Assignment = Backbone.Model.extend({
+  $(function() {
+    var Assignment = Backbone.Model.extend({
       urlRoot: "/assignments/sync",
       idAttribute: "_id",
       defaults: {
@@ -35,7 +29,8 @@ define(['domReady', 'jquery', 'backbone', 'jquery-actual'], function(domReady, $
         });
       }
     });
-    AssignmentList = Backbone.Collection.extend({
+
+    var AssignmentList = Backbone.Collection.extend({
       model: Assignment,
       url: "/assignments/sync",
       done: function() {
@@ -53,8 +48,9 @@ define(['domReady', 'jquery', 'backbone', 'jquery-actual'], function(domReady, $
         return a;
       }
     });
-    Assignments = new AssignmentList();
-    AssignmentView = Backbone.View.extend({
+
+    var Assignments = window.Assignments = new AssignmentList();
+    var AssignmentView = Backbone.View.extend({
       tagName: "li",
       template: _.template(readScript("/templates/item-template.js")),
       events: {
@@ -84,9 +80,7 @@ define(['domReady', 'jquery', 'backbone', 'jquery-actual'], function(domReady, $
         return false;
       },
       close: function() {
-        var value;
-
-        value = this.input.val();
+        var value = this.input.val();
         if (!value) {
           return this.clear();
         } else {
@@ -117,9 +111,8 @@ define(['domReady', 'jquery', 'backbone', 'jquery-actual'], function(domReady, $
         "click #toggle-all": "toggleAllComplete"
       },
       initialize: function() {
-        var d, day, month;
-
         _.bindAll(this, 'sortComplete', 'render', 'addOne', 'addAll', 'createOnEnter', 'backspace', 'focusAssignment', 'blurAssignment', 'onTransitionEnd', 'toggleAllComplete');
+
         this.input = this.$("#new-assignment");
         this.dueDate = this.$("#dueDate");
         this.priority = this.$("#priority");
@@ -127,12 +120,15 @@ define(['domReady', 'jquery', 'backbone', 'jquery-actual'], function(domReady, $
         this.expand = this.$("#expand");
         this.footer = this.$("footer");
         this.main = $("#main");
-        d = new Date();
-        month = (d.getMonth() < 9 ? "0" : "") + (d.getMonth() + 1);
-        day = (d.getDate() < 9 ? "0" : "") + (d.getDate() + 1);
+
+        var d = new Date();
+        var month = (d.getMonth() < 9 ? "0" : "") + (d.getMonth() + 1);
+        var day = (d.getDate() < 9 ? "0" : "") + (d.getDate() + 1);
+
         this.minDate = d.getFullYear() + "-" + month + "-" + day;
         this.dueDate.attr('min', this.minDate);
         this.dueDate.val(this.minDate);
+
         this.listenTo(Assignments, "all", function(ev) {
           console.log("all:", ev);
           return this.render();
@@ -140,22 +136,20 @@ define(['domReady', 'jquery', 'backbone', 'jquery-actual'], function(domReady, $
         this.listenTo(Assignments, "reset", this.sortComplete);
         this.listenTo(Assignments, "sort", this.sortComplete);
         Assignments.fetch();
-        return this.expand.on('transitionend webkitTransitionEnd oTransitionEnd otransitionend MSTransitionEnd', this.onTransitionEnd);
+
+        this.expand.on('transitionend webkitTransitionEnd oTransitionEnd otransitionend MSTransitionEnd', this.onTransitionEnd);
       },
       resort: function() {
-        return Assignments.sort({
-          silent: true
-        });
+        Assignments.sort({ silent: true });
       },
       sortComplete: function() {
         this.$("#assignment-list").empty();
-        return this.addAll();
+        this.addAll();
       },
       render: function() {
-        var done, remaining;
+        var done = Assignments.done().length;
+        var remaining = Assignments.remaining().length;
 
-        done = Assignments.done().length;
-        remaining = Assignments.remaining().length;
         if (Assignments.length) {
           this.main.show();
           this.footer.show();
@@ -167,7 +161,7 @@ define(['domReady', 'jquery', 'backbone', 'jquery-actual'], function(domReady, $
           this.main.hide();
           this.footer.hide();
         }
-        return this.allCheckbox.checked = !remaining;
+        this.allCheckbox.checked = !remaining;
       },
       addOne: function(assignment) {
         var view;
@@ -175,10 +169,10 @@ define(['domReady', 'jquery', 'backbone', 'jquery-actual'], function(domReady, $
         view = new AssignmentView({
           model: assignment
         });
-        return this.$("#assignment-list").append(view.render().el);
+        this.$("#assignment-list").append(view.render().el);
       },
       addAll: function() {
-        return Assignments.each(this.addOne, this);
+        Assignments.each(this.addOne, this);
       },
       backspace: function(e) {
         if (e.type === 'keyup' && e.keyCode !== 8) {
@@ -218,35 +212,35 @@ define(['domReady', 'jquery', 'backbone', 'jquery-actual'], function(domReady, $
         this.input.val("");
         this.priority.val("");
         this.dueDate.val(this.minDate);
-        return this.slide(false);
+        this.slide(false);
       },
       focusAssignment: function() {
-        return this.slide(true);
+        this.slide(true);
       },
       blurAssignment: function() {
         if (this.input.val() === '') {
-          return this.slide(false);
+          this.slide(false);
         } else {
-          return this.slide(true);
+          this.slide(true);
         }
       },
       slide: function(show) {
         if (show) {
           this.expand.addClass('unhide');
-          return this.expand.css({
+          this.expand.css({
             'display': 'block',
             'height': this.expand.actual("outerHeight")
           });
         } else {
           this.expand.removeClass('unhide');
-          return this.expand.css({
+          this.expand.css({
             'height': '0px'
           });
         }
       },
       onTransitionEnd: function(e) {
         if (!this.expand.hasClass("unhide")) {
-          return this.expand.css({
+          this.expand.css({
             'display': 'none',
             'height': ''
           });
@@ -257,18 +251,14 @@ define(['domReady', 'jquery', 'backbone', 'jquery-actual'], function(domReady, $
         return false;
       },
       toggleAllComplete: function() {
-        var done;
-
-        done = this.allCheckbox.checked;
-        return Assignments.each(function(assignment) {
+        var done = this.allCheckbox.checked;
+        Assignments.each(function(assignment) {
           return assignment.save({
             completed: done
           });
         });
       }
     });
-    App = new AppView;
-    window.App = App;
-    window.Assignments = Assignments;
+    var App = window.App = new AppView;
   });
 });
