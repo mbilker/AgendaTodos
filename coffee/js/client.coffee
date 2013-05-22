@@ -1,4 +1,4 @@
-define ['domReady', 'jquery', 'backbone'], (dom, $, Backbone) ->
+define ['domReady', 'jquery', 'backbone', 'jquery-actual'], (domReady, $, Backbone) ->
   readScript = (script) ->
     xhr = new XMLHttpRequest()
     xhr.open "GET", script, false
@@ -6,7 +6,7 @@ define ['domReady', 'jquery', 'backbone'], (dom, $, Backbone) ->
     x = xhr.responseText
     x
 
-  dom ->
+  domReady ->
     #Backbone.emulateHTTP = true;
     #Backbone.emulateJSON = true;
     Assignment = Backbone.Model.extend(

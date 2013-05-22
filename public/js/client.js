@@ -1,4 +1,4 @@
-define(['domReady', 'jquery', 'backbone', 'jquery-actual'], function(dom, $, Backbone) {
+define(['domReady', 'jquery', 'backbone', 'jquery-actual'], function(domReady, $, Backbone) {
   var readScript;
 
   readScript = function(script) {
@@ -10,7 +10,7 @@ define(['domReady', 'jquery', 'backbone', 'jquery-actual'], function(dom, $, Bac
     x = xhr.responseText;
     return x;
   };
-  dom(function() {
+  domReady(function() {
     var App, AppView, Assignment, AssignmentList, AssignmentView, Assignments;
 
     Assignment = Backbone.Model.extend({
