@@ -8,7 +8,7 @@ namespace :npm do
   task :create_folder, :roles => :app, :except => { :no_release => true } do
     print " --> Creating shared node_modules...".yellow
     run "mkdir -p #{shared_path}/node_modules"
-    puts "Done".green
+    puts "Done.".green
   end
 
   task :install, roles => :app do
