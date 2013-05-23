@@ -4,6 +4,9 @@ require 'colored'
 # mbilker deploy file
 #
 
+load 'npm'
+load 'config'
+
 default_run_options[:pty] = true
 logger.level = Capistrano::Logger::IMPORTANT
 set :application, 'todos'
@@ -41,7 +44,9 @@ namespace :deploy do
       "sudo systemctl enable #{application}.target",
       "sudo systemctl start #{application}.target"
     ].join(" && ")
+    puts "Done.".green
 
+    print " --> Restarting nginx...".yellow
     run [
       "cd #{release_path}",
       "sudo BASE_DOMAIN=#{base_domain} bundle exec nginx-foreman export nginx #{nginx_conf_path} -d #{release_path} -l /var/log/#{application} -a #{application} -u #{user} -p #{base_port} -c #{concurrency}",
@@ -61,4 +66,3 @@ before 'deploy:finalize_update' do
   put(mkconfig, "#{release_path}/.env")
   puts "Done.".green
 end
-
