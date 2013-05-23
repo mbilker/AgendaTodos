@@ -5,7 +5,7 @@ namespace :npm do
     puts "Done.".green
   end
 
-  task :node_additional_setup, :roles => :app, :except => { :no_release => true } do
+  task :create_folder, :roles => :app, :except => { :no_release => true } do
     print " --> Creating shared node_modules...".yellow
     run "mkdir -p #{shared_path}/node_modules"
     puts "Done".green
@@ -18,8 +18,7 @@ namespace :npm do
   end
 end
 
-after 'deploy:create_symlink', 'npm:refresh_symlink'
-after 'deploy:setup', 'npm:node_additional_setup'
+after 'deploy:create_symlink', 'npm:create_folder', 'npm:refresh_symlink'
 
 before 'deploy:start', 'npm:install'
 before 'deploy:restart', 'npm:install'
