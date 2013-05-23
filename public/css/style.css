@@ -67,15 +67,15 @@ body {
   display: none;
 }
 #assignment-list {
-  margin: 10px 0;
+  margin: 0;
   padding: 0;
   list-style: none;
-  border-top: 1px solid #ccc;
+  border-top: 1px solid #95a5a6;
 }
 #assignment-list li {
-  padding: 18px 20px 0 0;
+  padding: 10px 20px 10px 0;
   position: relative;
-  border-bottom: 1px solid #ccc;
+  border-bottom: 1px solid #95a5a6;
 }
 #assignment-list li label {
   font-size: 24px;
@@ -112,7 +112,6 @@ body {
 }
 #assignment-list li.editing .edit {
   display: block;
-  padding: 13px 15px 13px 20px;
 }
 #assignment-list li.editing .view {
   display: none;
