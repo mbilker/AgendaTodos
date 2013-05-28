@@ -3,10 +3,6 @@ requirejs.config({
     'underscore': 'lodash'
   },
   shim: {
-    'underscore': {
-      deps: [],
-      exports: '_'
-    },
     'backbone': {
       deps: ['jquery', 'underscore'],
       exports: 'Backbone'
