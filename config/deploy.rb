@@ -4,8 +4,8 @@ require 'colored'
 # mbilker deploy file
 #
 
-load 'npm'
-load 'config'
+load 'config/npm'
+load 'config/config'
 
 default_run_options[:pty] = true
 logger.level = Capistrano::Logger::IMPORTANT
