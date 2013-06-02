@@ -1,7 +1,5 @@
 node_modules
 
-.env
-
 runtime.config.json
 
 public/css
