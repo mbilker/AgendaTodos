@@ -4,17 +4,17 @@ html
     block head
       title= 'Agenda Book'
       link(rel='stylesheet', href='http://fonts.googleapis.com/css?family=Lato', type='text/css')
-      link(rel='stylesheet', href='/css/style.css', type='text/css')
-      script(type='text/javascript', src='/js/todos-main.js')
+      link(rel='stylesheet', href=settings.cssmain, type='text/css')
+      script(type='text/javascript', src=settings.jsmain)
   body
     #app.container
       div#header
         h1 Agenda Book
-        - if (info != undefined && info.length != 0)
-          each message in info
+        - if (settings.info && settings.info.length != 0)
+          each message in settings.info
             span.label.label-info= message
-        - if (error != undefined && error.length != 0)
-          each message in error
+        - if (settings.error && settings.error.length != 0)
+          each message in settings.error
             span.label.label-important= message
         - if (typeof currentUser !== 'undefined')
           a#logout(href='/sessions') Log Out
