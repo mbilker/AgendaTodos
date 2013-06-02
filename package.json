@@ -4,8 +4,7 @@
   "version": "0.0.1",
   "main": "bin/app",
   "scripts": {
-    "start": "bin/app",
-    "install": "grunt compile"
+    "start": "bin/app"
   },
   "repository": {
     "type": "git",
