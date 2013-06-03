@@ -18,11 +18,13 @@ html
       div#header
         h1 Agenda Book
         - if (settings.info && settings.info.length != 0)
-          each message in settings.info
-            span.label.label-info= message
+          div
+            each message in settings.info
+              span.label.label-info= message
         - if (settings.error && settings.error.length != 0)
-          each message in settings.error
-            span.label.label-important= message
+          div
+            each message in settings.error
+              span.label.label-important= message
         - if (typeof currentUser !== 'undefined')
           a#logout(href='/sessions') Log Out
       block content

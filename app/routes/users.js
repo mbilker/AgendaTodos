@@ -10,7 +10,8 @@ module.exports = function() {
   });
 
   app.post('/users', function(req, res) {
-    var user = new User(req.body.user);
+    var u = req.body.user;
+    var user = new User({ username: u.username, firstName: u.firstName, lastName: u.lastName, email: u.email, password: u.password });
 
     function userSaveFailed(err) {
       req.flash('error', 'Account creation failed');

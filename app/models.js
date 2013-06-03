@@ -20,8 +20,6 @@ var User = new Schema({
   'salt': String,
   'firstName': String,
   'lastName': String,
-  'prefix': { type: String, validate: [validatePrefix, 'a prefix needs to be of the following types'] },
-  'type': { type: String, default: 'empty' }
 });
 
 User.virtual('id').get(function() {
