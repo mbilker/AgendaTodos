@@ -1,6 +1,6 @@
 var crypto = require('crypto');
 
-var User, LoginToken, Assignment, Section;
+var User, LoginToken, Section, Task;
 
 function validatePresenceOf(value) {
   return value && value.length;
@@ -10,7 +10,7 @@ function validatePrefix(value) {
   return /Mr.|Mrs.|Dr./.test(value);
 }
 
-function defineModels(mongoose, cb) {
+function defineModels(mongoose) {
   var Schema = mongoose.Schema;
 
   User = new Schema({
@@ -97,7 +97,7 @@ function defineModels(mongoose, cb) {
     teacher: { type: String }
   });
 
-  Assignment = new Schema({
+  Task = new Schema({
     'userID': String,
     'title': String,
     'priority': Number,
@@ -109,9 +109,14 @@ function defineModels(mongoose, cb) {
   mongoose.model('User', User);
   mongoose.model('LoginToken', LoginToken);
   mongoose.model('Section', Section);
-  mongoose.model('Assignment', Assignment);
+  mongoose.model('Task', Task);
 
-  cb();
+  return {
+    User: mongoose.model('User'),
+    LoginToken: mongoose.model('LoginToken'),
+    Section: mongoose.model('Section'),
+    Task: mongoose.model('Task')
+  }
 }
 
-exports.defineModels = defineModels;
+module.exports = defineModels;

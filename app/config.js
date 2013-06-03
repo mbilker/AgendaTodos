@@ -6,7 +6,7 @@ if (process.env.NODE_ENV == 'production') {
     mongodb: process.env.MONGODB
   }
 } else {
-  Config = require('../runtime.config.json');
+  Config = require('../dev.config.json');
 }
 
 var required = [

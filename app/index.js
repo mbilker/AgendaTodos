@@ -7,7 +7,8 @@ var path = require('path'),
     flash = require('connect-flash'),
     RedisStore = require('connect-redis')(express),
     connectTimeout = require('connect-timeout'),
-    models = require('./models'),
+    models = require('./models')(mongoose),
+    utils = require('./utils')(models),
     Config = require('./config');
 
 var User, LoginToken, Assignment, Section;
@@ -65,15 +66,13 @@ App.start = function() {
 
   mongoose.connect(app.set('db-uri'));
 
-  models.defineModels(mongoose, function() {
-    app.User = User = mongoose.model('User');
-    app.LoginToken = LoginToken = mongoose.model('LoginToken');
-    app.Assignment = Assignment = mongoose.model('Assignment');
-    app.Section = Section = mongoose.model('Section');
+  User = models.User;
+  LoginToken = models.LoginToken;
+  Task = models.Task;
+  Section = models.Section;
 
-    server.listen(PORT);
-    console.log('Agenda Book Server ready, port: %s, environment: %s', PORT, app.settings.env);
-  });
+  server.listen(PORT);
+  console.log('Agenda Book Server ready, port: %s, environment: %s', PORT, app.settings.env);
 
   function authenticateFromLoginToken(req, res, next) {
     var cookie = JSON.parse(req.cookies.logintoken);
@@ -145,7 +144,6 @@ App.start = function() {
         }
       } else {
         req.flash('error', 'Incorrect credentials');
-        //console.log('Incorrect credentials');
         res.redirect('/sessions/new');
       }
     }); 
@@ -167,9 +165,8 @@ App.start = function() {
     });
   });
 
-  app.post('/users.:format?', function(req, res) {
+  app.post('/users', function(req, res) {
     var user = new User(req.body.user);
-    console.log(req.body.user);
 
     function userSaveFailed(err) {
       req.flash('error', 'Account creation failed');
@@ -185,18 +182,8 @@ App.start = function() {
 
       req.flash('info', 'Your account has been created');
 
-      var format = req.params.format || '';
-
-      switch (format) {
-        case 'json':
-          res.send(user.toObject());
-          break;
-
-        default:
-          req.session.user_id = user.id;
-          res.redirect('/');
-          break;
-      }
+      req.session.user_id = user.id;
+      res.redirect('/');
     });
   });
 
@@ -208,21 +195,19 @@ App.start = function() {
 
   app.get('/assignments/sync', loadUser, function(req, res) {
     function getError(err) {
-        console.log(err);
-        res.writeHead(500);
-        res.end();
+      console.log(err);
+      res.writeHead(500);
+      res.end();
     }
-    Assignment.find({ userID: req.currentUser.id }, function(err, assignments) {
+    Task.find({ userID: req.currentUser.id }, function(err, tasks) {
       if (err) return getError(err);
       res.writeHead(200, { 'Content-Type': 'application/json' });
-      res.end(JSON.stringify(assignments));
+      res.end(JSON.stringify(tasks));
     });
   });
 
   app.post('/assignments/sync', loadUser, function(req, res) {
-    console.log('Adding assignment');
-    console.log(req.body);
-    var assignment = new Assignment({
+    var t = new Task({
       userID: req.currentUser.id,
       title: req.body.title,
       completed: req.body.completed,
@@ -230,46 +215,45 @@ App.start = function() {
       dueDate: new Date(req.body.dueDate)
     });
 
-    function assignmentSaveError(err) {
+    function taskSaveError(err) {
+      console.log(err);
       res.writeHead(500);
       res.end();
     }
 
-    assignment.save(function(err) {
-      if (err) return assignmentSaveError(err);
+    t.save(function(err) {
+      if (err) return taskSaveError(err);
       res.writeHead(200, { 'Content-Type': 'application/json' });
-      res.end(JSON.stringify(assignment));
+      res.end(JSON.stringify(t));
     });
   });
 
   app.put('/assignments/sync/:id', loadUser, function(req, res) {
-    console.log('Updating assignment');
     function updateFailed(err) {
       console.log(err);
       res.writeHead(500);
       res.end();
     }
-    Assignment.findOne({ userID: req.currentUser.id, _id: req.params.id }, function(err, assignment) {
+    Task.findOne({ userID: req.currentUser.id, _id: req.params.id }, function(err, task) {
       if (err) return updateFailed(err);
       ['title', 'completed', 'priority', 'dueDate'].forEach(function(x) {
-        assignment[x] = req.body[x];
+        task[x] = req.body[x];
       });
-      assignment.save(function(err) {
+      task.save(function(err) {
         if (err) return updateFailed(err);
         res.writeHead(200, { 'Content-Type': 'application/json' });
-        res.end(JSON.stringify(assignment));
+        res.end(JSON.stringify(task));
       });
     });
   });
 
   app.del('/assignments/sync/:id', loadUser, function(req, res) {
-    console.log('Deleting assignment');
     function removeError(err) {
       console.log(err);
       res.writeHead(500);
       res.end();
     }
-    Assignment.remove({ userID: req.currentUser.id, _id: req.params.id }, function(err) {
+    Task.remove({ userID: req.currentUser.id, _id: req.params.id }, function(err) {
       if (err) return removeError(err);
       res.end();
     });
