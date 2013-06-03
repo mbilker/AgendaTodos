@@ -48,10 +48,7 @@ $(function() {
       return this.without.apply(this, this.done());
     },
     comparator: function(assignment) {
-      var a;
-
-      a = -(assignment.get("priority") + 1) + new Date(assignment.get("dueDate")).getTime();
-      return a;
+      return -(assignment.get("priority") + 1) + new Date(assignment.get("dueDate")).getTime();
     }
   });
 
@@ -63,10 +60,11 @@ $(function() {
       "click .toggle": "toggleDone",
       "click .edit-text": "edit",
       "click a.destroy": "clear",
-      "keypress .edit": "updateOnEnter",
-      "blur .edit": "close"
+      "click .save-changes": "dueDateEdited"
     },
     initialize: function() {
+      _.bindAll(this, 'render', 'saveModel', 'toggleDone', 'edit', 'dueDateEdited', 'clear');
+
       this.listenTo(this.model, "change", this.render);
       this.listenTo(this.model, "destroy", this.remove);
     },
@@ -74,39 +72,38 @@ $(function() {
       this.$el.html(this.template(this.model.toJSON()));
       this.$el.toggleClass("done", this.model.get("completed"));
 
-      this.input = this.$(".edit");
+      this.titleEdit = this.$(".title-edit");
+      this.dueDateEdit = this.$(".dueDate-edit");
+      this.priorityEdit = this.$(".priority-edit");
       this.modal = this.$(".modal");
+      this.modal.on('hidden', this.saveModel);
 
       return this;
+    },
+    saveModel: function () {
+      var date = this.dueDateEdit.val().split("-");
+      date = new Date(date[0], date[1] - 1, date[2]);
+      var priority = parseInt(this.priorityEdit.val()) || 0;
+
+      this.model.save({
+        title: this.titleEdit.val(),
+        dueDate: date,
+        priority: priority
+      });
     },
     toggleDone: function() {
       this.model.toggle();
     },
     edit: function(e) {
       e.preventDefault();
-      //this.$el.addClass("editing");
-      //this.input.focus();
       this.modal.modal();
       return false;
     },
-    close: function() {
-      var value = this.input.val();
-      if (!value) {
-        this.clear();
-      } else {
-        this.model.save({
-          title: value
-        });
-        this.$el.removeClass("editing");
-      }
-    },
-    updateOnEnter: function(e) {
-      if (e.keyCode === 13) {
-        return this.close();
-      }
+    dueDateEdited: function() {
+      this.modal.modal('hide');
     },
     clear: function() {
-      return this.model.destroy();
+      this.model.destroy();
     }
   });
   AppView = Backbone.View.extend({
@@ -140,7 +137,7 @@ $(function() {
 
       this.listenTo(Assignments, "all", function(ev) {
         console.log("all:", ev);
-        return this.render();
+        this.render();
       });
       this.listenTo(Assignments, "reset", this.sortComplete);
       this.listenTo(Assignments, "sort", this.sortComplete);
@@ -190,27 +187,22 @@ $(function() {
       }
     },
     createOnEnter: function(e) {
-      var date, priority;
+      if (!this.expand.hasClass('unhide')) this.slide(true);
 
-      if (!this.expand.hasClass('unhide')) {
-        this.slide(true);
-      }
       if (e.type === "keypress" && e.keyCode !== 13) {
         return;
       }
-      if (!this.input.val()) {
-        return this.input.parents(".control-group").addClass("warning");
-      } else {
-        this.input.parents(".control-group").removeClass("warning");
-      }
-      if (!this.dueDate.val()) {
-        return this.dueDate.parents(".control-group").addClass("warning");
-      } else {
-        this.dueDate.parents(".control-group").removeClass("warning");
-      }
-      date = this.dueDate.val().split("-");
+
+      if (!this.input.val()) return this.input.parents(".control-group").addClass("warning");
+      else this.input.parents(".control-group").removeClass("warning");
+
+      if (!this.dueDate.val()) return this.dueDate.parents(".control-group").addClass("warning");
+      else this.dueDate.parents(".control-group").removeClass("warning");
+
+      var date = this.dueDate.val().split("-");
       date = new Date(date[0], date[1] - 1, date[2]);
-      priority = Number(this.priority.val()) || 0;
+      var priority = parseInt(this.priority.val()) || 0;
+
       Assignments.create({
         title: this.input.val(),
         dueDate: date,

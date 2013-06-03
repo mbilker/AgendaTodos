@@ -1,5 +1,2 @@
-module.exports = function(models) {
-  return {
-    checkForUser: require('./checkForUser.js')(models),
-  }
-}
+exports.checkForUserJSON = require('./checkForUserJSON.js');
+exports.loadUser = require('./loadUser.js');

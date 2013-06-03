@@ -7,7 +7,6 @@
   <span class="priority priority<%- priority %>"></span>
   <a class="destroy"></a>
 </div>
-<input class="edit input-block-level" type="text" value="<%- title %>" />
 
 <div class="modal hide fade" tabindex="-1" role="dialog" aria-hidden="true">
   <div class="modal-header">
@@ -17,15 +16,21 @@
   <div class="modal-body">
     <div class="form-horizontal">
       <div class="control-group">
-        <label for="priority" class="control-label">Priority</label>
+        <label class="control-label">Title</label>
         <div class="controls">
-          <input id="priority" type="number" min="0" max="9" placeholder="<%- priority %>" class="span1" value="<%- priority %>">
+          <input class="title-edit span3" type="text" min="0" max="9" placeholder="<%- title %>" value="<%- title %>">
         </div>
       </div>
       <div class="control-group">
-        <label for="dueDate" class="control-label">Due Date</label>
+        <label class="control-label">Priority</label>
         <div class="controls">
-          <input id="dueDate" type="date" class="span2" min="<%= formatDateInput(new Date(dueDate)) %>" value="<%= formatDateInput(new Date(dueDate)) %>">
+          <input class="priority-edit span3" type="number" min="0" max="9" placeholder="<%- priority %>" value="<%- priority %>">
+        </div>
+      </div>
+      <div class="control-group">
+        <label class="control-label">Due Date</label>
+        <div class="controls">
+          <input class="dueDate-edit span3" type="date" min="<%= formatDateInput(new Date(dueDate)) %>" value="<%= formatDateInput(new Date(dueDate)) %>">
         </div>
       </div>
     </div>
