@@ -27,17 +27,6 @@ function App() {
   });
 
   app.configure('production', function() {
-    var redisUrl = url.parse(process.env.REDISCLOUD_URL),
-        redisAuth = redisUrl.auth.split(':');  
-    store.store = new RedisStore({
-      host: redisUrl.hostname,
-      port: redisUrl.port,
-      db: redisAuth[0],
-      pass: redisAuth[1]
-    });
-  });
-
-  app.configure('test', function() {
     store.store = new RedisStore();
   });
 
