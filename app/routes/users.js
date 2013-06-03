@@ -10,6 +10,7 @@ module.exports = function() {
   });
 
   app.post('/users', function(req, res) {
+    console.log(req.body.user);
     var u = req.body.user;
     var user = new User({ username: u.username, firstName: u.firstName, lastName: u.lastName, email: u.email, password: u.password });
 
