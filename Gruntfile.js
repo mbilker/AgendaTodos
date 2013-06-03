@@ -1,6 +1,7 @@
 module.exports = function(grunt) {
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
+    name: 'todos',
     bgShell: {
       runNode: {
         cmd: 'node ./node_modules/nodemon/nodemon.js bin/app',
@@ -20,21 +21,20 @@ module.exports = function(grunt) {
     },
     concat: {
       options: {
-        // define a string to put between each file in the concatenated output
         separator: ';'
       },
       dist: {
         src: ['assets/js/**/*.js'],
-        dest: 'public/js/todos-main.js'
+        dest: 'public/js/<%= name %>-main.js'
       }
     },
     uglify: {
       options: {
-        banner: '/*! todos-main <%= grunt.template.today("dd-mm-yyyy") %> */\n'
+        banner: '/*! <%= name %>-main <%= grunt.template.today("dd-mm-yyyy") %> */\n'
       },
       dist: {
         files: {
-          'public/js/todos-main.min.js': ['<%= concat.dist.dest %>']
+          'public/js/<%= name %>-main.min.js': ['<%= concat.dist.dest %>']
         }
       }
     },
