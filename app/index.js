@@ -59,7 +59,7 @@ function App() {
   mongoose.connect(Config.mongodb);
 
   app.listen(LISTEN);
-  console.log('Agenda Book Server ready, port: %s, environment: %s', PORT, app.settings.env);
+  console.log('Agenda Book Server ready, port: %s, environment: %s', LISTEN, app.settings.env);
 
   require('./routes/list').call(this);
   require('./routes/sessions').call(this);
