@@ -10,8 +10,13 @@ var path = require('path'),
     utils = require('./utils'),
     Config = require('./config');
 
+require('./systemd.js');
+
+var User, LoginToken, Assignment, Section;
+
 var base = path.join(__dirname, '..'),
-    PORT = process.env.PORT || 5000;
+    PORT = process.env.PORT || 5000,
+    LISTEN = process.env.LISTEN_PID > 0 ? 'systemd' : PORT;
 
 function App() {
   this.app = app;
@@ -31,7 +36,6 @@ function App() {
   });
 
   app.configure(function() {
-    app.set('db-uri', Config.mongodb);
     app.set('views', path.join(base, 'views'));
     app.use(express.bodyParser());
     app.use(express.cookieParser());
@@ -52,9 +56,9 @@ function App() {
     app.use(express.static(path.join(base, 'public')));
   });
 
-  mongoose.connect(app.set('db-uri'));
+  mongoose.connect(Config.mongodb);
 
-  app.listen(PORT);
+  app.listen(LISTEN);
   console.log('Agenda Book Server ready, port: %s, environment: %s', PORT, app.settings.env);
 
   require('./routes/list').call(this);
