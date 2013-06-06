@@ -1,5 +1,6 @@
 var path = require('path'),
     url = require('url'),
+    http = require('http'),
     express = require('express'),
     app = express(),
     mongoose = require('mongoose'),
@@ -58,7 +59,9 @@ function App() {
 
   mongoose.connect(Config.mongodb);
 
-  app.listen(LISTEN);
+  this.server = server = http.createServer(app);
+  if (LISTEN === 'systemd') server.autoQuit({ timeout: 900 });
+  server.listen(LISTEN);
   console.log('Agenda Book Server ready, port: %s, environment: %s', LISTEN, app.settings.env);
 
   require('./routes/list').call(this);
