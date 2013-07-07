@@ -1,5 +1,5 @@
 # Agenda Book
 
 Todo:
-- [ ] Make the assignments show up in list
-- [ ] Add validations for models
+- [x] Make the assignments show up in list
+- [x] Add validations for models

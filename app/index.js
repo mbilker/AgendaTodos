@@ -33,7 +33,8 @@ function App() {
   });
 
   app.configure('production', function() {
-    store.store = new RedisStore();
+    var a = url.parse(process.env.REDISCLOUD_URL);
+    store.store = new RedisStore({ port: a.port, host: a.hostname, pass: a.auth.split(":")[1] });
   });
 
   app.configure(function() {
