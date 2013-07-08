@@ -11,13 +11,14 @@ var path = require('path'),
     utils = require('./utils'),
     Config = require('./config');
 
-require('./systemd.js');
+//require('./systemd.js');
 
 var User, LoginToken, Assignment, Section;
 
 var base = path.join(__dirname, '..'),
     PORT = process.env.PORT || 5000,
-    LISTEN = process.env.LISTEN_PID > 0 ? 'systemd' : PORT;
+    LISTEN = PORT;
+    //LISTEN = process.env.LISTEN_PID > 0 ? 'systemd' : PORT;
 
 function App() {
   this.app = app;
@@ -61,7 +62,7 @@ function App() {
   mongoose.connect(Config.mongodb);
 
   this.server = server = http.createServer(app);
-  if (LISTEN === 'systemd') server.autoQuit({ timeout: 900 });
+  //if (LISTEN === 'systemd') server.autoQuit({ timeout: 900 });
   server.listen(LISTEN);
   console.log('Agenda Book Server ready, port: %s, environment: %s', LISTEN, app.settings.env);
 
