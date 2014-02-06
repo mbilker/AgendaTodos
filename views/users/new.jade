@@ -6,8 +6,8 @@ block content
 
     form.form-horizontal(method='post', action='/users')
       include fields
-      .control-group
-        .controls
+      .form-group
+        .col-sm-offset-3.col-sm-6
           input.btn(type='submit', value='Register')
-          span  or 
-            a.btn(href='/sessions/new') Go to Log In
+          |  or 
+          a(href='/sessions/new') Go to Log In

@@ -1,23 +1,20 @@
-var path = require('path'),
-    url = require('url'),
-    http = require('http'),
-    express = require('express'),
-    app = express(),
-    mongoose = require('mongoose'),
-    flash = require('connect-flash'),
-    RedisStore = require('connect-redis')(express),
-    connectTimeout = require('connect-timeout'),
-    models = require('./models'),
-    utils = require('./utils'),
-    Config = require('./config');
-
-require('./systemd.js');
+var path = require('path');
+var url = require('url');
+var http = require('http');
+var express = require('express');
+var app = express();
+var mongoose = require('mongoose');
+var flash = require('connect-flash');
+var RedisStore = require('connect-redis')(express);
+var connectTimeout = require('connect-timeout');
+var models = require('./models');
+var utils = require('./utils');
+var Config = require('./config');
 
 var User, LoginToken, Assignment, Section;
 
-var base = path.join(__dirname, '..'),
-    PORT = process.env.PORT || 5000,
-    LISTEN = process.env.LISTEN_PID > 0 ? 'systemd' : PORT;
+var base = path.join(__dirname, '..');
+var PORT = process.env.PORT || 5000;
 
 function App() {
   this.app = app;
@@ -38,19 +35,16 @@ function App() {
 
   app.configure(function() {
     app.set('views', path.join(base, 'views'));
+    app.use(connectTimeout({ time: 10000 }));
     app.use(express.bodyParser());
     app.use(express.cookieParser());
-    app.use(connectTimeout({ time: 10000 }));
     app.use(express.session(store));
-    app.use(express.methodOverride());
     app.use(flash());
     app.use(function(req, res, next) {
       res.locals.settings = settings = {};
       settings.info = req.flash('info');
       settings.error = req.flash('error');
 
-      settings.jsmain = '/js/todos-main' + (process.env.NODE_ENV == 'production' ? '.min' : '') + '.js';
-      settings.cssmain = '/css/style.css';
       next();
     });
     app.use(app.router);
@@ -60,9 +54,8 @@ function App() {
   mongoose.connect(Config.mongodb);
 
   this.server = server = http.createServer(app);
-  if (LISTEN === 'systemd') server.autoQuit({ timeout: 900 });
-  server.listen(LISTEN);
-  console.log('Agenda Book Server ready, port: %s, environment: %s', LISTEN, app.settings.env);
+  server.listen(PORT);
+  console.log('Agenda Book Server ready, port: %s, environment: %s', PORT, app.settings.env);
 
   require('./routes/list').call(this);
   require('./routes/sessions').call(this);

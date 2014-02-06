@@ -2,9 +2,9 @@
   "name": "agenda-todos",
   "description": "My agenda book for the web using backbone.js",
   "version": "0.0.1",
-  "main": "bin/app",
+  "main": "bin/app.js",
   "scripts": {
-    "start": "bin/app"
+    "start": "bin/app.js"
   },
   "repository": {
     "type": "git",
@@ -18,19 +18,18 @@
     "connect-flash": "~0.1.0",
     "lodash": "~1.0.1",
     "connect": "~2.7.5",
-    "connect-redis": "~1.4.5"
+    "connect-redis": "~1.4.5",
+    "gulp": "~3.5.1",
+    "gulp-util": "~2.2.14",
+    "event-stream": "~3.1.0",
+    "gulp-uglify": "~0.2.0",
+    "gulp-stylus": "0.0.12"
   },
   "engines": {
     "node": "0.10.x",
     "npm": "1.2.x"
   },
   "devDependencies": {
-    "grunt": "~0.4.1",
-    "grunt-contrib-concat": "~0.3.0",
-    "grunt-contrib-uglify": "~0.2.2",
-    "grunt-contrib-stylus": "~0.5.0",
-    "grunt-contrib-watch": "~0.4.4",
-    "nodemon": "~0.7.8",
-    "grunt-bg-shell": "~2.0.1"
+    "gulp-nodemon": "~0.1.2"
   }
 }

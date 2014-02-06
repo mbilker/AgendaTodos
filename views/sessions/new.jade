@@ -1,16 +1,17 @@
 extends ../layout
 
 block content
-  .page
-    h2 Log In
-    p
-      a.button(href='/users/new') Create an account &rarr;
-    form.form-horizontal#login(method='post', action='/sessions')
-      include ../users/fields
-      .control-group
-        label.control-label(for='remember_me') Remember Me
-        .controls
-          input#remember_me(type='checkbox', name='remember_me')
-      .control-group
-        .controls
-          input.btn.btn-success(type='submit', value='Log In')
+  h2 Log In
+  p
+    a.button(href='/users/new') Create an account &rarr;
+  form.form-horizontal#login(method='post', action='/sessions')
+    include ../users/fields
+    .form-group
+      .col-sm-offset-3.col-sm-5
+        .checkbox
+          label
+            input#remember_me(type='checkbox', name='remember_me')
+            | Remember me
+    .form-group
+      .col-sm-offset-3.col-sm-5
+        input.btn.btn-success(type='submit', value='Log In')

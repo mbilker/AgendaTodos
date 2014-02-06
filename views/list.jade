@@ -3,20 +3,19 @@ extends layout
 block content
   div#list
     header
-      .control-group
-        input.input-block-level(id='new-assignment', type='text', placeholder='What needs to be done?')
+      input.form-control(id='new-assignment', type='text', placeholder='What needs to be done?')
       #expand
         .form-horizontal
-          .control-group
-            label.control-label(for='priority') Priority
-            .controls
-              input.span1(id='priority', type='number', min='0', max='9', placeholder='0')
-          .control-group
-            label.control-label(for='dueDate') Due Date
-            .controls
-              input.span2(id='dueDate', type='date')
-          .control-group
-            .controls
+          .form-group
+            label.col-sm-3.control-label(for='priority') Priority
+            .col-sm-5
+              input.form-control(id='priority', type='number', min='0', max='9', placeholder='0')
+          .form-group
+            label.col-sm-3.control-label(for='dueDate') Due Date
+            .col-sm-5
+              input.form-control(id='dueDate', type='date')
+          .form-group
+            .col-sm-offset-3.col-sm-3
               input.btn.btn-success(id='submit', type='button', value='Submit')
     section#main
       label.checkbox(for='toggle-all')

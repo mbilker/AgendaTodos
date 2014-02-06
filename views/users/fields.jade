@@ -1,23 +1,23 @@
-.control-group
-  label.control-label(for='username') Username
-  .controls
-    input#username(name='user[username]', type='text', value=user.username || '')
+.form-group
+  label.col-sm-3.control-label(for='username') Username
+  .col-sm-5
+    input.form-control#username(name='user[username]', type='text', value=user.username || '')
 
 - if (typeof register !== 'undefined')
-  .control-group
-    label.control-label(for='firstName') First Name
-    .controls
-      input#email(name='user[firstName]', type='text', value=user.firstName || '')
-  .control-group
-    label.control-label(for='lastName') Last Name
-    .controls
-      input#email(name='user[lastName]', type='text', value=user.lastName || '')
-  .control-group
-    label.control-label(for='email') Email
-    .controls
-      input#email(name='user[email]', type='text', value=user.email || '')
+  .form-group
+    label.col-sm-3.control-label(for='firstName') First Name
+    .col-sm-5
+      input.form-control#email(name='user[firstName]', type='text', value=user.firstName || '')
+  .form-group
+    label.col-sm-3.control-label(for='lastName') Last Name
+    .col-sm-5
+      input.form-control#email(name='user[lastName]', type='text', value=user.lastName || '')
+  .form-group
+    label.col-sm-3.control-label(for='email') Email
+    .col-sm-5
+      input.form-control#email(name='user[email]', type='text', value=user.email || '')
 
-.control-group
-  label.control-label(for='password') Password
-  .controls
-    input#password(name='user[password]', type='password', value='')
+.form-group
+  label.col-sm-3.control-label(for='password') Password
+  .col-sm-5
+    input.form-control#password(name='user[password]', type='password', value='')
