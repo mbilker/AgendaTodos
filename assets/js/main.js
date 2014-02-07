@@ -6,10 +6,10 @@ function readScript(script) {
 }
 
 function formatDateInput(d) {
-  var month = (d.getMonth() < 9 ? "0" : "") + (d.getMonth() + 1);
-  var day = (d.getDate() < 10 ? "0" : "") + d.getDate();
+  var m = (d.getMonth() < 9 ? "0" : "") + (d.getMonth() + 1);
+  var d = (d.getDate() < 10 ? "0" : "") + d.getDate();
 
-  return d.getFullYear() + "-" + month + "-" + day;
+  return d.getFullYear() + "-" + m + "-" + d;
 }
 
 $(function() {

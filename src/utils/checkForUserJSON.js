@@ -3,8 +3,7 @@ var models = require('../models'),
     LoginToken = models.LoginToken;
 
 function sendNotAuthenticated(res) {
-  res.writeHead(500, { 'Content-Type': 'application/json' });
-  res.end(JSON.stringify({ err: 'Not authenticated' }));
+  res.json(500, { err: 'Not authenticated' });
 }
 
 module.exports = function checkForUserJSON(req, res, next) {

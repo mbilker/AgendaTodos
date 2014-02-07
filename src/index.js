@@ -11,8 +11,6 @@ var models = require('./models');
 var utils = require('./utils');
 var Config = require('./config');
 
-var User, LoginToken, Assignment, Section;
-
 var base = path.join(__dirname, '..');
 var PORT = process.env.PORT || 5000;
 
@@ -35,6 +33,7 @@ function App() {
   });
 
   app.configure(function() {
+    app.set('view engine', 'ejs');
     app.set('views', path.join(base, 'views'));
     app.use(connectTimeout({ time: 10000 }));
     app.use(express.bodyParser());
@@ -51,17 +50,20 @@ function App() {
     app.use(app.router);
     app.use(express.static(path.join(base, 'public')));
   });
+}
 
+App.prototype.init = function init() {
   mongoose.connect(Config.mongodb);
-
-  this.server = server = http.createServer(app);
-  server.listen(PORT);
-  console.log('Agenda Book Server ready, port: %s, environment: %s', PORT, app.settings.env);
 
   require('./routes/list').call(this);
   require('./routes/sessions').call(this);
   require('./routes/users').call(this);
   require('./routes/sync').call(this);
+
+  this.server = http.createServer(app);
+  this.server.listen(PORT, function() {
+    console.log('Agenda Book Server ready, port: %s, environment: %s', PORT, app.settings.env);
+  });
 }
 
 module.exports = new App();

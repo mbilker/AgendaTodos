@@ -1,15 +1,12 @@
 module.exports = function() {
-  var app = this.app,
-      User = this.models.User;
+  var app = this.app;
+  var User = this.models.User;
 
-  app.get('/users/new', function(req, res) {
-    res.render('users/new.jade', {
-      user: new User(),
-      register: true
-    });
+  app.get('/register', function(req, res) {
+    res.render('layout');
   });
 
-  app.post('/users', function(req, res) {
+  app.post('/register', function(req, res) {
     var u = req.body.user;
     var user = new User({ username: u.username, firstName: u.firstName, lastName: u.lastName, email: u.email, password: u.password });
 

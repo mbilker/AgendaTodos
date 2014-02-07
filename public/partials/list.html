@@ -1,0 +1,53 @@
+<div class="list-header">
+  <form ng-submit="addNew()">
+    <input class="form-control" type="text" placeholder="What needs to be done?" ng-model="assignmentTitle">
+    <div class="expand" ng-if="expand">
+      <div class="form-horizontal">
+        <div class="form-group">
+          <label class="col-sm-3 control-label" for="priority">Priority</label>
+          <div class="col-sm-5">
+            <input id="priority" class="form-control" type="number" min="0" max="9" placeholder="0" ng-model="priority">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-sm-3 control-label" for="dueDate">Due Date</label>
+          <div class="col-sm-5">
+            <dateInput id="dueDate" class="form-control" ng-model="dueDate"></dateInput>
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="col-sm-offset-3 col-sm-3">
+          <input class="btn btn-default" type="submit" value="Submit">
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+<div class="list">
+  <div class="checkbox">
+    <label>
+      <input type="checkbox" ng-modal="toggleAll">
+    </label>
+  </div>
+  <div class="assignment-list">
+    <div ng-repeat="entry in assignments | orderBy:comparator">
+      <div class="checkbox">
+        <label>
+          <input type="checkbox" ng-modal="entry.completed" ng-change="updateEntry(entry)">{{entry.title}}
+        </label>
+      </div>
+      <ul>
+        <li><span class="details">Due: {{new Date(entry.dueDate).toDateString()}} - Priority: {{entry.priority}}</span>
+          <a class="edit-text" ng-click="editText(entry)">Edit Text</a>
+          <span class="priority priority{{priority}}"></span>
+          <a class="destroy" ng-click="destroy(entry)"></a>
+          </li>
+      </ul>
+    </div>
+  </div>
+</div>
+<div class="list-footer">
+  <a class="clear-completed" ng-click="clearCompleted()">Clear {{assignments.length}} completed {{assignments.length == 1 ? 'item' : 'items'}}</a>
+  <div class="count"><b>{{remaining()}}</b> {{remaining() == 1 ? 'item' : 'items'}} left</div>
+</div>

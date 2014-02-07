@@ -1,25 +1,23 @@
 module.exports = function() {
-  var app = this.app,
-      checkForUserJSON = this.utils.checkForUserJSON,
-      User = this.models.User,
-      Task = this.models.Task;
+  var app = this.app;
+  var checkForUserJSON = this.utils.checkForUserJSON;
+  var User = this.models.User;
+  var Task = this.models.Task;
 
   function error(err, res) {
     console.log(err);
-    res.writeHead(500);
-    res.end();
+    res.send(500, 'Error: [' + err.toString() + ']');
   }
 
-  app.get('/assignments/sync', checkForUserJSON, function(req, res) {
+  app.get('/tasks', checkForUserJSON, function(req, res) {
     Task.find({ userID: req.currentUser.id }, function(err, tasks) {
       if (err) return error(err, res);
 
-      res.writeHead(200, { 'Content-Type': 'application/json' });
-      res.end(JSON.stringify(tasks));
+      res.json(200, tasks);
     });
   });
 
-  app.post('/assignments/sync', checkForUserJSON, function(req, res) {
+  app.post('/tasks', checkForUserJSON, function(req, res) {
     var task = new Task({
       userID: req.currentUser.id,
       title: req.body.title,
@@ -31,12 +29,11 @@ module.exports = function() {
     task.save(function(err) {
       if (err) return error(err, res);
 
-      res.writeHead(200, { 'Content-Type': 'application/json' });
-      res.end(JSON.stringify(task));
+      res.json(200, task);
     });
   });
 
-  app.put('/assignments/sync/:id', checkForUserJSON, function(req, res) {
+  app.put('/tasks/:id', checkForUserJSON, function(req, res) {
     Task.findOne({ userID: req.currentUser.id, _id: req.params.id }, function(err, task) {
       if (err) return error(err, res);
 
@@ -47,13 +44,12 @@ module.exports = function() {
       task.save(function(err) {
         if (err) return error(err, res);
 
-        res.writeHead(200, { 'Content-Type': 'application/json' });
-        res.end(JSON.stringify(task));
+        res.json(200, task);
       });
     });
   });
 
-  app.del('/assignments/sync/:id', checkForUserJSON, function(req, res) {
+  app.del('/tasks/:id', checkForUserJSON, function(req, res) {
     Task.remove({ userID: req.currentUser.id, _id: req.params.id }, function(err) {
       if (err) return error(err, res);
       

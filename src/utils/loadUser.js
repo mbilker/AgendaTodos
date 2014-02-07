@@ -7,7 +7,7 @@ function authenticateFromLoginToken(req, res, next) {
 
   LoginToken.findOne({ username: cookie.username, series: cookie.series, token: cookie.token }, function(err, token) {
     if (!token) {
-      res.redirect('/sessions/new');
+      res.redirect('/login');
       return;
     }
 
@@ -22,7 +22,7 @@ function authenticateFromLoginToken(req, res, next) {
           next();
         });
       } else {
-        res.redirect('/sessions/new');
+        res.redirect('/login');
       }
     });
   });
@@ -35,12 +35,12 @@ module.exports = function loadUser(req, res, next) {
         req.currentUser = user;
         next();
       } else {
-        res.redirect('/sessions/new');
+        res.redirect('/login');
       }
     });
   } else if (req.cookies.logintoken) {
     authenticateFromLoginToken(req, res, next);
   } else {
-    res.redirect('/sessions/new');
+    res.redirect('/login');
   }
 }
