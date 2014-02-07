@@ -1,5 +1,9 @@
 /**
+<<<<<<< HEAD
  * @license AngularJS v1.2.11
+=======
+ * @license AngularJS v1.2.8
+>>>>>>> 8916cf86b93341f7fca80a23a50fb66db6474c09
  * (c) 2010-2014 Google, Inc. http://angularjs.org
  * License: MIT
  */
@@ -68,7 +72,11 @@ function minErr(module) {
       return match;
     });
 
+<<<<<<< HEAD
     message = message + '\nhttp://errors.angularjs.org/1.2.11/' +
+=======
+    message = message + '\nhttp://errors.angularjs.org/1.2.8/' +
+>>>>>>> 8916cf86b93341f7fca80a23a50fb66db6474c09
       (module ? module + '/' : '') + code;
     for (i = 2; i < arguments.length; i++) {
       message = message + (i == 2 ? '?' : '&') + 'p' + (i-2) + '=' +
@@ -271,8 +279,12 @@ function isArrayLike(obj) {
  * is the value of an object property or an array element and `key` is the object property key or
  * array element index. Specifying a `context` for the function is optional.
  *
+<<<<<<< HEAD
  * It is worth nothing that `.forEach` does not iterate over inherited properties because it filters
  * using the `hasOwnProperty` method.
+=======
+ * Note: this function was previously known as `angular.foreach`.
+>>>>>>> 8916cf86b93341f7fca80a23a50fb66db6474c09
  *
    <pre>
      var values = {name: 'misko', gender: 'male'};
@@ -1834,11 +1846,19 @@ function setupModuleLoader(window) {
  * - `codeName` – `{string}` – Code name of the release, such as "jiggling-armfat".
  */
 var version = {
+<<<<<<< HEAD
   full: '1.2.11',    // all of these placeholder strings will be replaced by grunt's
   major: 1,    // package task
   minor: 2,
   dot: 11,
   codeName: 'cryptocurrency-hyperdeflation'
+=======
+  full: '1.2.8',    // all of these placeholder strings will be replaced by grunt's
+  major: 1,    // package task
+  minor: 2,
+  dot: 8,
+  codeName: 'interdimensional-cartography'
+>>>>>>> 8916cf86b93341f7fca80a23a50fb66db6474c09
 };
 
 
@@ -3280,9 +3300,17 @@ function annotate(fn) {
  * @param {(Object|function())} provider If the provider is:
  *
  *   - `Object`: then it should have a `$get` method. The `$get` method will be invoked using
+<<<<<<< HEAD
  *     {@link AUTO.$injector#invoke $injector.invoke()} when an instance needs to be created.
  *   - `Constructor`: a new instance of the provider will be created using                     
  *     {@link AUTO.$injector#instantiate $injector.instantiate()}, then treated as `object`.
+=======
+ *               {@link AUTO.$injector#invoke $injector.invoke()} when an instance needs to be
+ *               created.
+ *   - `Constructor`: a new instance of the provider will be created using
+ *               {@link AUTO.$injector#instantiate $injector.instantiate()}, then treated as
+ *               `object`.
+>>>>>>> 8916cf86b93341f7fca80a23a50fb66db6474c09
  *
  * @returns {Object} registered provider instance
 
@@ -3398,7 +3426,11 @@ function annotate(fn) {
  * constructor function that will be used to instantiate the service instance.
  *
  * You should use {@link AUTO.$provide#methods_service $provide.service(class)} if you define your service
+<<<<<<< HEAD
  * as a type/class.
+=======
+ * as a type/class. This is common when using {@link http://coffeescript.org CoffeeScript}.
+>>>>>>> 8916cf86b93341f7fca80a23a50fb66db6474c09
  *
  * @param {string} name The name of the instance.
  * @param {Function} constructor A class (constructor function) that will be instantiated.
@@ -3406,6 +3438,7 @@ function annotate(fn) {
  *
  * @example
  * Here is an example of registering a service using
+<<<<<<< HEAD
  * {@link AUTO.$provide#methods_service $provide.service(class)}.
  * <pre>
  *   var Ping = function($http) {
@@ -3424,6 +3457,22 @@ function annotate(fn) {
  *   someModule.controller('Ctrl', ['ping', function(ping) {
  *     ping.send();
  *   }]);
+=======
+ * {@link AUTO.$provide#methods_service $provide.service(class)} that is defined as a CoffeeScript class.
+ * <pre>
+ *   class Ping
+ *     constructor: (@$http) ->
+ *     send: () =>
+ *       @$http.get('/ping')
+ *
+ *   $provide.service('ping', ['$http', Ping])
+ * </pre>
+ * You would then inject and use this service like this:
+ * <pre>
+ *   someModule.controller 'Ctrl', ['ping', (ping) ->
+ *     ping.send()
+ *   ]
+>>>>>>> 8916cf86b93341f7fca80a23a50fb66db6474c09
  * </pre>
  */
 
@@ -5118,6 +5167,7 @@ function $TemplateCacheProvider() {
       <div compile="html"></div>
     </div>
    </doc:source>
+<<<<<<< HEAD
    <doc:protractor>
      it('should auto compile', function() {
        var textarea = $('textarea');
@@ -5129,6 +5179,15 @@ function $TemplateCacheProvider() {
        expect(output.getText()).toBe('Angular!');
      });
    </doc:protractor>
+=======
+   <doc:scenario>
+     it('should auto compile', function() {
+       expect(element('div[compile]').text()).toBe('Hello Angular');
+       input('html').enter('{{name}}!');
+       expect(element('div[compile]').text()).toBe('Angular!');
+     });
+   </doc:scenario>
+>>>>>>> 8916cf86b93341f7fca80a23a50fb66db6474c09
  </doc:example>
 
  *
@@ -6405,6 +6464,7 @@ function $CompileProvider($provide, $$sanitizeUriProvider) {
                 linkNode = $compileNode[0];
 
             if (beforeTemplateLinkNode !== beforeTemplateCompileNode) {
+<<<<<<< HEAD
               var oldClasses = beforeTemplateLinkNode.className;
               // it was cloned therefore we have to clone as well.
               linkNode = jqLiteClone(compileNode);
@@ -6412,6 +6472,11 @@ function $CompileProvider($provide, $$sanitizeUriProvider) {
 
               // Copy in CSS classes from original node
               safeAddClass(jqLite(linkNode), oldClasses);
+=======
+              // it was cloned therefore we have to clone as well.
+              linkNode = jqLiteClone(compileNode);
+              replaceWith(linkRootElement, jqLite(beforeTemplateLinkNode), linkNode);
+>>>>>>> 8916cf86b93341f7fca80a23a50fb66db6474c09
             }
             if (afterTemplateNodeLinkFn.transclude) {
               childBoundTranscludeFn = createBoundTranscludeFn(scope, afterTemplateNodeLinkFn.transclude);
@@ -6956,9 +7021,15 @@ function $HttpProvider() {
       common: {
         'Accept': 'application/json, text/plain, */*'
       },
+<<<<<<< HEAD
       post:   copy(CONTENT_TYPE_APPLICATION_JSON),
       put:    copy(CONTENT_TYPE_APPLICATION_JSON),
       patch:  copy(CONTENT_TYPE_APPLICATION_JSON)
+=======
+      post:   CONTENT_TYPE_APPLICATION_JSON,
+      put:    CONTENT_TYPE_APPLICATION_JSON,
+      patch:  CONTENT_TYPE_APPLICATION_JSON
+>>>>>>> 8916cf86b93341f7fca80a23a50fb66db6474c09
     },
 
     xsrfCookieName: 'XSRF-TOKEN',
@@ -7068,6 +7139,7 @@ function $HttpProvider() {
      * XMLHttpRequest will transparently follow it, meaning that the error callback will not be
      * called for such responses.
      *
+<<<<<<< HEAD
      * # Writing Unit Tests that use $http
      * When unit testing (using {@link api/ngMock ngMock}), it is necessary to call
      * {@link api/ngMock.$httpBackend#methods_flush $httpBackend.flush()} to flush each pending
@@ -7076,6 +7148,33 @@ function $HttpProvider() {
      * ```
      * $httpBackend.expectGET(...);
      * $http.get(...);
+=======
+     * # Calling $http from outside AngularJS
+     * The `$http` service will not actually send the request until the next `$digest()` is
+     * executed. Normally this is not an issue, since almost all the time your call to `$http` will
+     * be from within a `$apply()` block.
+     * If you are calling `$http` from outside Angular, then you should wrap it in a call to
+     * `$apply` to cause a $digest to occur and also to handle errors in the block correctly.
+     *
+     * ```
+     * $scope.$apply(function() {
+     *   $http(...);
+     * });
+     * ```
+     *
+     * # Writing Unit Tests that use $http
+     * When unit testing you are mostly responsible for scheduling the `$digest` cycle. If you do
+     * not trigger a `$digest` before calling `$httpBackend.flush()` then the request will not have
+     * been made and `$httpBackend.expect(...)` expectations will fail.  The solution is to run the
+     * code that calls the `$http()` method inside a $apply block as explained in the previous
+     * section.
+     *
+     * ```
+     * $httpBackend.expectGET(...);
+     * $scope.$apply(function() {
+     *   $http.get(...);
+     * });
+>>>>>>> 8916cf86b93341f7fca80a23a50fb66db6474c09
      * $httpBackend.flush();
      * ```
      *
@@ -7152,7 +7251,11 @@ function $HttpProvider() {
      * to `push` or `unshift` a new transformation function into the transformation chain. You can
      * also decide to completely override any default transformations by assigning your
      * transformation functions to these properties directly without the array wrapper.  These defaults
+<<<<<<< HEAD
      * are again available on the $http factory at run-time, which may be useful if you have run-time
+=======
+     * are again available on the $http factory at run-time, which may be useful if you have run-time 
+>>>>>>> 8916cf86b93341f7fca80a23a50fb66db6474c09
      * services you wish to be involved in your transformations.
      *
      * Similarly, to locally override the request/response transforms, augment the
@@ -7432,14 +7535,24 @@ function $HttpProvider() {
       <option>JSONP</option>
     </select>
     <input type="text" ng-model="url" size="80"/>
+<<<<<<< HEAD
     <button id="fetchbtn" ng-click="fetch()">fetch</button><br>
     <button id="samplegetbtn" ng-click="updateModel('GET', 'http-hello.html')">Sample GET</button>
     <button id="samplejsonpbtn"
+=======
+    <button ng-click="fetch()">fetch</button><br>
+    <button ng-click="updateModel('GET', 'http-hello.html')">Sample GET</button>
+    <button
+>>>>>>> 8916cf86b93341f7fca80a23a50fb66db6474c09
       ng-click="updateModel('JSONP',
                     'http://angularjs.org/greet.php?callback=JSON_CALLBACK&name=Super%20Hero')">
       Sample JSONP
     </button>
+<<<<<<< HEAD
     <button id="invalidjsonpbtn"
+=======
+    <button
+>>>>>>> 8916cf86b93341f7fca80a23a50fb66db6474c09
       ng-click="updateModel('JSONP', 'http://angularjs.org/doesntexist&callback=JSON_CALLBACK')">
         Invalid JSONP
       </button>
@@ -7476,6 +7589,7 @@ function $HttpProvider() {
 <file name="http-hello.html">
   Hello, $http!
 </file>
+<<<<<<< HEAD
 <file name="protractorTest.js">
   var status = element(by.binding('status'));
   var data = element(by.binding('data'));
@@ -7496,14 +7610,36 @@ function $HttpProvider() {
     fetchBtn.click();
     expect(status.getText()).toMatch('200');
     expect(data.getText()).toMatch(/Super Hero!/);
+=======
+<file name="scenario.js">
+  it('should make an xhr GET request', function() {
+    element(':button:contains("Sample GET")').click();
+    element(':button:contains("fetch")').click();
+    expect(binding('status')).toBe('200');
+    expect(binding('data')).toMatch(/Hello, \$http!/);
+  });
+
+  it('should make a JSONP request to angularjs.org', function() {
+    element(':button:contains("Sample JSONP")').click();
+    element(':button:contains("fetch")').click();
+    expect(binding('status')).toBe('200');
+    expect(binding('data')).toMatch(/Super Hero!/);
+>>>>>>> 8916cf86b93341f7fca80a23a50fb66db6474c09
   });
 
   it('should make JSONP request to invalid URL and invoke the error handler',
       function() {
+<<<<<<< HEAD
     invalidJsonpBtn.click();
     fetchBtn.click();
     expect(status.getText()).toMatch('0');
     expect(data.getText()).toMatch('Request failed');
+=======
+    element(':button:contains("Invalid JSONP")').click();
+    element(':button:contains("fetch")').click();
+    expect(binding('status')).toBe('0');
+    expect(binding('data')).toBe('Request failed');
+>>>>>>> 8916cf86b93341f7fca80a23a50fb66db6474c09
   });
 </file>
 </example>
@@ -7885,6 +8021,7 @@ function $HttpProvider() {
 }
 
 function createXhr(method) {
+<<<<<<< HEAD
     //if IE and the method is not RFC2616 compliant, or if XMLHttpRequest
     //is not available, try getting an ActiveXObject. Otherwise, use XMLHttpRequest
     //if it is available
@@ -7898,6 +8035,16 @@ function createXhr(method) {
     throw minErr('$httpBackend')('noxhr', "This browser does not support XMLHttpRequest.");
 }
 
+=======
+  // IE8 doesn't support PATCH method, but the ActiveX object does
+  /* global ActiveXObject */
+  return (msie <= 8 && lowercase(method) === 'patch')
+      ? new ActiveXObject('Microsoft.XMLHTTP')
+      : new window.XMLHttpRequest();
+}
+
+
+>>>>>>> 8916cf86b93341f7fca80a23a50fb66db6474c09
 /**
  * @ngdoc object
  * @name ng.$httpBackend
@@ -8090,11 +8237,19 @@ var $interpolateMinErr = minErr('$interpolate');
     //demo.label//
 </div>
 </doc:source>
+<<<<<<< HEAD
 <doc:protractor>
   it('should interpolate binding with custom symbols', function() {
     expect(element(by.binding('demo.label')).getText()).toBe('This binding is brought you by // interpolation symbols.');
   });
 </doc:protractor>
+=======
+<doc:scenario>
+ it('should interpolate binding with custom symbols', function() {
+  expect(binding('demo.label')).toBe('This binding is brought you by // interpolation symbols.');
+ });
+</doc:scenario>
+>>>>>>> 8916cf86b93341f7fca80a23a50fb66db6474c09
 </doc:example>
  */
 function $InterpolateProvider() {
@@ -8322,7 +8477,11 @@ function $IntervalProvider() {
       * In tests you can use {@link ngMock.$interval#methods_flush `$interval.flush(millis)`} to
       * move forward by `millis` milliseconds and trigger any functions scheduled to run in that
       * time.
+<<<<<<< HEAD
       *
+=======
+      * 
+>>>>>>> 8916cf86b93341f7fca80a23a50fb66db6474c09
       * <div class="alert alert-warning">
       * **Note**: Intervals created by this service must be explicitly destroyed when you are finished
       * with them.  In particular they are not automatically destroyed when a controller's scope or a
@@ -8435,8 +8594,13 @@ function $IntervalProvider() {
           promise = deferred.promise,
           iteration = 0,
           skipApply = (isDefined(invokeApply) && !invokeApply);
+<<<<<<< HEAD
 
       count = isDefined(count) ? count : 0;
+=======
+      
+      count = isDefined(count) ? count : 0,
+>>>>>>> 8916cf86b93341f7fca80a23a50fb66db6474c09
 
       promise.then(null, null, fn);
 
@@ -10136,7 +10300,11 @@ Parser.prototype = {
     var getter = getterFn(field, this.options, this.text);
 
     return extend(function(scope, locals, self) {
+<<<<<<< HEAD
       return getter(self || object(scope, locals));
+=======
+      return getter(self || object(scope, locals), locals);
+>>>>>>> 8916cf86b93341f7fca80a23a50fb66db6474c09
     }, {
       assign: function(scope, value, locals) {
         return setter(object(scope, locals), field, value, parser.text, parser.options);
@@ -10712,9 +10880,15 @@ function $ParseProvider() {
  * asynchronous programming what `try`, `catch` and `throw` keywords are to synchronous programming.
  *
  * <pre>
+<<<<<<< HEAD
  *   // for the purpose of this example let's assume that variables `$q`, `scope` and `okToGreet`
  *   // are available in the current lexical scope (they could have been injected or passed in).
  * 
+=======
+ *   // for the purpose of this example let's assume that variables `$q` and `scope` are
+ *   // available in the current lexical scope (they could have been injected or passed in).
+ *
+>>>>>>> 8916cf86b93341f7fca80a23a50fb66db6474c09
  *   function asyncGreet(name) {
  *     var deferred = $q.defer();
  *
@@ -10919,7 +11093,11 @@ function qFactory(nextTick, exceptionHandler) {
 
 
       reject: function(reason) {
+<<<<<<< HEAD
         deferred.resolve(createInternalRejectedPromise(reason));
+=======
+        deferred.resolve(reject(reason));
+>>>>>>> 8916cf86b93341f7fca80a23a50fb66db6474c09
       },
 
 
@@ -11076,12 +11254,15 @@ function qFactory(nextTick, exceptionHandler) {
    * @returns {Promise} Returns a promise that was already resolved as rejected with the `reason`.
    */
   var reject = function(reason) {
+<<<<<<< HEAD
     var result = defer();
     result.reject(reason);
     return result.promise;
   };
 
   var createInternalRejectedPromise = function(reason) {
+=======
+>>>>>>> 8916cf86b93341f7fca80a23a50fb66db6474c09
     return {
       then: function(callback, errback) {
         var result = defer();
@@ -11848,7 +12029,11 @@ function $RootScopeProvider(){
 
           // `break traverseScopesLoop;` takes us to here
 
+<<<<<<< HEAD
           if((dirty || asyncQueue.length) && !(ttl--)) {
+=======
+          if(dirty && !(ttl--)) {
+>>>>>>> 8916cf86b93341f7fca80a23a50fb66db6474c09
             clearPhase();
             throw $rootScopeMinErr('infdig',
                 '{0} $digest() iterations reached. Aborting!\n' +
@@ -12142,7 +12327,11 @@ function $RootScopeProvider(){
        * onto the {@link ng.$exceptionHandler $exceptionHandler} service.
        *
        * @param {string} name Event name to emit.
+<<<<<<< HEAD
        * @param {...*} args Optional one or more arguments which will be passed onto the event listeners.
+=======
+       * @param {...*} args Optional set of arguments which will be passed onto the event listeners.
+>>>>>>> 8916cf86b93341f7fca80a23a50fb66db6474c09
        * @return {Object} Event object (see {@link ng.$rootScope.Scope#methods_$on}).
        */
       $emit: function(name, args) {
@@ -12210,7 +12399,11 @@ function $RootScopeProvider(){
        * onto the {@link ng.$exceptionHandler $exceptionHandler} service.
        *
        * @param {string} name Event name to broadcast.
+<<<<<<< HEAD
        * @param {...*} args Optional one or more arguments which will be passed onto the event listeners.
+=======
+       * @param {...*} args Optional set of arguments which will be passed onto the event listeners.
+>>>>>>> 8916cf86b93341f7fca80a23a50fb66db6474c09
        * @return {Object} Event object, see {@link ng.$rootScope.Scope#methods_$on}
        */
       $broadcast: function(name, args) {
@@ -12653,7 +12846,11 @@ function $SceDelegateProvider() {
      *
      * @description
      * Returns an object that is trusted by angular for use in specified strict
+<<<<<<< HEAD
      * contextual escaping contexts (such as ng-bind-html, ng-include, any src
+=======
+     * contextual escaping contexts (such as ng-html-bind-unsafe, ng-include, any src
+>>>>>>> 8916cf86b93341f7fca80a23a50fb66db6474c09
      * attribute interpolation, any dom event binding attribute interpolation
      * such as for onclick,  etc.) that uses the provided value.
      * See {@link ng.$sce $sce} for enabling strict contextual escaping.
@@ -12699,7 +12896,11 @@ function $SceDelegateProvider() {
      *
      * @param {*} value The result of a prior {@link ng.$sceDelegate#methods_trustAs `$sceDelegate.trustAs`}
      *      call or anything else.
+<<<<<<< HEAD
      * @returns {*} The `value` that was originally provided to {@link ng.$sceDelegate#methods_trustAs
+=======
+     * @returns {*} The value the was originally provided to {@link ng.$sceDelegate#methods_trustAs
+>>>>>>> 8916cf86b93341f7fca80a23a50fb66db6474c09
      *     `$sceDelegate.trustAs`} if `value` is the result of such a call.  Otherwise, returns
      *     `value` unchanged.
      */
@@ -12880,8 +13081,13 @@ function $SceDelegateProvider() {
  * It's important to remember that SCE only applies to interpolation expressions.
  *
  * If your expressions are constant literals, they're automatically trusted and you don't need to
+<<<<<<< HEAD
  * call `$sce.trustAs` on them (remember to include the `ngSanitize` module) (e.g.
  * `<div ng-bind-html="'<b>implicitly trusted</b>'"></div>`) just works.
+=======
+ * call `$sce.trustAs` on them.  (e.g.
+ * `<div ng-html-bind-unsafe="'<b>implicitly trusted</b>'"></div>`) just works.
+>>>>>>> 8916cf86b93341f7fca80a23a50fb66db6474c09
  *
  * Additionally, `a[href]` and `img[src]` automatically sanitize their URLs and do not pass them
  * through {@link ng.$sce#methods_getTrusted $sce.getTrusted}.  SCE doesn't play a role here.
@@ -12941,7 +13147,11 @@ function $SceDelegateProvider() {
  *      matched against the **entire** *normalized / absolute URL* of the resource being tested
  *      (even when the RegExp did not have the `^` and `$` codes.)  In addition, any flags
  *      present on the RegExp (such as multiline, global, ignoreCase) are ignored.
+<<<<<<< HEAD
  *    - If you are generating your JavaScript from some other templating engine (not
+=======
+ *    - If you are generating your Javascript from some other templating engine (not
+>>>>>>> 8916cf86b93341f7fca80a23a50fb66db6474c09
  *      recommended, e.g. in issue [#4006](https://github.com/angular/angular.js/issues/4006)),
  *      remember to escape your regular expression (and be aware that you might need more than
  *      one level of escaping depending on your templating engine and the way you interpolated
@@ -12958,7 +13168,11 @@ function $SceDelegateProvider() {
  * ## Show me an example using SCE.
  *
  * @example
+<<<<<<< HEAD
 <example module="mySceApp" deps="angular-sanitize.js">
+=======
+<example module="mySceApp">
+>>>>>>> 8916cf86b93341f7fca80a23a50fb66db6474c09
 <file name="index.html">
   <div ng-controller="myAppController as myCtrl">
     <i ng-bind-html="myCtrl.explicitlyTrustedHtml" id="explicitlyTrustedHtml"></i><br><br>
@@ -13002,6 +13216,7 @@ function $SceDelegateProvider() {
 ]
 </file>
 
+<<<<<<< HEAD
 <file name="protractorTest.js">
   describe('SCE doc demo', function() {
     it('should sanitize untrusted values', function() {
@@ -13011,6 +13226,15 @@ function $SceDelegateProvider() {
 
     it('should NOT sanitize explicitly trusted values', function() {
       expect(element(by.id('explicitlyTrustedHtml')).getInnerHtml()).toBe(
+=======
+<file name="scenario.js">
+  describe('SCE doc demo', function() {
+    it('should sanitize untrusted values', function() {
+      expect(element('.htmlComment').html()).toBe('<span>Is <i>anyone</i> reading this?</span>');
+    });
+    it('should NOT sanitize explicitly trusted values', function() {
+      expect(element('#explicitlyTrustedHtml').html()).toBe(
+>>>>>>> 8916cf86b93341f7fca80a23a50fb66db6474c09
           '<span onmouseover="this.textContent=&quot;Explicitly trusted HTML bypasses ' +
           'sanitization.&quot;">Hover over this text.</span>');
     });
@@ -13185,8 +13409,13 @@ function $SceProvider() {
      *
      * @description
      * Delegates to {@link ng.$sceDelegate#methods_trustAs `$sceDelegate.trustAs`}.  As such,
+<<<<<<< HEAD
      * returns an object that is trusted by angular for use in specified strict contextual
      * escaping contexts (such as ng-bind-html, ng-include, any src attribute
+=======
+     * returns an objectthat is trusted by angular for use in specified strict contextual
+     * escaping contexts (such as ng-html-bind-unsafe, ng-include, any src attribute
+>>>>>>> 8916cf86b93341f7fca80a23a50fb66db6474c09
      * interpolation, any dom event binding attribute interpolation such as for onclick,  etc.)
      * that uses the provided value.  See * {@link ng.$sce $sce} for enabling strict contextual
      * escaping.
@@ -13769,6 +13998,7 @@ function urlIsSameOrigin(requestUrl) {
          <button ng-click="doGreeting(greeting)">ALERT</button>
        </div>
      </doc:source>
+<<<<<<< HEAD
      <doc:protractor>
       it('should display the greeting in the input box', function() {
        element(by.model('greeting')).sendKeys('Hello, E2E Tests');
@@ -13776,6 +14006,15 @@ function urlIsSameOrigin(requestUrl) {
        // element(':button').click();
       });
      </doc:protractor>
+=======
+     <doc:scenario>
+      it('should display the greeting in the input box', function() {
+       input('greeting').enter('Hello, E2E Tests');
+       // If we click the button it will block the test runner
+       // element(':button').click();
+      });
+     </doc:scenario>
+>>>>>>> 8916cf86b93341f7fca80a23a50fb66db6474c09
    </doc:example>
  */
 function $WindowProvider(){
@@ -13984,6 +14223,7 @@ function $FilterProvider($provide) {
        Equality <input type="checkbox" ng-model="strict"><br>
        <table id="searchObjResults">
          <tr><th>Name</th><th>Phone</th></tr>
+<<<<<<< HEAD
          <tr ng-repeat="friendObj in friends | filter:search:strict">
            <td>{{friendObj.name}}</td>
            <td>{{friendObj.phone}}</td>
@@ -14025,6 +14265,37 @@ function $FilterProvider($provide) {
          expectFriendNames(['Julie'], 'friendObj');
        });
      </doc:protractor>
+=======
+         <tr ng-repeat="friend in friends | filter:search:strict">
+           <td>{{friend.name}}</td>
+           <td>{{friend.phone}}</td>
+         </tr>
+       </table>
+     </doc:source>
+     <doc:scenario>
+       it('should search across all fields when filtering with a string', function() {
+         input('searchText').enter('m');
+         expect(repeater('#searchTextResults tr', 'friend in friends').column('friend.name')).
+           toEqual(['Mary', 'Mike', 'Adam']);
+
+         input('searchText').enter('76');
+         expect(repeater('#searchTextResults tr', 'friend in friends').column('friend.name')).
+           toEqual(['John', 'Julie']);
+       });
+
+       it('should search in specific fields when filtering with a predicate object', function() {
+         input('search.$').enter('i');
+         expect(repeater('#searchObjResults tr', 'friend in friends').column('friend.name')).
+           toEqual(['Mary', 'Mike', 'Julie', 'Juliette']);
+       });
+       it('should use a equal comparison when comparator is true', function() {
+         input('search.name').enter('Julie');
+         input('strict').check();
+         expect(repeater('#searchObjResults tr', 'friend in friends').column('friend.name')).
+           toEqual(['Julie']);
+       });
+     </doc:scenario>
+>>>>>>> 8916cf86b93341f7fca80a23a50fb66db6474c09
    </doc:example>
  */
 function filterFilter() {
@@ -14102,7 +14373,11 @@ function filterFilter() {
           (function(path) {
             if (typeof expression[path] == 'undefined') return;
             predicates.push(function(value) {
+<<<<<<< HEAD
               return search(path == '$' ? value : (value && value[path]), expression[path]);
+=======
+              return search(path == '$' ? value : getter(value, path), expression[path]);
+>>>>>>> 8916cf86b93341f7fca80a23a50fb66db6474c09
             });
           })(key);
         }
@@ -14148,6 +14423,7 @@ function filterFilter() {
        </script>
        <div ng-controller="Ctrl">
          <input type="number" ng-model="amount"> <br>
+<<<<<<< HEAD
          default currency symbol ($): <span id="currency-default">{{amount | currency}}</span><br>
          custom currency identifier (USD$): <span>{{amount | currency:"USD$"}}</span>
        </div>
@@ -14164,6 +14440,23 @@ function filterFilter() {
          expect(element(by.binding('amount | currency:"USD$"')).getText()).toBe('(USD$1,234.00)');
        });
      </doc:protractor>
+=======
+         default currency symbol ($): {{amount | currency}}<br>
+         custom currency identifier (USD$): {{amount | currency:"USD$"}}
+       </div>
+     </doc:source>
+     <doc:scenario>
+       it('should init with 1234.56', function() {
+         expect(binding('amount | currency')).toBe('$1,234.56');
+         expect(binding('amount | currency:"USD$"')).toBe('USD$1,234.56');
+       });
+       it('should update', function() {
+         input('amount').enter('-1234');
+         expect(binding('amount | currency')).toBe('($1,234.00)');
+         expect(binding('amount | currency:"USD$"')).toBe('(USD$1,234.00)');
+       });
+     </doc:scenario>
+>>>>>>> 8916cf86b93341f7fca80a23a50fb66db6474c09
    </doc:example>
  */
 currencyFilter.$inject = ['$locale'];
@@ -14202,6 +14495,7 @@ function currencyFilter($locale) {
        </script>
        <div ng-controller="Ctrl">
          Enter number: <input ng-model='val'><br>
+<<<<<<< HEAD
          Default formatting: <span id='number-default'>{{val | number}}</span><br>
          No fractions: <span>{{val | number:0}}</span><br>
          Negative number: <span>{{-val | number:4}}</span>
@@ -14222,6 +14516,27 @@ function currencyFilter($locale) {
          expect(element(by.binding('-val | number:4')).getText()).toBe('-3,374.3330');
       });
      </doc:protractor>
+=======
+         Default formatting: {{val | number}}<br>
+         No fractions: {{val | number:0}}<br>
+         Negative number: {{-val | number:4}}
+       </div>
+     </doc:source>
+     <doc:scenario>
+       it('should format numbers', function() {
+         expect(binding('val | number')).toBe('1,234.568');
+         expect(binding('val | number:0')).toBe('1,235');
+         expect(binding('-val | number:4')).toBe('-1,234.5679');
+       });
+
+       it('should update', function() {
+         input('val').enter('3374.333');
+         expect(binding('val | number')).toBe('3,374.333');
+         expect(binding('val | number:0')).toBe('3,374');
+         expect(binding('-val | number:4')).toBe('-3,374.3330');
+       });
+     </doc:scenario>
+>>>>>>> 8916cf86b93341f7fca80a23a50fb66db6474c09
    </doc:example>
  */
 
@@ -14451,6 +14766,7 @@ var DATE_FORMATS_SPLIT = /((?:[^yMdHhmsaZE']+)|(?:'(?:[^']|'')*')|(?:E+|y+|M+|d+
    <doc:example>
      <doc:source>
        <span ng-non-bindable>{{1288323623006 | date:'medium'}}</span>:
+<<<<<<< HEAD
            <span>{{1288323623006 | date:'medium'}}</span><br>
        <span ng-non-bindable>{{1288323623006 | date:'yyyy-MM-dd HH:mm:ss Z'}}</span>:
           <span>{{1288323623006 | date:'yyyy-MM-dd HH:mm:ss Z'}}</span><br>
@@ -14467,6 +14783,24 @@ var DATE_FORMATS_SPLIT = /((?:[^yMdHhmsaZE']+)|(?:'(?:[^']|'')*')|(?:E+|y+|M+|d+
             toMatch(/10\/2\d\/2010 @ \d{1,2}:\d{2}(AM|PM)/);
        });
      </doc:protractor>
+=======
+           {{1288323623006 | date:'medium'}}<br>
+       <span ng-non-bindable>{{1288323623006 | date:'yyyy-MM-dd HH:mm:ss Z'}}</span>:
+          {{1288323623006 | date:'yyyy-MM-dd HH:mm:ss Z'}}<br>
+       <span ng-non-bindable>{{1288323623006 | date:'MM/dd/yyyy @ h:mma'}}</span>:
+          {{'1288323623006' | date:'MM/dd/yyyy @ h:mma'}}<br>
+     </doc:source>
+     <doc:scenario>
+       it('should format date', function() {
+         expect(binding("1288323623006 | date:'medium'")).
+            toMatch(/Oct 2\d, 2010 \d{1,2}:\d{2}:\d{2} (AM|PM)/);
+         expect(binding("1288323623006 | date:'yyyy-MM-dd HH:mm:ss Z'")).
+            toMatch(/2010\-10\-2\d \d{2}:\d{2}:\d{2} (\-|\+)?\d{4}/);
+         expect(binding("'1288323623006' | date:'MM/dd/yyyy @ h:mma'")).
+            toMatch(/10\/2\d\/2010 @ \d{1,2}:\d{2}(AM|PM)/);
+       });
+     </doc:scenario>
+>>>>>>> 8916cf86b93341f7fca80a23a50fb66db6474c09
    </doc:example>
  */
 dateFilter.$inject = ['$locale'];
@@ -14565,11 +14899,19 @@ function dateFilter($locale) {
      <doc:source>
        <pre>{{ {'name':'value'} | json }}</pre>
      </doc:source>
+<<<<<<< HEAD
      <doc:protractor>
        it('should jsonify filtered objects', function() {
          expect(element(by.binding("{'name':'value'}")).getText()).toMatch(/\{\n  "name": ?"value"\n}/);
        });
      </doc:protractor>
+=======
+     <doc:scenario>
+       it('should jsonify filtered objects', function() {
+         expect(binding("{'name':'value'}")).toMatch(/\{\n  "name": ?"value"\n}/);
+       });
+     </doc:scenario>
+>>>>>>> 8916cf86b93341f7fca80a23a50fb66db6474c09
    </doc:example>
  *
  */
@@ -14637,6 +14979,7 @@ var uppercaseFilter = valueFn(uppercase);
          <p>Output letters: {{ letters | limitTo:letterLimit }}</p>
        </div>
      </doc:source>
+<<<<<<< HEAD
      <doc:protractor>
        var numLimitInput = element(by.model('numLimit'));
        var letterLimitInput = element(by.model('letterLimit'));
@@ -14668,6 +15011,30 @@ var uppercaseFilter = valueFn(uppercase);
          expect(limitedLetters.getText()).toEqual('Output letters: abcdefghi');
        });
      </doc:protractor>
+=======
+     <doc:scenario>
+       it('should limit the number array to first three items', function() {
+         expect(element('.doc-example-live input[ng-model=numLimit]').val()).toBe('3');
+         expect(element('.doc-example-live input[ng-model=letterLimit]').val()).toBe('3');
+         expect(binding('numbers | limitTo:numLimit')).toEqual('[1,2,3]');
+         expect(binding('letters | limitTo:letterLimit')).toEqual('abc');
+       });
+
+       it('should update the output when -3 is entered', function() {
+         input('numLimit').enter(-3);
+         input('letterLimit').enter(-3);
+         expect(binding('numbers | limitTo:numLimit')).toEqual('[7,8,9]');
+         expect(binding('letters | limitTo:letterLimit')).toEqual('ghi');
+       });
+
+       it('should not exceed the maximum size of input array', function() {
+         input('numLimit').enter(100);
+         input('letterLimit').enter(100);
+         expect(binding('numbers | limitTo:numLimit')).toEqual('[1,2,3,4,5,6,7,8,9]');
+         expect(binding('letters | limitTo:letterLimit')).toEqual('abcdefghi');
+       });
+     </doc:scenario>
+>>>>>>> 8916cf86b93341f7fca80a23a50fb66db6474c09
    </doc:example>
  */
 function limitToFilter(){
@@ -14768,6 +15135,32 @@ function limitToFilter(){
          </table>
        </div>
      </doc:source>
+<<<<<<< HEAD
+=======
+     <doc:scenario>
+       it('should be reverse ordered by aged', function() {
+         expect(binding('predicate')).toBe('-age');
+         expect(repeater('table.friend', 'friend in friends').column('friend.age')).
+           toEqual(['35', '29', '21', '19', '10']);
+         expect(repeater('table.friend', 'friend in friends').column('friend.name')).
+           toEqual(['Adam', 'Julie', 'Mike', 'Mary', 'John']);
+       });
+
+       it('should reorder the table when user selects different predicate', function() {
+         element('.doc-example-live a:contains("Name")').click();
+         expect(repeater('table.friend', 'friend in friends').column('friend.name')).
+           toEqual(['Adam', 'John', 'Julie', 'Mary', 'Mike']);
+         expect(repeater('table.friend', 'friend in friends').column('friend.age')).
+           toEqual(['35', '10', '29', '19', '21']);
+
+         element('.doc-example-live a:contains("Phone")').click();
+         expect(repeater('table.friend', 'friend in friends').column('friend.phone')).
+           toEqual(['555-9876', '555-8765', '555-5678', '555-4321', '555-1212']);
+         expect(repeater('table.friend', 'friend in friends').column('friend.name')).
+           toEqual(['Mary', 'Julie', 'Adam', 'Mike', 'John']);
+       });
+     </doc:scenario>
+>>>>>>> 8916cf86b93341f7fca80a23a50fb66db6474c09
    </doc:example>
  */
 orderByFilter.$inject = ['$parse'];
@@ -14864,6 +15257,7 @@ var htmlAnchorDirective = valueFn({
       element.append(document.createComment('IE fix'));
     }
 
+<<<<<<< HEAD
     if (!attr.href && !attr.xlinkHref && !attr.name) {
       return function(scope, element) {
         // SVGAElement does not use the href attribute, but rather the 'xlinkHref' attribute.
@@ -14872,6 +15266,13 @@ var htmlAnchorDirective = valueFn({
         element.on('click', function(event){
           // if we have no href url, then don't navigate anywhere.
           if (!element.attr(href)) {
+=======
+    if (!attr.href && !attr.name) {
+      return function(scope, element) {
+        element.on('click', function(event){
+          // if we have no href url, then don't navigate anywhere.
+          if (!element.attr('href')) {
+>>>>>>> 8916cf86b93341f7fca80a23a50fb66db6474c09
             event.preventDefault();
           }
         });
@@ -14921,6 +15322,7 @@ var htmlAnchorDirective = valueFn({
         <a id="link-5" name="xxx" ng-click="value = 5">anchor</a> (no link)<br />
         <a id="link-6" ng-href="{{value}}">link</a> (link, change location)
       </doc:source>
+<<<<<<< HEAD
       <doc:protractor>
         it('should execute ng-click but not reload when href without value', function() {
           element(by.id('link-1')).click();
@@ -14963,6 +15365,48 @@ var htmlAnchorDirective = valueFn({
           expect(browser.getCurrentUrl()).toMatch(/\/6$/);
         });
       </doc:protractor>
+=======
+      <doc:scenario>
+        it('should execute ng-click but not reload when href without value', function() {
+          element('#link-1').click();
+          expect(input('value').val()).toEqual('1');
+          expect(element('#link-1').attr('href')).toBe("");
+        });
+
+        it('should execute ng-click but not reload when href empty string', function() {
+          element('#link-2').click();
+          expect(input('value').val()).toEqual('2');
+          expect(element('#link-2').attr('href')).toBe("");
+        });
+
+        it('should execute ng-click and change url when ng-href specified', function() {
+          expect(element('#link-3').attr('href')).toBe("/123");
+
+          element('#link-3').click();
+          expect(browser().window().path()).toEqual('/123');
+        });
+
+        it('should execute ng-click but not reload when href empty string and name specified', function() {
+          element('#link-4').click();
+          expect(input('value').val()).toEqual('4');
+          expect(element('#link-4').attr('href')).toBe('');
+        });
+
+        it('should execute ng-click but not reload when no href but name specified', function() {
+          element('#link-5').click();
+          expect(input('value').val()).toEqual('5');
+          expect(element('#link-5').attr('href')).toBe(undefined);
+        });
+
+        it('should only change url when only ng-href', function() {
+          input('value').enter('6');
+          expect(element('#link-6').attr('href')).toBe('6');
+
+          element('#link-6').click();
+          expect(browser().location().url()).toEqual('/6');
+        });
+      </doc:scenario>
+>>>>>>> 8916cf86b93341f7fca80a23a50fb66db6474c09
     </doc:example>
  */
 
@@ -15047,6 +15491,7 @@ var htmlAnchorDirective = valueFn({
         Click me to toggle: <input type="checkbox" ng-model="checked"><br/>
         <button ng-model="button" ng-disabled="checked">Button</button>
       </doc:source>
+<<<<<<< HEAD
       <doc:protractor>
         it('should toggle button', function() {
           expect(element(by.css('.doc-example-live button')).getAttribute('disabled')).toBeFalsy();
@@ -15054,6 +15499,15 @@ var htmlAnchorDirective = valueFn({
           expect(element(by.css('.doc-example-live button')).getAttribute('disabled')).toBeTruthy();
         });
       </doc:protractor>
+=======
+      <doc:scenario>
+        it('should toggle button', function() {
+          expect(element('.doc-example-live :button').prop('disabled')).toBeFalsy();
+          input('checked').check();
+          expect(element('.doc-example-live :button').prop('disabled')).toBeTruthy();
+        });
+      </doc:scenario>
+>>>>>>> 8916cf86b93341f7fca80a23a50fb66db6474c09
     </doc:example>
  *
  * @element INPUT
@@ -15082,6 +15536,7 @@ var htmlAnchorDirective = valueFn({
         Check me to check both: <input type="checkbox" ng-model="master"><br/>
         <input id="checkSlave" type="checkbox" ng-checked="master">
       </doc:source>
+<<<<<<< HEAD
       <doc:protractor>
         it('should check both checkBoxes', function() {
           expect(element(by.id('checkSlave')).getAttribute('checked')).toBeFalsy();
@@ -15089,6 +15544,15 @@ var htmlAnchorDirective = valueFn({
           expect(element(by.id('checkSlave')).getAttribute('checked')).toBeTruthy();
         });
       </doc:protractor>
+=======
+      <doc:scenario>
+        it('should check both checkBoxes', function() {
+          expect(element('.doc-example-live #checkSlave').prop('checked')).toBeFalsy();
+          input('master').check();
+          expect(element('.doc-example-live #checkSlave').prop('checked')).toBeTruthy();
+        });
+      </doc:scenario>
+>>>>>>> 8916cf86b93341f7fca80a23a50fb66db6474c09
     </doc:example>
  *
  * @element INPUT
@@ -15117,6 +15581,7 @@ var htmlAnchorDirective = valueFn({
         Check me to make text readonly: <input type="checkbox" ng-model="checked"><br/>
         <input type="text" ng-readonly="checked" value="I'm Angular"/>
       </doc:source>
+<<<<<<< HEAD
       <doc:protractor>
         it('should toggle readonly attr', function() {
           expect(element(by.css('.doc-example-live [type="text"]')).getAttribute('readonly')).toBeFalsy();
@@ -15124,6 +15589,15 @@ var htmlAnchorDirective = valueFn({
           expect(element(by.css('.doc-example-live [type="text"]')).getAttribute('readonly')).toBeTruthy();
         });
       </doc:protractor>
+=======
+      <doc:scenario>
+        it('should toggle readonly attr', function() {
+          expect(element('.doc-example-live :text').prop('readonly')).toBeFalsy();
+          input('checked').check();
+          expect(element('.doc-example-live :text').prop('readonly')).toBeTruthy();
+        });
+      </doc:scenario>
+>>>>>>> 8916cf86b93341f7fca80a23a50fb66db6474c09
     </doc:example>
  *
  * @element INPUT
@@ -15156,6 +15630,7 @@ var htmlAnchorDirective = valueFn({
           <option id="greet" ng-selected="selected">Greetings!</option>
         </select>
       </doc:source>
+<<<<<<< HEAD
       <doc:protractor>
         it('should select Greetings!', function() {
           expect(element(by.id('greet')).getAttribute('selected')).toBeFalsy();
@@ -15163,6 +15638,15 @@ var htmlAnchorDirective = valueFn({
           expect(element(by.id('greet')).getAttribute('selected')).toBeTruthy();
         });
       </doc:protractor>
+=======
+      <doc:scenario>
+        it('should select Greetings!', function() {
+          expect(element('.doc-example-live #greet').prop('selected')).toBeFalsy();
+          input('selected').check();
+          expect(element('.doc-example-live #greet').prop('selected')).toBeTruthy();
+        });
+      </doc:scenario>
+>>>>>>> 8916cf86b93341f7fca80a23a50fb66db6474c09
     </doc:example>
  *
  * @element OPTION
@@ -15192,6 +15676,7 @@ var htmlAnchorDirective = valueFn({
             <summary>Show/Hide me</summary>
          </details>
        </doc:source>
+<<<<<<< HEAD
        <doc:protractor>
          it('should toggle open', function() {
            expect(element(by.id('details')).getAttribute('open')).toBeFalsy();
@@ -15199,6 +15684,15 @@ var htmlAnchorDirective = valueFn({
            expect(element(by.id('details')).getAttribute('open')).toBeTruthy();
          });
        </doc:protractor>
+=======
+       <doc:scenario>
+         it('should toggle open', function() {
+           expect(element('#details').prop('open')).toBeFalsy();
+           input('open').check();
+           expect(element('#details').prop('open')).toBeTruthy();
+         });
+       </doc:scenario>
+>>>>>>> 8916cf86b93341f7fca80a23a50fb66db6474c09
      </doc:example>
  *
  * @element DETAILS
@@ -15557,6 +16051,7 @@ function FormController(element, attrs) {
          <tt>myForm.$error.required = {{!!myForm.$error.required}}</tt><br>
         </form>
       </doc:source>
+<<<<<<< HEAD
       <doc:protractor>
         it('should initialize to model', function() {
           var userType = element(by.binding('userType'));
@@ -15578,6 +16073,20 @@ function FormController(element, attrs) {
           expect(valid.getText()).toContain('false');
         });
       </doc:protractor>
+=======
+      <doc:scenario>
+        it('should initialize to model', function() {
+         expect(binding('userType')).toEqual('guest');
+         expect(binding('myForm.input.$valid')).toEqual('true');
+        });
+
+        it('should be invalid if empty', function() {
+         input('userType').enter('');
+         expect(binding('userType')).toEqual('');
+         expect(binding('myForm.input.$valid')).toEqual('false');
+        });
+      </doc:scenario>
+>>>>>>> 8916cf86b93341f7fca80a23a50fb66db6474c09
     </doc:example>
  */
 var formDirectiveFactory = function(isNgForm) {
@@ -15649,7 +16158,11 @@ var ngFormDirective = formDirectiveFactory(true);
 */
 
 var URL_REGEXP = /^(ftp|http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?$/;
+<<<<<<< HEAD
 var EMAIL_REGEXP = /^[a-z0-9!#$%&'*+/=?^_`{|}~.-]+@[a-z0-9-]+(\.[a-z0-9-]+)*$/i;
+=======
+var EMAIL_REGEXP = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,6}$/;
+>>>>>>> 8916cf86b93341f7fca80a23a50fb66db6474c09
 var NUMBER_REGEXP = /^\s*(\-|\+)?(\d+|(\d*(\.\d*)))\s*$/;
 
 var inputType = {
@@ -15702,6 +16215,7 @@ var inputType = {
            <tt>myForm.$error.required = {{!!myForm.$error.required}}</tt><br/>
           </form>
         </doc:source>
+<<<<<<< HEAD
         <doc:protractor>
           var text = element(by.binding('text'));
           var valid = element(by.binding('myForm.input.$valid'));
@@ -15727,6 +16241,31 @@ var inputType = {
             expect(valid.getText()).toContain('false');
           });
         </doc:protractor>
+=======
+        <doc:scenario>
+          it('should initialize to model', function() {
+            expect(binding('text')).toEqual('guest');
+            expect(binding('myForm.input.$valid')).toEqual('true');
+          });
+
+          it('should be invalid if empty', function() {
+            input('text').enter('');
+            expect(binding('text')).toEqual('');
+            expect(binding('myForm.input.$valid')).toEqual('false');
+          });
+
+          it('should be invalid if multi word', function() {
+            input('text').enter('hello world');
+            expect(binding('myForm.input.$valid')).toEqual('false');
+          });
+
+          it('should not be trimmed', function() {
+            input('text').enter('untrimmed ');
+            expect(binding('text')).toEqual('untrimmed ');
+            expect(binding('myForm.input.$valid')).toEqual('true');
+          });
+        </doc:scenario>
+>>>>>>> 8916cf86b93341f7fca80a23a50fb66db6474c09
       </doc:example>
    */
   'text': textInputType,
@@ -15780,6 +16319,7 @@ var inputType = {
            <tt>myForm.$error.required = {{!!myForm.$error.required}}</tt><br/>
           </form>
         </doc:source>
+<<<<<<< HEAD
         <doc:protractor>
           var value = element(by.binding('value'));
           var valid = element(by.binding('myForm.input.$valid'));
@@ -15804,6 +16344,26 @@ var inputType = {
             expect(valid.getText()).toContain('false');
           });
         </doc:protractor>
+=======
+        <doc:scenario>
+          it('should initialize to model', function() {
+           expect(binding('value')).toEqual('12');
+           expect(binding('myForm.input.$valid')).toEqual('true');
+          });
+
+          it('should be invalid if empty', function() {
+           input('value').enter('');
+           expect(binding('value')).toEqual('');
+           expect(binding('myForm.input.$valid')).toEqual('false');
+          });
+
+          it('should be invalid if over max', function() {
+           input('value').enter('123');
+           expect(binding('value')).toEqual('');
+           expect(binding('myForm.input.$valid')).toEqual('false');
+          });
+        </doc:scenario>
+>>>>>>> 8916cf86b93341f7fca80a23a50fb66db6474c09
       </doc:example>
    */
   'number': numberInputType,
@@ -15855,6 +16415,7 @@ var inputType = {
            <tt>myForm.$error.url = {{!!myForm.$error.url}}</tt><br/>
           </form>
         </doc:source>
+<<<<<<< HEAD
         <doc:protractor>
           var text = element(by.binding('text'));
           var valid = element(by.binding('myForm.input.$valid'));
@@ -15880,6 +16441,25 @@ var inputType = {
             expect(valid.getText()).toContain('false');
           });
         </doc:protractor>
+=======
+        <doc:scenario>
+          it('should initialize to model', function() {
+            expect(binding('text')).toEqual('http://google.com');
+            expect(binding('myForm.input.$valid')).toEqual('true');
+          });
+
+          it('should be invalid if empty', function() {
+            input('text').enter('');
+            expect(binding('text')).toEqual('');
+            expect(binding('myForm.input.$valid')).toEqual('false');
+          });
+
+          it('should be invalid if not url', function() {
+            input('text').enter('xxx');
+            expect(binding('myForm.input.$valid')).toEqual('false');
+          });
+        </doc:scenario>
+>>>>>>> 8916cf86b93341f7fca80a23a50fb66db6474c09
       </doc:example>
    */
   'url': urlInputType,
@@ -15931,6 +16511,7 @@ var inputType = {
              <tt>myForm.$error.email = {{!!myForm.$error.email}}</tt><br/>
            </form>
         </doc:source>
+<<<<<<< HEAD
         <doc:protractor>
           var text = element(by.binding('text'));
           var valid = element(by.binding('myForm.input.$valid'));
@@ -15955,6 +16536,25 @@ var inputType = {
             expect(valid.getText()).toContain('false');
           });
         </doc:protractor>
+=======
+        <doc:scenario>
+          it('should initialize to model', function() {
+            expect(binding('text')).toEqual('me@example.com');
+            expect(binding('myForm.input.$valid')).toEqual('true');
+          });
+
+          it('should be invalid if empty', function() {
+            input('text').enter('');
+            expect(binding('text')).toEqual('');
+            expect(binding('myForm.input.$valid')).toEqual('false');
+          });
+
+          it('should be invalid if not email', function() {
+            input('text').enter('xxx');
+            expect(binding('myForm.input.$valid')).toEqual('false');
+          });
+        </doc:scenario>
+>>>>>>> 8916cf86b93341f7fca80a23a50fb66db6474c09
       </doc:example>
    */
   'email': emailInputType,
@@ -15972,8 +16572,11 @@ var inputType = {
    * @param {string=} name Property name of the form under which the control is published.
    * @param {string=} ngChange Angular expression to be executed when input changes due to user
    *    interaction with the input element.
+<<<<<<< HEAD
    * @param {string} ngValue Angular expression which sets the value to which the expression should
    *    be set when selected.
+=======
+>>>>>>> 8916cf86b93341f7fca80a23a50fb66db6474c09
    *
    * @example
       <doc:example>
@@ -15981,14 +16584,18 @@ var inputType = {
          <script>
            function Ctrl($scope) {
              $scope.color = 'blue';
+<<<<<<< HEAD
              $scope.specialValue = {
                "id": "12345",
                "value": "green"
              };
+=======
+>>>>>>> 8916cf86b93341f7fca80a23a50fb66db6474c09
            }
          </script>
          <form name="myForm" ng-controller="Ctrl">
            <input type="radio" ng-model="color" value="red">  Red <br/>
+<<<<<<< HEAD
            <input type="radio" ng-model="color" ng-value="specialValue"> Green <br/>
            <input type="radio" ng-model="color" value="blue"> Blue <br/>
            <tt>color = {{color | json}}</tt><br/>
@@ -16006,6 +16613,21 @@ var inputType = {
             expect(color.getText()).toContain('red');
           });
         </doc:protractor>
+=======
+           <input type="radio" ng-model="color" value="green"> Green <br/>
+           <input type="radio" ng-model="color" value="blue"> Blue <br/>
+           <tt>color = {{color}}</tt><br/>
+          </form>
+        </doc:source>
+        <doc:scenario>
+          it('should change state', function() {
+            expect(binding('color')).toEqual('blue');
+
+            input('color').select('red');
+            expect(binding('color')).toEqual('red');
+          });
+        </doc:scenario>
+>>>>>>> 8916cf86b93341f7fca80a23a50fb66db6474c09
       </doc:example>
    */
   'radio': radioInputType,
@@ -16042,6 +16664,7 @@ var inputType = {
            <tt>value2 = {{value2}}</tt><br/>
           </form>
         </doc:source>
+<<<<<<< HEAD
         <doc:protractor>
           it('should change state', function() {
             var value1 = element(by.binding('value1'));
@@ -16057,6 +16680,19 @@ var inputType = {
             expect(value2.getText()).toContain('NO');
           });
         </doc:protractor>
+=======
+        <doc:scenario>
+          it('should change state', function() {
+            expect(binding('value1')).toEqual('true');
+            expect(binding('value2')).toEqual('YES');
+
+            input('value1').check();
+            input('value2').check();
+            expect(binding('value1')).toEqual('false');
+            expect(binding('value2')).toEqual('NO');
+          });
+        </doc:scenario>
+>>>>>>> 8916cf86b93341f7fca80a23a50fb66db6474c09
       </doc:example>
    */
   'checkbox': checkboxInputType,
@@ -16409,6 +17045,7 @@ function checkboxInputType(scope, element, attr, ctrl) {
          <tt>myForm.$error.maxlength = {{!!myForm.$error.maxlength}}</tt><br>
        </div>
       </doc:source>
+<<<<<<< HEAD
       <doc:protractor>
         var user = element(by.binding('{{user}}'));
         var userNameValid = element(by.binding('myForm.userName.$valid'));
@@ -16462,6 +17099,46 @@ function checkboxInputType(scope, element, attr, ctrl) {
           expect(formValid.getText()).toContain('false');
         });
       </doc:protractor>
+=======
+      <doc:scenario>
+        it('should initialize to model', function() {
+          expect(binding('user')).toEqual('{"name":"guest","last":"visitor"}');
+          expect(binding('myForm.userName.$valid')).toEqual('true');
+          expect(binding('myForm.$valid')).toEqual('true');
+        });
+
+        it('should be invalid if empty when required', function() {
+          input('user.name').enter('');
+          expect(binding('user')).toEqual('{"last":"visitor"}');
+          expect(binding('myForm.userName.$valid')).toEqual('false');
+          expect(binding('myForm.$valid')).toEqual('false');
+        });
+
+        it('should be valid if empty when min length is set', function() {
+          input('user.last').enter('');
+          expect(binding('user')).toEqual('{"name":"guest","last":""}');
+          expect(binding('myForm.lastName.$valid')).toEqual('true');
+          expect(binding('myForm.$valid')).toEqual('true');
+        });
+
+        it('should be invalid if less than required min length', function() {
+          input('user.last').enter('xx');
+          expect(binding('user')).toEqual('{"name":"guest"}');
+          expect(binding('myForm.lastName.$valid')).toEqual('false');
+          expect(binding('myForm.lastName.$error')).toMatch(/minlength/);
+          expect(binding('myForm.$valid')).toEqual('false');
+        });
+
+        it('should be invalid if longer than max length', function() {
+          input('user.last').enter('some ridiculously long name');
+          expect(binding('user'))
+            .toEqual('{"name":"guest"}');
+          expect(binding('myForm.lastName.$valid')).toEqual('false');
+          expect(binding('myForm.lastName.$error')).toMatch(/maxlength/);
+          expect(binding('myForm.$valid')).toEqual('false');
+        });
+      </doc:scenario>
+>>>>>>> 8916cf86b93341f7fca80a23a50fb66db6474c09
     </doc:example>
  */
 var inputDirective = ['$browser', '$sniffer', function($browser, $sniffer) {
@@ -16593,6 +17270,7 @@ var VALID_CLASS = 'ng-valid',
        <textarea ng-model="userContent"></textarea>
       </form>
     </file>
+<<<<<<< HEAD
     <file name="protractorTest.js">
       it('should data-bind and become invalid', function() {
         var contentEditable = element(by.css('.doc-example-live [contenteditable]'));
@@ -16604,6 +17282,16 @@ var VALID_CLASS = 'ng-valid',
 
         expect(contentEditable.getText()).toEqual('');
         expect(contentEditable.getAttribute('class')).toMatch(/ng-invalid-required/);
+=======
+    <file name="scenario.js">
+      it('should data-bind and become invalid', function() {
+        var contentEditable = element('[contenteditable]');
+
+        expect(contentEditable.text()).toEqual('Change me!');
+        input('userContent').enter('');
+        expect(contentEditable.text()).toEqual('');
+        expect(contentEditable.prop('className')).toMatch(/ng-invalid-required/);
+>>>>>>> 8916cf86b93341f7fca80a23a50fb66db6474c09
       });
     </file>
  * </example>
@@ -16883,10 +17571,14 @@ var ngModelDirective = function() {
  * @name ng.directive:ngChange
  *
  * @description
+<<<<<<< HEAD
  * Evaluate the given expression when the user changes the input.
  * The expression is evaluated immediately, unlike the JavaScript onchange event
  * which only triggers at the end of a change (usually, when the user leaves the
  * form element or presses the return key).
+=======
+ * Evaluate given expression when user changes the input.
+>>>>>>> 8916cf86b93341f7fca80a23a50fb66db6474c09
  * The expression is not evaluated when the value change is coming from the model.
  *
  * Note, this directive requires `ngModel` to be present.
@@ -16910,6 +17602,7 @@ var ngModelDirective = function() {
  *       <input type="checkbox" ng-model="confirmed" ng-change="change()" id="ng-change-example1" />
  *       <input type="checkbox" ng-model="confirmed" id="ng-change-example2" />
  *       <label for="ng-change-example2">Confirmed</label><br />
+<<<<<<< HEAD
  *       <tt>debug = {{confirmed}}</tt><br/>
  *       <tt>counter = {{counter}}</tt><br/>
  *     </div>
@@ -16934,6 +17627,26 @@ var ngModelDirective = function() {
  *       expect(debug.getText()).toContain('true');
  *     });
  *   </doc:protractor>
+=======
+ *       debug = {{confirmed}}<br />
+ *       counter = {{counter}}
+ *     </div>
+ *   </doc:source>
+ *   <doc:scenario>
+ *     it('should evaluate the expression if changing from view', function() {
+ *       expect(binding('counter')).toEqual('0');
+ *       element('#ng-change-example1').click();
+ *       expect(binding('counter')).toEqual('1');
+ *       expect(binding('confirmed')).toEqual('true');
+ *     });
+ *
+ *     it('should not evaluate the expression if changing from model', function() {
+ *       element('#ng-change-example2').click();
+ *       expect(binding('counter')).toEqual('0');
+ *       expect(binding('confirmed')).toEqual('true');
+ *     });
+ *   </doc:scenario>
+>>>>>>> 8916cf86b93341f7fca80a23a50fb66db6474c09
  * </doc:example>
  */
 var ngChangeDirective = valueFn({
@@ -17006,6 +17719,7 @@ var requiredDirective = function() {
          <tt>myForm.$error.required = {{!!myForm.$error.required}}</tt><br/>
         </form>
       </doc:source>
+<<<<<<< HEAD
       <doc:protractor>
         var listInput = element(by.model('names'));
         var names = element(by.binding('{{names}}'));
@@ -17026,6 +17740,22 @@ var requiredDirective = function() {
           expect(valid.getText()).toContain('false');
           expect(error.getCssValue('display')).not.toBe('none');        });
       </doc:protractor>
+=======
+      <doc:scenario>
+        it('should initialize to model', function() {
+          expect(binding('names')).toEqual('["igor","misko","vojta"]');
+          expect(binding('myForm.namesInput.$valid')).toEqual('true');
+          expect(element('span.error').css('display')).toBe('none');
+        });
+
+        it('should be invalid if empty', function() {
+          input('names').enter('');
+          expect(binding('names')).toEqual('');
+          expect(binding('myForm.namesInput.$valid')).toEqual('false');
+          expect(element('span.error').css('display')).not().toBe('none');
+        });
+      </doc:scenario>
+>>>>>>> 8916cf86b93341f7fca80a23a50fb66db6474c09
     </doc:example>
  */
 var ngListDirective = function() {
@@ -17107,6 +17837,7 @@ var CONSTANT_VALUE_REGEXP = /^(true|false|\d+)$/;
           <div>You chose {{my.favorite}}</div>
         </form>
       </doc:source>
+<<<<<<< HEAD
       <doc:protractor>
         var favorite = element(by.binding('my.favorite'));
 
@@ -17118,6 +17849,17 @@ var CONSTANT_VALUE_REGEXP = /^(true|false|\d+)$/;
           expect(favorite.getText()).toContain('pizza');
         });
       </doc:protractor>
+=======
+      <doc:scenario>
+        it('should initialize to model', function() {
+          expect(binding('my.favorite')).toEqual('unicorns');
+        });
+        it('should bind the values to the inputs', function() {
+          input('my.favorite').select('pizza');
+          expect(binding('my.favorite')).toEqual('pizza');
+        });
+      </doc:scenario>
+>>>>>>> 8916cf86b93341f7fca80a23a50fb66db6474c09
     </doc:example>
  */
 var ngValueDirective = function() {
@@ -17177,6 +17919,7 @@ var ngValueDirective = function() {
          Hello <span ng-bind="name"></span>!
        </div>
      </doc:source>
+<<<<<<< HEAD
      <doc:protractor>
        it('should check ng-bind', function() {
          var exampleContainer = $('.doc-example-live');
@@ -17188,6 +17931,15 @@ var ngValueDirective = function() {
          expect(exampleContainer.findElement(by.binding('name')).getText()).toBe('world');
        });
      </doc:protractor>
+=======
+     <doc:scenario>
+       it('should check ng-bind', function() {
+         expect(using('.doc-example-live').binding('name')).toBe('Whirled');
+         using('.doc-example-live').input('name').enter('world');
+         expect(using('.doc-example-live').binding('name')).toBe('world');
+       });
+     </doc:scenario>
+>>>>>>> 8916cf86b93341f7fca80a23a50fb66db6474c09
    </doc:example>
  */
 var ngBindDirective = ngDirective(function(scope, element, attr) {
@@ -17233,6 +17985,7 @@ var ngBindDirective = ngDirective(function(scope, element, attr) {
         <pre ng-bind-template="{{salutation}} {{name}}!"></pre>
        </div>
      </doc:source>
+<<<<<<< HEAD
      <doc:protractor>
        it('should check ng-bind', function() {
          var salutationElem = element(by.binding('salutation'));
@@ -17249,6 +18002,22 @@ var ngBindDirective = ngDirective(function(scope, element, attr) {
          expect(salutationElem.getText()).toBe('Greetings user!');
        });
      </doc:protractor>
+=======
+     <doc:scenario>
+       it('should check ng-bind', function() {
+         expect(using('.doc-example-live').binding('salutation')).
+           toBe('Hello');
+         expect(using('.doc-example-live').binding('name')).
+           toBe('World');
+         using('.doc-example-live').input('salutation').enter('Greetings');
+         using('.doc-example-live').input('name').enter('user');
+         expect(using('.doc-example-live').binding('salutation')).
+           toBe('Greetings');
+         expect(using('.doc-example-live').binding('name')).
+           toBe('user');
+       });
+     </doc:scenario>
+>>>>>>> 8916cf86b93341f7fca80a23a50fb66db6474c09
    </doc:example>
  */
 var ngBindTemplateDirective = ['$interpolate', function($interpolate) {
@@ -17301,10 +18070,19 @@ var ngBindTemplateDirective = ['$interpolate', function($interpolate) {
        }]);
      </file>
 
+<<<<<<< HEAD
      <file name="protractorTest.js">
        it('should check ng-bind-html', function() {
          expect(element(by.binding('myHTML')).getText()).toBe(
              'I am an HTMLstring with links! and other stuff');
+=======
+     <file name="scenario.js">
+       it('should check ng-bind-html', function() {
+         expect(using('.doc-example-live').binding('myHTML')).
+           toBe(
+           'I am an <code>HTML</code>string with <a href="#">links!</a> and other <em>stuff</em>'
+           );
+>>>>>>> 8916cf86b93341f7fca80a23a50fb66db6474c09
        });
      </file>
    </example>
@@ -17436,6 +18214,7 @@ function classDirective(name, selector) {
            color: red;
        }
      </file>
+<<<<<<< HEAD
      <file name="protractorTest.js">
        var ps = element.all(by.css('.doc-example-live p'));
 
@@ -17465,6 +18244,33 @@ function classDirective(name, selector) {
          element(by.model('style2')).sendKeys('strike');
          element(by.model('style3')).sendKeys('red');
          expect(ps.last().getAttribute('class')).toBe('bold strike red');
+=======
+     <file name="scenario.js">
+       it('should let you toggle the class', function() {
+
+         expect(element('.doc-example-live p:first').prop('className')).not().toMatch(/bold/);
+         expect(element('.doc-example-live p:first').prop('className')).not().toMatch(/red/);
+
+         input('important').check();
+         expect(element('.doc-example-live p:first').prop('className')).toMatch(/bold/);
+
+         input('error').check();
+         expect(element('.doc-example-live p:first').prop('className')).toMatch(/red/);
+       });
+
+       it('should let you toggle string example', function() {
+         expect(element('.doc-example-live p:nth-of-type(2)').prop('className')).toBe('');
+         input('style').enter('red');
+         expect(element('.doc-example-live p:nth-of-type(2)').prop('className')).toBe('red');
+       });
+
+       it('array example should have 3 classes', function() {
+         expect(element('.doc-example-live p:last').prop('className')).toBe('');
+         input('style1').enter('bold');
+         input('style2').enter('strike');
+         input('style3').enter('red');
+         expect(element('.doc-example-live p:last').prop('className')).toBe('bold strike red');
+>>>>>>> 8916cf86b93341f7fca80a23a50fb66db6474c09
        });
      </file>
    </example>
@@ -17475,8 +18281,13 @@ function classDirective(name, selector) {
 
    <example animations="true">
      <file name="index.html">
+<<<<<<< HEAD
       <input id="setbtn" type="button" value="set" ng-click="myVar='my-class'">
       <input id="clearbtn" type="button" value="clear" ng-click="myVar=''">
+=======
+      <input type="button" value="set" ng-click="myVar='my-class'">
+      <input type="button" value="clear" ng-click="myVar=''">
+>>>>>>> 8916cf86b93341f7fca80a23a50fb66db6474c09
       <br>
       <span class="base-class" ng-class="myVar">Sample Text</span>
      </file>
@@ -17491,6 +18302,7 @@ function classDirective(name, selector) {
          font-size:3em;
        }
      </file>
+<<<<<<< HEAD
      <file name="protractorTest.js">
        it('should check ng-class', function() {
          expect(element(by.css('.base-class')).getAttribute('class')).not.
@@ -17504,6 +18316,21 @@ function classDirective(name, selector) {
          element(by.id('clearbtn')).click();
 
          expect(element(by.css('.base-class')).getAttribute('class')).not.
+=======
+     <file name="scenario.js">
+       it('should check ng-class', function() {
+         expect(element('.doc-example-live span').prop('className')).not().
+           toMatch(/my-class/);
+
+         using('.doc-example-live').element(':button:first').click();
+
+         expect(element('.doc-example-live span').prop('className')).
+           toMatch(/my-class/);
+
+         using('.doc-example-live').element(':button:last').click();
+
+         expect(element('.doc-example-live span').prop('className')).not().
+>>>>>>> 8916cf86b93341f7fca80a23a50fb66db6474c09
            toMatch(/my-class/);
        });
      </file>
@@ -17555,11 +18382,19 @@ var ngClassDirective = classDirective('', true);
          color: blue;
        }
      </file>
+<<<<<<< HEAD
      <file name="protractorTest.js">
        it('should check ng-class-odd and ng-class-even', function() {
          expect(element(by.repeater('name in names').row(0).column('name')).getAttribute('class')).
            toMatch(/odd/);
          expect(element(by.repeater('name in names').row(1).column('name')).getAttribute('class')).
+=======
+     <file name="scenario.js">
+       it('should check ng-class-odd and ng-class-even', function() {
+         expect(element('.doc-example-live li:first span').prop('className')).
+           toMatch(/odd/);
+         expect(element('.doc-example-live li:last span').prop('className')).
+>>>>>>> 8916cf86b93341f7fca80a23a50fb66db6474c09
            toMatch(/even/);
        });
      </file>
@@ -17603,11 +18438,19 @@ var ngClassOddDirective = classDirective('Odd', 0);
          color: blue;
        }
      </file>
+<<<<<<< HEAD
      <file name="protractorTest.js">
        it('should check ng-class-odd and ng-class-even', function() {
          expect(element(by.repeater('name in names').row(0).column('name')).getAttribute('class')).
            toMatch(/odd/);
          expect(element(by.repeater('name in names').row(1).column('name')).getAttribute('class')).
+=======
+     <file name="scenario.js">
+       it('should check ng-class-odd and ng-class-even', function() {
+         expect(element('.doc-example-live li:first span').prop('className')).
+           toMatch(/odd/);
+         expect(element('.doc-example-live li:last span').prop('className')).
+>>>>>>> 8916cf86b93341f7fca80a23a50fb66db6474c09
            toMatch(/even/);
        });
      </file>
@@ -17660,6 +18503,7 @@ var ngClassEvenDirective = classDirective('Even', 1);
         <div id="template1" ng-cloak>{{ 'hello' }}</div>
         <div id="template2" ng-cloak class="ng-cloak">{{ 'hello IE7' }}</div>
      </doc:source>
+<<<<<<< HEAD
      <doc:protractor>
        it('should remove the template directive and css class', function() {
          expect($('.doc-example-live #template1').getAttribute('ng-cloak')).
@@ -17668,6 +18512,16 @@ var ngClassEvenDirective = classDirective('Even', 1);
            toBeNull();
        });
      </doc:protractor>
+=======
+     <doc:scenario>
+       it('should remove the template directive and css class', function() {
+         expect(element('.doc-example-live #template1').attr('ng-cloak')).
+           not().toBeDefined();
+         expect(element('.doc-example-live #template2').attr('ng-cloak')).
+           not().toBeDefined();
+       });
+     </doc:scenario>
+>>>>>>> 8916cf86b93341f7fca80a23a50fb66db6474c09
    </doc:example>
  *
  */
@@ -17760,6 +18614,7 @@ var ngCloakDirective = ngDirective({
        </ul>
       </div>
      </doc:source>
+<<<<<<< HEAD
      <doc:protractor>
        it('should check controller as', function() {
          var container = element(by.id('ctrl-as-exmpl'));
@@ -17790,6 +18645,24 @@ var ngCloakDirective = ngDirective({
              .toBe('yourname@example.org');
        });
      </doc:protractor>
+=======
+     <doc:scenario>
+       it('should check controller as', function() {
+         expect(element('#ctrl-as-exmpl>:input').val()).toBe('John Smith');
+         expect(element('#ctrl-as-exmpl li:nth-child(1) input').val())
+           .toBe('408 555 1212');
+         expect(element('#ctrl-as-exmpl li:nth-child(2) input').val())
+           .toBe('john.smith@example.org');
+
+         element('#ctrl-as-exmpl li:first a:contains("clear")').click();
+         expect(element('#ctrl-as-exmpl li:first input').val()).toBe('');
+
+         element('#ctrl-as-exmpl li:last a:contains("add")').click();
+         expect(element('#ctrl-as-exmpl li:nth-child(3) input').val())
+           .toBe('yourname@example.org');
+       });
+     </doc:scenario>
+>>>>>>> 8916cf86b93341f7fca80a23a50fb66db6474c09
    </doc:example>
     <doc:example>
      <doc:source>
@@ -17837,6 +18710,7 @@ var ngCloakDirective = ngDirective({
        </ul>
       </div>
      </doc:source>
+<<<<<<< HEAD
      <doc:protractor>
        it('should check controller', function() {
          var container = element(by.id('ctrl-exmpl'));
@@ -17867,6 +18741,24 @@ var ngCloakDirective = ngDirective({
              .toBe('yourname@example.org');
        });
      </doc:protractor>
+=======
+     <doc:scenario>
+       it('should check controller', function() {
+         expect(element('#ctrl-exmpl>:input').val()).toBe('John Smith');
+         expect(element('#ctrl-exmpl li:nth-child(1) input').val())
+           .toBe('408 555 1212');
+         expect(element('#ctrl-exmpl li:nth-child(2) input').val())
+           .toBe('john.smith@example.org');
+
+         element('#ctrl-exmpl li:first a:contains("clear")').click();
+         expect(element('#ctrl-exmpl li:first input').val()).toBe('');
+
+         element('#ctrl-exmpl li:last a:contains("add")').click();
+         expect(element('#ctrl-exmpl li:nth-child(3) input').val())
+           .toBe('yourname@example.org');
+       });
+     </doc:scenario>
+>>>>>>> 8916cf86b93341f7fca80a23a50fb66db6474c09
    </doc:example>
 
  */
@@ -17929,7 +18821,10 @@ var ngControllerDirective = [function() {
  * an element is clicked.
  *
  * @element ANY
+<<<<<<< HEAD
  * @priority 0
+=======
+>>>>>>> 8916cf86b93341f7fca80a23a50fb66db6474c09
  * @param {expression} ngClick {@link guide/expression Expression} to evaluate upon
  * click. (Event object is available as `$event`)
  *
@@ -17986,7 +18881,10 @@ forEach(
  * The `ngDblclick` directive allows you to specify custom behavior on a dblclick event.
  *
  * @element ANY
+<<<<<<< HEAD
  * @priority 0
+=======
+>>>>>>> 8916cf86b93341f7fca80a23a50fb66db6474c09
  * @param {expression} ngDblclick {@link guide/expression Expression} to evaluate upon
  * a dblclick. (The Event object is available as `$event`)
  *
@@ -18010,7 +18908,10 @@ forEach(
  * The ngMousedown directive allows you to specify custom behavior on mousedown event.
  *
  * @element ANY
+<<<<<<< HEAD
  * @priority 0
+=======
+>>>>>>> 8916cf86b93341f7fca80a23a50fb66db6474c09
  * @param {expression} ngMousedown {@link guide/expression Expression} to evaluate upon
  * mousedown. (Event object is available as `$event`)
  *
@@ -18034,7 +18935,10 @@ forEach(
  * Specify custom behavior on mouseup event.
  *
  * @element ANY
+<<<<<<< HEAD
  * @priority 0
+=======
+>>>>>>> 8916cf86b93341f7fca80a23a50fb66db6474c09
  * @param {expression} ngMouseup {@link guide/expression Expression} to evaluate upon
  * mouseup. (Event object is available as `$event`)
  *
@@ -18057,7 +18961,10 @@ forEach(
  * Specify custom behavior on mouseover event.
  *
  * @element ANY
+<<<<<<< HEAD
  * @priority 0
+=======
+>>>>>>> 8916cf86b93341f7fca80a23a50fb66db6474c09
  * @param {expression} ngMouseover {@link guide/expression Expression} to evaluate upon
  * mouseover. (Event object is available as `$event`)
  *
@@ -18081,7 +18988,10 @@ forEach(
  * Specify custom behavior on mouseenter event.
  *
  * @element ANY
+<<<<<<< HEAD
  * @priority 0
+=======
+>>>>>>> 8916cf86b93341f7fca80a23a50fb66db6474c09
  * @param {expression} ngMouseenter {@link guide/expression Expression} to evaluate upon
  * mouseenter. (Event object is available as `$event`)
  *
@@ -18105,7 +19015,10 @@ forEach(
  * Specify custom behavior on mouseleave event.
  *
  * @element ANY
+<<<<<<< HEAD
  * @priority 0
+=======
+>>>>>>> 8916cf86b93341f7fca80a23a50fb66db6474c09
  * @param {expression} ngMouseleave {@link guide/expression Expression} to evaluate upon
  * mouseleave. (Event object is available as `$event`)
  *
@@ -18129,7 +19042,10 @@ forEach(
  * Specify custom behavior on mousemove event.
  *
  * @element ANY
+<<<<<<< HEAD
  * @priority 0
+=======
+>>>>>>> 8916cf86b93341f7fca80a23a50fb66db6474c09
  * @param {expression} ngMousemove {@link guide/expression Expression} to evaluate upon
  * mousemove. (Event object is available as `$event`)
  *
@@ -18153,7 +19069,10 @@ forEach(
  * Specify custom behavior on keydown event.
  *
  * @element ANY
+<<<<<<< HEAD
  * @priority 0
+=======
+>>>>>>> 8916cf86b93341f7fca80a23a50fb66db6474c09
  * @param {expression} ngKeydown {@link guide/expression Expression} to evaluate upon
  * keydown. (Event object is available as `$event` and can be interrogated for keyCode, altKey, etc.)
  *
@@ -18175,7 +19094,10 @@ forEach(
  * Specify custom behavior on keyup event.
  *
  * @element ANY
+<<<<<<< HEAD
  * @priority 0
+=======
+>>>>>>> 8916cf86b93341f7fca80a23a50fb66db6474c09
  * @param {expression} ngKeyup {@link guide/expression Expression} to evaluate upon
  * keyup. (Event object is available as `$event` and can be interrogated for keyCode, altKey, etc.)
  *
@@ -18222,7 +19144,10 @@ forEach(
  * attribute**.
  *
  * @element form
+<<<<<<< HEAD
  * @priority 0
+=======
+>>>>>>> 8916cf86b93341f7fca80a23a50fb66db6474c09
  * @param {expression} ngSubmit {@link guide/expression Expression} to eval. (Event object is available as `$event`)
  *
  * @example
@@ -18247,6 +19172,7 @@ forEach(
         <pre>list={{list}}</pre>
       </form>
      </doc:source>
+<<<<<<< HEAD
      <doc:protractor>
        it('should check ng-submit', function() {
          expect(element(by.binding('list')).getText()).toBe('list=[]');
@@ -18261,6 +19187,22 @@ forEach(
          expect(element(by.binding('list')).getText()).toContain('hello');
         });
      </doc:protractor>
+=======
+     <doc:scenario>
+       it('should check ng-submit', function() {
+         expect(binding('list')).toBe('[]');
+         element('.doc-example-live #submit').click();
+         expect(binding('list')).toBe('["hello"]');
+         expect(input('text').val()).toBe('');
+       });
+       it('should ignore empty strings', function() {
+         expect(binding('list')).toBe('[]');
+         element('.doc-example-live #submit').click();
+         element('.doc-example-live #submit').click();
+         expect(binding('list')).toBe('["hello"]');
+       });
+     </doc:scenario>
+>>>>>>> 8916cf86b93341f7fca80a23a50fb66db6474c09
    </doc:example>
  */
 
@@ -18272,7 +19214,10 @@ forEach(
  * Specify custom behavior on focus event.
  *
  * @element window, input, select, textarea, a
+<<<<<<< HEAD
  * @priority 0
+=======
+>>>>>>> 8916cf86b93341f7fca80a23a50fb66db6474c09
  * @param {expression} ngFocus {@link guide/expression Expression} to evaluate upon
  * focus. (Event object is available as `$event`)
  *
@@ -18288,7 +19233,10 @@ forEach(
  * Specify custom behavior on blur event.
  *
  * @element window, input, select, textarea, a
+<<<<<<< HEAD
  * @priority 0
+=======
+>>>>>>> 8916cf86b93341f7fca80a23a50fb66db6474c09
  * @param {expression} ngBlur {@link guide/expression Expression} to evaluate upon
  * blur. (Event object is available as `$event`)
  *
@@ -18304,7 +19252,10 @@ forEach(
  * Specify custom behavior on copy event.
  *
  * @element window, input, select, textarea, a
+<<<<<<< HEAD
  * @priority 0
+=======
+>>>>>>> 8916cf86b93341f7fca80a23a50fb66db6474c09
  * @param {expression} ngCopy {@link guide/expression Expression} to evaluate upon
  * copy. (Event object is available as `$event`)
  *
@@ -18325,7 +19276,10 @@ forEach(
  * Specify custom behavior on cut event.
  *
  * @element window, input, select, textarea, a
+<<<<<<< HEAD
  * @priority 0
+=======
+>>>>>>> 8916cf86b93341f7fca80a23a50fb66db6474c09
  * @param {expression} ngCut {@link guide/expression Expression} to evaluate upon
  * cut. (Event object is available as `$event`)
  *
@@ -18346,7 +19300,10 @@ forEach(
  * Specify custom behavior on paste event.
  *
  * @element window, input, select, textarea, a
+<<<<<<< HEAD
  * @priority 0
+=======
+>>>>>>> 8916cf86b93341f7fca80a23a50fb66db6474c09
  * @param {expression} ngPaste {@link guide/expression Expression} to evaluate upon
  * paste. (Event object is available as `$event`)
  *
@@ -18587,6 +19544,7 @@ var ngIfDirective = ['$animate', function($animate) {
         top:50px;
       }
     </file>
+<<<<<<< HEAD
     <file name="protractorTest.js">
       var templateSelect = element(by.model('template'));
       var includeElem = element(by.css('.doc-example-live [ng-include]'));
@@ -18605,6 +19563,21 @@ var ngIfDirective = ['$animate', function($animate) {
         templateSelect.click();
         templateSelect.element.all(by.css('option')).get(0).click();
         expect(includeElem.isPresent()).toBe(false);
+=======
+    <file name="scenario.js">
+      it('should load template1.html', function() {
+       expect(element('.doc-example-live [ng-include]').text()).
+         toMatch(/Content of template1.html/);
+      });
+      it('should load template2.html', function() {
+       select('template').option('1');
+       expect(element('.doc-example-live [ng-include]').text()).
+         toMatch(/Content of template2.html/);
+      });
+      it('should change to blank', function() {
+       select('template').option('');
+       expect(element('.doc-example-live [ng-include]')).toBe(undefined);
+>>>>>>> 8916cf86b93341f7fca80a23a50fb66db6474c09
       });
     </file>
   </example>
@@ -18735,6 +19708,7 @@ var ngIncludeFillContentDirective = ['$compile',
  * should use {@link guide/controller controllers} rather than `ngInit`
  * to initialize values on a scope.
  * </div>
+<<<<<<< HEAD
  * <div class="alert alert-warning">
  * **Note**: If you have assignment in `ngInit` along with {@link api/ng.$filter `$filter`}, make
  * sure you have parenthesis for correct precedence:
@@ -18742,6 +19716,8 @@ var ngIncludeFillContentDirective = ['$compile',
  *   <div ng-init="test1 = (data | orderBy:'name')"></div>
  * </pre>
  * </div>
+=======
+>>>>>>> 8916cf86b93341f7fca80a23a50fb66db6474c09
  *
  * @priority 450
  *
@@ -18764,6 +19740,7 @@ var ngIncludeFillContentDirective = ['$compile',
      </div>
    </div>
      </doc:source>
+<<<<<<< HEAD
      <doc:protractor>
        it('should alias index positions', function() {
          var elements = element.all(by.css('.example-init'));
@@ -18773,6 +19750,17 @@ var ngIncludeFillContentDirective = ['$compile',
          expect(elements.get(3).getText()).toBe('list[ 1 ][ 1 ] = d;');
        });
      </doc:protractor>
+=======
+     <doc:scenario>
+       it('should alias index positions', function() {
+         expect(element('.example-init').text())
+           .toBe('list[ 0 ][ 0 ] = a;' +
+                 'list[ 0 ][ 1 ] = b;' +
+                 'list[ 1 ][ 0 ] = c;' +
+                 'list[ 1 ][ 1 ] = d;');
+       });
+     </doc:scenario>
+>>>>>>> 8916cf86b93341f7fca80a23a50fb66db6474c09
    </doc:example>
  */
 var ngInitDirective = ngDirective({
@@ -18810,12 +19798,22 @@ var ngInitDirective = ngDirective({
         <div>Normal: {{1 + 2}}</div>
         <div ng-non-bindable>Ignored: {{1 + 2}}</div>
       </doc:source>
+<<<<<<< HEAD
       <doc:protractor>
        it('should check ng-non-bindable', function() {
          expect(element(by.binding('1 + 2')).getText()).toContain('3');
          expect(element.all(by.css('.doc-example-live div')).last().getText()).toMatch(/1 \+ 2/);
        });
       </doc:protractor>
+=======
+      <doc:scenario>
+       it('should check ng-non-bindable', function() {
+         expect(using('.doc-example-live').binding('1 + 2')).toBe('3');
+         expect(using('.doc-example-live').element('div:last').text()).
+           toMatch(/1 \+ 2/);
+       });
+      </doc:scenario>
+>>>>>>> 8916cf86b93341f7fca80a23a50fb66db6474c09
     </doc:example>
  */
 var ngNonBindableDirective = ngDirective({ terminal: true, priority: 1000 });
@@ -18943,6 +19941,7 @@ var ngNonBindableDirective = ngDirective({ terminal: true, priority: 1000 });
           </ng-pluralize>
         </div>
       </doc:source>
+<<<<<<< HEAD
       <doc:protractor>
         it('should show correct pluralized string', function() {
           var withoutOffset = element.all(by.css('ng-pluralize')).get(0);
@@ -18990,6 +19989,51 @@ var ngNonBindableDirective = ngDirective({ terminal: true, priority: 1000 });
           expect(withOffset.getText()).toEqual('Di, Vojta and 2 other people are viewing.');
         });
       </doc:protractor>
+=======
+      <doc:scenario>
+        it('should show correct pluralized string', function() {
+          expect(element('.doc-example-live ng-pluralize:first').text()).
+                                             toBe('1 person is viewing.');
+          expect(element('.doc-example-live ng-pluralize:last').text()).
+                                                toBe('Igor is viewing.');
+
+          using('.doc-example-live').input('personCount').enter('0');
+          expect(element('.doc-example-live ng-pluralize:first').text()).
+                                               toBe('Nobody is viewing.');
+          expect(element('.doc-example-live ng-pluralize:last').text()).
+                                              toBe('Nobody is viewing.');
+
+          using('.doc-example-live').input('personCount').enter('2');
+          expect(element('.doc-example-live ng-pluralize:first').text()).
+                                            toBe('2 people are viewing.');
+          expect(element('.doc-example-live ng-pluralize:last').text()).
+                              toBe('Igor and Misko are viewing.');
+
+          using('.doc-example-live').input('personCount').enter('3');
+          expect(element('.doc-example-live ng-pluralize:first').text()).
+                                            toBe('3 people are viewing.');
+          expect(element('.doc-example-live ng-pluralize:last').text()).
+                              toBe('Igor, Misko and one other person are viewing.');
+
+          using('.doc-example-live').input('personCount').enter('4');
+          expect(element('.doc-example-live ng-pluralize:first').text()).
+                                            toBe('4 people are viewing.');
+          expect(element('.doc-example-live ng-pluralize:last').text()).
+                              toBe('Igor, Misko and 2 other people are viewing.');
+        });
+
+        it('should show data-binded names', function() {
+          using('.doc-example-live').input('personCount').enter('4');
+          expect(element('.doc-example-live ng-pluralize:last').text()).
+              toBe('Igor, Misko and 2 other people are viewing.');
+
+          using('.doc-example-live').input('person1').enter('Di');
+          using('.doc-example-live').input('person2').enter('Vojta');
+          expect(element('.doc-example-live ng-pluralize:last').text()).
+              toBe('Di, Vojta and 2 other people are viewing.');
+        });
+      </doc:scenario>
+>>>>>>> 8916cf86b93341f7fca80a23a50fb66db6474c09
     </doc:example>
  */
 var ngPluralizeDirective = ['$locale', '$interpolate', function($locale, $interpolate) {
@@ -19208,6 +20252,7 @@ var ngPluralizeDirective = ['$locale', '$interpolate', function($locale, $interp
         max-height:40px;
       }
     </file>
+<<<<<<< HEAD
     <file name="protractorTest.js">
       var friends = element(by.css('.doc-example-live'))
           .element.all(by.repeater('friend in friends'));
@@ -19229,6 +20274,27 @@ var ngPluralizeDirective = ['$locale', '$interpolate', function($locale, $interp
          expect(friends.count()).toBe(2);
          expect(friends.get(0).getText()).toEqual('[1] Mary who is 28 years old.');
          expect(friends.last().getText()).toEqual('[2] Samantha who is 60 years old.');
+=======
+    <file name="scenario.js">
+       it('should render initial data set', function() {
+         var r = using('.doc-example-live').repeater('ul li');
+         expect(r.count()).toBe(10);
+         expect(r.row(0)).toEqual(["1","John","25"]);
+         expect(r.row(1)).toEqual(["2","Jessie","30"]);
+         expect(r.row(9)).toEqual(["10","Samantha","60"]);
+         expect(binding('friends.length')).toBe("10");
+       });
+
+       it('should update repeater when filter predicate changes', function() {
+         var r = using('.doc-example-live').repeater('ul li');
+         expect(r.count()).toBe(10);
+
+         input('q').enter('ma');
+
+         expect(r.count()).toBe(2);
+         expect(r.row(0)).toEqual(["1","Mary","28"]);
+         expect(r.row(1)).toEqual(["2","Samantha","60"]);
+>>>>>>> 8916cf86b93341f7fca80a23a50fb66db6474c09
        });
       </file>
     </example>
@@ -19482,11 +20548,14 @@ var ngRepeatDirective = ['$parse', '$animate', function($parse, $animate) {
  *
  * Just remember to include the important flag so the CSS override will function.
  *
+<<<<<<< HEAD
  * <div class="alert alert-warning">
  * **Note:** Here is a list of values that ngShow will consider as a falsy value (case insensitive):<br />
  * "f" / "0" / "false" / "no" / "n" / "[]"
  * </div>
  * 
+=======
+>>>>>>> 8916cf86b93341f7fca80a23a50fb66db6474c09
  * ## A note about animations with ngShow
  *
  * Animations in ngShow/ngHide work with the show and hide events that are triggered when the directive expression
@@ -19562,6 +20631,7 @@ var ngRepeatDirective = ['$parse', '$animate', function($parse, $animate) {
         background:white;
       }
     </file>
+<<<<<<< HEAD
     <file name="protractorTest.js">
       var thumbsUp = element(by.css('.doc-example-live span.icon-thumbs-up'));
       var thumbsDown = element(by.css('.doc-example-live span.icon-thumbs-down'));
@@ -19575,6 +20645,18 @@ var ngRepeatDirective = ['$parse', '$animate', function($parse, $animate) {
         expect(thumbsUp.isDisplayed()).toBeTruthy();
         expect(thumbsDown.isDisplayed()).toBeFalsy();
       });
+=======
+    <file name="scenario.js">
+       it('should check ng-show / ng-hide', function() {
+         expect(element('.doc-example-live span:first:hidden').count()).toEqual(1);
+         expect(element('.doc-example-live span:last:visible').count()).toEqual(1);
+
+         input('checked').check();
+
+         expect(element('.doc-example-live span:first:visible').count()).toEqual(1);
+         expect(element('.doc-example-live span:last:hidden').count()).toEqual(1);
+       });
+>>>>>>> 8916cf86b93341f7fca80a23a50fb66db6474c09
     </file>
   </example>
  */
@@ -19638,11 +20720,14 @@ var ngShowDirective = ['$animate', function($animate) {
  * </pre>
  *
  * Just remember to include the important flag so the CSS override will function.
+<<<<<<< HEAD
  * 
  * <div class="alert alert-warning">
  * **Note:** Here is a list of values that ngHide will consider as a falsy value (case insensitive):<br />
  * "f" / "0" / "false" / "no" / "n" / "[]"
  * </div>
+=======
+>>>>>>> 8916cf86b93341f7fca80a23a50fb66db6474c09
  *
  * ## A note about animations with ngHide
  *
@@ -19719,6 +20804,7 @@ var ngShowDirective = ['$animate', function($animate) {
         background:white;
       }
     </file>
+<<<<<<< HEAD
     <file name="protractorTest.js">
       var thumbsUp = element(by.css('.doc-example-live span.icon-thumbs-up'));
       var thumbsDown = element(by.css('.doc-example-live span.icon-thumbs-down'));
@@ -19732,6 +20818,18 @@ var ngShowDirective = ['$animate', function($animate) {
         expect(thumbsUp.isDisplayed()).toBeTruthy();
         expect(thumbsDown.isDisplayed()).toBeFalsy();
       });
+=======
+    <file name="scenario.js">
+       it('should check ng-show / ng-hide', function() {
+         expect(element('.doc-example-live .check-element:first:hidden').count()).toEqual(1);
+         expect(element('.doc-example-live .check-element:last:visible').count()).toEqual(1);
+
+         input('checked').check();
+
+         expect(element('.doc-example-live .check-element:first:visible').count()).toEqual(1);
+         expect(element('.doc-example-live .check-element:last:hidden').count()).toEqual(1);
+       });
+>>>>>>> 8916cf86b93341f7fca80a23a50fb66db6474c09
     </file>
   </example>
  */
@@ -19770,6 +20868,7 @@ var ngHideDirective = ['$animate', function($animate) {
          color: black;
        }
      </file>
+<<<<<<< HEAD
      <file name="protractorTest.js">
        var colorSpan = element(by.css('.doc-example-live span'));
 
@@ -19779,6 +20878,15 @@ var ngHideDirective = ['$animate', function($animate) {
          expect(colorSpan.getCssValue('color')).toBe('rgba(255, 0, 0, 1)');
          element(by.css('.doc-example-live input[value=clear]')).click();
          expect(colorSpan.getCssValue('color')).toBe('rgba(0, 0, 0, 1)');
+=======
+     <file name="scenario.js">
+       it('should check ng-style', function() {
+         expect(element('.doc-example-live span').css('color')).toBe('rgb(0, 0, 0)');
+         element('.doc-example-live :button[value=set]').click();
+         expect(element('.doc-example-live span').css('color')).toBe('rgb(255, 0, 0)');
+         element('.doc-example-live :button[value=clear]').click();
+         expect(element('.doc-example-live span').css('color')).toBe('rgb(0, 0, 0)');
+>>>>>>> 8916cf86b93341f7fca80a23a50fb66db6474c09
        });
      </file>
    </example>
@@ -19803,7 +20911,11 @@ var ngStyleDirective = ngDirective(function(scope, element, attr) {
  * as specified in the template.
  *
  * The directive itself works similar to ngInclude, however, instead of downloading template code (or loading it
+<<<<<<< HEAD
  * from the template cache), `ngSwitch` simply chooses one of the nested elements and makes it visible based on which element
+=======
+ * from the template cache), `ngSwitch` simply choses one of the nested elements and makes it visible based on which element
+>>>>>>> 8916cf86b93341f7fca80a23a50fb66db6474c09
  * matches the value obtained from the evaluated expression. In other words, you define a container element
  * (where you place the directive), place an expression on the **`on="..."` attribute**
  * (or the **`ng-switch="..."` attribute**), define any inner elements inside of the directive and place
@@ -19899,6 +21011,7 @@ var ngStyleDirective = ngDirective(function(scope, element, attr) {
         top:0;
       }
     </file>
+<<<<<<< HEAD
     <file name="protractorTest.js">
       var switchElem = element(by.css('.doc-example-live [ng-switch]'));
       var select = element(by.model('selection'));
@@ -19913,6 +21026,19 @@ var ngStyleDirective = ngDirective(function(scope, element, attr) {
       it('should select default', function() {
         select.element.all(by.css('option')).get(2).click();
         expect(switchElem.getText()).toMatch(/default/);
+=======
+    <file name="scenario.js">
+      it('should start in settings', function() {
+        expect(element('.doc-example-live [ng-switch]').text()).toMatch(/Settings Div/);
+      });
+      it('should change to home', function() {
+        select('selection').option('home');
+        expect(element('.doc-example-live [ng-switch]').text()).toMatch(/Home Span/);
+      });
+      it('should select default', function() {
+        select('selection').option('other');
+        expect(element('.doc-example-live [ng-switch]').text()).toMatch(/default/);
+>>>>>>> 8916cf86b93341f7fca80a23a50fb66db6474c09
       });
     </file>
   </example>
@@ -20019,6 +21145,7 @@ var ngSwitchDefaultDirective = ngDirective({
          <pane title="{{title}}">{{text}}</pane>
        </div>
      </doc:source>
+<<<<<<< HEAD
      <doc:protractor>
         it('should have transcluded', function() {
           var titleElement = element(by.model('title'));
@@ -20031,6 +21158,16 @@ var ngSwitchDefaultDirective = ngDirective({
           expect(element(by.binding('text')).getText()).toEqual('TEXT');
         });
      </doc:protractor>
+=======
+     <doc:scenario>
+        it('should have transcluded', function() {
+          input('title').enter('TITLE');
+          input('text').enter('TEXT');
+          expect(binding('title')).toEqual('TITLE');
+          expect(binding('text')).toEqual('TEXT');
+        });
+     </doc:scenario>
+>>>>>>> 8916cf86b93341f7fca80a23a50fb66db6474c09
    </doc:example>
  *
  */
@@ -20083,12 +21220,21 @@ var ngTranscludeDirective = ngDirective({
       <a ng-click="currentTpl='/tpl.html'" id="tpl-link">Load inlined template</a>
       <div id="tpl-content" ng-include src="currentTpl"></div>
     </doc:source>
+<<<<<<< HEAD
     <doc:protractor>
       it('should load template defined inside script tag', function() {
         element(by.css('#tpl-link')).click();
         expect(element(by.css('#tpl-content')).getText()).toMatch(/Content of the template/);
       });
     </doc:protractor>
+=======
+    <doc:scenario>
+      it('should load template defined inside script tag', function() {
+        element('#tpl-link').click();
+        expect(element('#tpl-content').text()).toMatch(/Content of the template/);
+      });
+    </doc:scenario>
+>>>>>>> 8916cf86b93341f7fca80a23a50fb66db6474c09
   </doc:example>
  */
 var scriptDirective = ['$templateCache', function($templateCache) {
@@ -20126,21 +21272,31 @@ var ngOptionsMinErr = minErr('ngOptions');
  * represented by the selected option will be bound to the model identified by the `ngModel`
  * directive.
  *
+<<<<<<< HEAD
  * <div class="alert alert-warning">
  * **Note:** `ngModel` compares by reference, not value. This is important when binding to an
  * array of objects. See an example {@link http://jsfiddle.net/qWzTb/ in this jsfiddle}.
  * </div>
  *
+=======
+>>>>>>> 8916cf86b93341f7fca80a23a50fb66db6474c09
  * Optionally, a single hard-coded `<option>` element, with the value set to an empty string, can
  * be nested into the `<select>` element. This element will then represent the `null` or "not selected"
  * option. See example below for demonstration.
  *
+<<<<<<< HEAD
  * <div class="alert alert-warning">
  * **Note:** `ngOptions` provides an iterator facility for the `<option>` element which should be used instead
  * of {@link ng.directive:ngRepeat ngRepeat} when you want the
  * `select` model to be bound to a non-string value. This is because an option element can only
  * be bound to string values at present.
  * </div>
+=======
+ * Note: `ngOptions` provides iterator facility for `<option>` element which should be used instead
+ * of {@link ng.directive:ngRepeat ngRepeat} when you want the
+ * `select` model to be bound to a non-string value. This is because an option element can only
+ * be bound to string values at present.
+>>>>>>> 8916cf86b93341f7fca80a23a50fb66db6474c09
  *
  * @param {string} ngModel Assignable angular expression to data-bind to.
  * @param {string=} name Property name of the form under which the control is published.
@@ -20227,6 +21383,7 @@ var ngOptionsMinErr = minErr('ngOptions');
           </div>
         </div>
       </doc:source>
+<<<<<<< HEAD
       <doc:protractor>
          it('should check ng-options', function() {
            expect(element(by.binding('{selected_color:color}')).getText()).toMatch('red');
@@ -20238,6 +21395,17 @@ var ngOptionsMinErr = minErr('ngOptions');
            expect(element(by.binding('{selected_color:color}')).getText()).toMatch('null');
          });
       </doc:protractor>
+=======
+      <doc:scenario>
+         it('should check ng-options', function() {
+           expect(binding('{selected_color:color}')).toMatch('red');
+           select('color').option('0');
+           expect(binding('{selected_color:color}')).toMatch('black');
+           using('.nullable').select('color').option('');
+           expect(binding('{selected_color:color}')).toMatch('null');
+         });
+      </doc:scenario>
+>>>>>>> 8916cf86b93341f7fca80a23a50fb66db6474c09
     </doc:example>
  */
 
@@ -20546,7 +21714,11 @@ var selectDirective = ['$compile', '$parse', function($compile,   $parse) {
 
           // We now build up the list of options we need (we merge later)
           for (index = 0; length = keys.length, index < length; index++) {
+<<<<<<< HEAD
 
+=======
+            
+>>>>>>> 8916cf86b93341f7fca80a23a50fb66db6474c09
             key = index;
             if (keyName) {
               key = keys[index];

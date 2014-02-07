@@ -5,8 +5,13 @@ module.exports = function() {
   var Task = this.models.Task;
 
   function error(err, res) {
+<<<<<<< HEAD:src/routes/sync.js
     console.log(err);
     res.send(500, 'Error: [' + err.toString() + ']');
+=======
+    console.log(err.stack);
+    res.send(500, 'Error on sync [' + err.toString() + ']');
+>>>>>>> 8916cf86b93341f7fca80a23a50fb66db6474c09:src/routes/sync.js
   }
 
   app.get('/tasks', checkForUserJSON, function(req, res) {

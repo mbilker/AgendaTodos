@@ -1,5 +1,9 @@
 /**
+<<<<<<< HEAD
  * @license AngularJS v1.2.11
+=======
+ * @license AngularJS v1.2.8
+>>>>>>> 8916cf86b93341f7fca80a23a50fb66db6474c09
  * (c) 2010-2014 Google, Inc. http://angularjs.org
  * License: MIT
  */
@@ -190,7 +194,11 @@ function $RouteProvider(){
 
     path = path
       .replace(/([().])/g, '\\$1')
+<<<<<<< HEAD
       .replace(/(\/)?:(\w+)([\?\*])?/g, function(_, slash, key, option){
+=======
+      .replace(/(\/)?:(\w+)([\?|\*])?/g, function(_, slash, key, option){
+>>>>>>> 8916cf86b93341f7fca80a23a50fb66db6474c09
         var optional = option === '?' ? option : null;
         var star = option === '*' ? option : null;
         keys.push({ name: key, optional: !!optional });
@@ -350,17 +358,30 @@ function $RouteProvider(){
          }
        </file>
 
+<<<<<<< HEAD
        <file name="protractorTest.js">
          it('should load and compile correct template', function() {
            element(by.linkText('Moby: Ch1')).click();
            var content = element(by.css('.doc-example-live [ng-view]')).getText();
+=======
+       <file name="scenario.js">
+         it('should load and compile correct template', function() {
+           element('a:contains("Moby: Ch1")').click();
+           var content = element('.doc-example-live [ng-view]').text();
+>>>>>>> 8916cf86b93341f7fca80a23a50fb66db6474c09
            expect(content).toMatch(/controller\: ChapterCntl/);
            expect(content).toMatch(/Book Id\: Moby/);
            expect(content).toMatch(/Chapter Id\: 1/);
 
+<<<<<<< HEAD
            element(by.partialLinkText('Scarlet')).click();
 
            content = element(by.css('.doc-example-live [ng-view]')).getText();
+=======
+           element('a:contains("Scarlet")').click();
+           sleep(2); // promises are not part of scenario waiting
+           content = element('.doc-example-live [ng-view]').text();
+>>>>>>> 8916cf86b93341f7fca80a23a50fb66db6474c09
            expect(content).toMatch(/controller\: BookCntl/);
            expect(content).toMatch(/Book Id\: Scarlet/);
          });
@@ -375,7 +396,11 @@ function $RouteProvider(){
      * @eventType broadcast on root scope
      * @description
      * Broadcasted before a route change. At this  point the route services starts
+<<<<<<< HEAD
      * resolving all of the dependencies needed for the route change to occur.
+=======
+     * resolving all of the dependencies needed for the route change to occurs.
+>>>>>>> 8916cf86b93341f7fca80a23a50fb66db6474c09
      * Typically this involves fetching the view template as well as any dependencies
      * defined in `resolve` route property. Once  all of the dependencies are resolved
      * `$routeChangeSuccess` is fired.
@@ -669,6 +694,7 @@ ngRouteModule.directive('ngView', ngViewFillContentFactory);
  *
  * @scope
  * @priority 400
+<<<<<<< HEAD
  * @param {string=} onload Expression to evaluate whenever the view updates.
  *
  * @param {string=} autoscroll Whether `ngView` should call {@link ng.$anchorScroll
@@ -678,6 +704,8 @@ ngRouteModule.directive('ngView', ngViewFillContentFactory);
  *                  - If the attribute is set without value, enable scrolling.
  *                  - Otherwise enable scrolling only if the `autoscroll` attribute value evaluated
  *                    as an expression yields a truthy value.
+=======
+>>>>>>> 8916cf86b93341f7fca80a23a50fb66db6474c09
  * @example
     <example module="ngViewExample" deps="angular-route.js" animations="true">
       <file name="index.html">
@@ -794,17 +822,29 @@ ngRouteModule.directive('ngView', ngViewFillContentFactory);
         }
       </file>
 
+<<<<<<< HEAD
       <file name="protractorTest.js">
         it('should load and compile correct template', function() {
           element(by.linkText('Moby: Ch1')).click();
           var content = element(by.css('.doc-example-live [ng-view]')).getText();
+=======
+      <file name="scenario.js">
+        it('should load and compile correct template', function() {
+          element('a:contains("Moby: Ch1")').click();
+          var content = element('.doc-example-live [ng-view]').text();
+>>>>>>> 8916cf86b93341f7fca80a23a50fb66db6474c09
           expect(content).toMatch(/controller\: ChapterCntl/);
           expect(content).toMatch(/Book Id\: Moby/);
           expect(content).toMatch(/Chapter Id\: 1/);
 
+<<<<<<< HEAD
           element(by.partialLinkText('Scarlet')).click();
 
           content = element(by.css('.doc-example-live [ng-view]')).getText();
+=======
+          element('a:contains("Scarlet")').click();
+          content = element('.doc-example-live [ng-view]').text();
+>>>>>>> 8916cf86b93341f7fca80a23a50fb66db6474c09
           expect(content).toMatch(/controller\: BookCntl/);
           expect(content).toMatch(/Book Id\: Scarlet/);
         });

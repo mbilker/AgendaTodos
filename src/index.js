@@ -53,7 +53,11 @@ function App() {
 }
 
 App.prototype.init = function init() {
+<<<<<<< HEAD:src/index.js
   mongoose.connect(Config.mongodb);
+=======
+  //mongoose.connect(Config.mongodb);
+>>>>>>> 8916cf86b93341f7fca80a23a50fb66db6474c09:src/index.js
 
   require('./routes/list').call(this);
   require('./routes/sessions').call(this);
