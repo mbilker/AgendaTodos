@@ -27,7 +27,7 @@ gulp.task('dev', ['default'], function() {
   gulp.watch('assets/**/*.js', ['scripts']);
   gulp.watch('assets/css/*.styl', ['stylus']);
 
-  nodemon({ script: 'bin/app.js', options: '--watch app' });
+  nodemon({ script: 'bin/app.js', options: '--watch src' });
 });
 
 gulp.task('default', ['scripts', 'stylus']);

@@ -24,7 +24,7 @@
   </script>
 </head>
 <body ng-controller="AgendaTodosCtl">
-  <div class="container">
+  <div class="container app">
     <header>
       <h1>Agenda Book</h1>
       <% settings.info.forEach(function(info) { %>
@@ -33,13 +33,17 @@
       <% settings.error.forEach(function(error) { %>
         <span class="label label-danger"><%- error %></span>
       <% }) %>
-      <% if (currentUser) { %>
+      <% if (typeof currentUser !== 'undefined') { %>
         <a href="/logout">Log Out</a>
       <% } %>
     </header>
+    <% if (typeof loadPage !== 'undefined') { %>
+    <<%= loadPage %> />
+    <% } else { %>
     <div ng-view></div>
+    <% } %>
   </div>
-  <footer>
+  <footer class="app-footer">
     Created by TSA Team 2146-100
   </footer>
 </body>

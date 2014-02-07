@@ -7,6 +7,7 @@ function authenticateFromLoginToken(req, res, next) {
 
   LoginToken.findOne({ username: cookie.username, series: cookie.series, token: cookie.token }, function(err, token) {
     if (!token) {
+      console.log(err, user);
       res.redirect('/login');
       return;
     }
@@ -29,7 +30,6 @@ function authenticateFromLoginToken(req, res, next) {
 }
 
 module.exports = function loadUser(req, res, next) {
-  return next();
   if (req.session.user_id) {
     User.findById(req.session.user_id, function(err, user) {
       if (user) {

@@ -6,7 +6,7 @@ module.exports = function() {
 
   app.get('/login', function(req, res) {
     res.render('layout', {
-      login: true
+      loadPage: 'login'
     });
   });
 

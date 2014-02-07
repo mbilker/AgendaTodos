@@ -53,7 +53,9 @@ function App() {
 }
 
 App.prototype.init = function init() {
-  mongoose.connect(Config.mongodb);
+  mongoose.connect(Config.mongodb, function() {
+    console.log('Connected to db');
+  });
 
   require('./routes/list').call(this);
   require('./routes/sessions').call(this);

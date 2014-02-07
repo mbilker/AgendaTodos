@@ -7,13 +7,12 @@ html, body
 body
   -webkit-font-smoothing antialiased
 
-#expand
+.expand
   padding-top 15px
-  display none
   overflow hidden
   vendor('transition', all 0.5s)
 
-#app
+.app
   width 520px
   padding 20px
   background-color #DADFE1
@@ -23,34 +22,26 @@ body
     text-align center
 
   footer
-    display none
     margin 0 -20px -20px -20px
-    overflow hidden
-    background-color #5bb75b
     padding 0 20px
+    background-color #5bb75b
     line-height 37px
+    overflow hidden
 
-#main
-  display none
-
-#assignment-list
-  margin 0
-  padding 0
-  list-style none
+.task-list
+  padding-bottom 10px
   border-top 1px solid #95a5a6
 
-  li
+  .task-item
     padding 10px 20px 10px 0
     position relative
     border-bottom 1px solid #95a5a6
 
-  li label
-    font-size 24px
+  .task-item .checkbox
+    margin-top 0px
+    margin-bottom 0px
 
-  li:last-child
-    border-bottom none
-
-  li.done .view label
+  .task-item.done .view label
     color #777777
     text-decoration line-through
 
@@ -118,7 +109,7 @@ body
   li .edit
     display none
 
-#clear-completed
+.clear-completed
   float right
   line-height 20px
   text-decoration none
@@ -132,21 +123,15 @@ body
   vendor('border-radius', 12px)
   vendor('box-shadow', rgba(0, 0, 0, 0.2) 0 -1px 0 0)
 
-#clear-completed:hover
+.clear-completed:hover
   background rgba(0, 0, 0, 0.15)
   vendor('box-shadow', rgba(0, 0, 0, 0.3) 0 -1px 0 0)
 
-#clear-completed:active
+.clear-completed:active
   position relative
   top 1px
 
-#todo-count span
-  font-weight bold
-
-#footer
+.app-footer
   margin 10px auto
   color #95a5a6
   text-align center
-
-  a 
-    color #bdc3c7

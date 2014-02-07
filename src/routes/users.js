@@ -3,7 +3,9 @@ module.exports = function() {
   var User = this.models.User;
 
   app.get('/register', function(req, res) {
-    res.render('layout');
+    res.render('layout', {
+      loadPage: 'register'
+    });
   });
 
   app.post('/register', function(req, res) {
@@ -12,11 +14,7 @@ module.exports = function() {
 
     function userSaveFailed(err) {
       req.flash('error', 'Account creation failed');
-      console.log(err);
-      res.render('users/new.jade', {
-        user: user,
-        register: true
-      });
+      res.redirect('/register');
     }
 
     user.save(function(err) {
