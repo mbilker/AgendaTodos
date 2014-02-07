@@ -5,17 +5,15 @@ module.exports = function() {
       Task = this.models.Task;
 
   function error(err, res) {
-    console.log(err);
-    res.writeHead(500);
-    res.end();
+    console.log(err.stack);
+    res.send(500, 'Error on sync [' + err.toString() + ']');
   }
 
   app.get('/assignments/sync', checkForUserJSON, function(req, res) {
     Task.find({ userID: req.currentUser.id }, function(err, tasks) {
       if (err) return error(err, res);
 
-      res.writeHead(200, { 'Content-Type': 'application/json' });
-      res.end(JSON.stringify(tasks));
+      res.json(200, tasks);
     });
   });
 
@@ -31,8 +29,7 @@ module.exports = function() {
     task.save(function(err) {
       if (err) return error(err, res);
 
-      res.writeHead(200, { 'Content-Type': 'application/json' });
-      res.end(JSON.stringify(task));
+      res.json(200, task);
     });
   });
 
@@ -47,8 +44,7 @@ module.exports = function() {
       task.save(function(err) {
         if (err) return error(err, res);
 
-        res.writeHead(200, { 'Content-Type': 'application/json' });
-        res.end(JSON.stringify(task));
+        res.json(200, task);
       });
     });
   });

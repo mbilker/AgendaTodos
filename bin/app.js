@@ -1,3 +1,4 @@
 #!/usr/bin/env node
 
-var App = require('../app');
+var app = require('../src');
+app.init();

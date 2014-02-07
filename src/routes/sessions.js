@@ -1,8 +1,8 @@
 module.exports = function() {
-  var app = this.app,
-      loadUser = this.utils.loadUser,
-      User = this.models.User,
-      LoginToken = this.models.LoginToken;
+  var app = this.app;
+  var loadUser = this.utils.loadUser;
+  var User = this.models.User;
+  var LoginToken = this.models.LoginToken;
 
   app.get('/sessions/new', function(req, res) {
     res.render('sessions/new.jade', {
@@ -11,6 +11,7 @@ module.exports = function() {
   });
 
   app.post('/sessions', function(req, res) {
+    return res.redirect('/');
     User.findOne({ username: req.body.user.username }, function(err, user) {
       if (user && user.authenticate(req.body.user.password)) {
         req.session.user_id = user.id;

@@ -11,8 +11,6 @@ var models = require('./models');
 var utils = require('./utils');
 var Config = require('./config');
 
-var User, LoginToken, Assignment, Section;
-
 var base = path.join(__dirname, '..');
 var PORT = process.env.PORT || 5000;
 
@@ -51,8 +49,10 @@ function App() {
     app.use(app.router);
     app.use(express.static(path.join(base, 'public')));
   });
+}
 
-  mongoose.connect(Config.mongodb);
+App.prototype.init = function init() {
+  //mongoose.connect(Config.mongodb);
 
   this.server = server = http.createServer(app);
   server.listen(PORT);
