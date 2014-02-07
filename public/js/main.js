@@ -40,7 +40,12 @@ AgendaTodosApp.directive('dateinput', ['dateFilter', function(dateFilter) {
       });
 
       ngModelCtrl.$parsers.unshift(function(viewValue) {
-        return new Date(viewValue);
+        var date = new Date(viewValue);
+        date.setDate(date.getDate() + 1);
+        date.setHours(0);
+        date.setMinutes(0);
+        date.setSeconds(0);
+        return date;
       });
     }
   }
@@ -52,7 +57,11 @@ AgendaTodosApp.controller('AgendaTodosListCtl', ['$scope', '$modal', 'Assignment
   function setFormToDefault() {
     $scope.assignmentTitle = "";
     $scope.priority = 0;
-    $scope.dueDate = new Date();
+    var d = new Date();
+    d.setHours(0);
+    d.setMinutes(0);
+    d.setSeconds(0);
+    $scope.dueDate = d;
   }
   setFormToDefault();
 
@@ -60,6 +69,10 @@ AgendaTodosApp.controller('AgendaTodosListCtl', ['$scope', '$modal', 'Assignment
     if (!$scope.assignmentTitle.length) {
       return;
     }
+
+    console.log($scope.assignmentTitle);
+    console.log($scope.priority);
+    console.log($scope.dueDate);
 
     var assignment = new Assignment();
     assignment.title = $scope.assignmentTitle;
@@ -92,8 +105,21 @@ AgendaTodosApp.controller('AgendaTodosListCtl', ['$scope', '$modal', 'Assignment
     return count;
   }
 
-  $scope.comparator = function(a) {
-    return -(a.priority + 1) + new Date(a.dueDate).getTime();
+  $scope.comparator = function(a, b) {
+    console.log(a, b);
+    if (!a || !b) {
+      return 0;
+    }
+
+    var aVal = -(a.priority + 1) + new Date(a.dueDate).getTime();
+    var bVal = -(b.priority + 1) + new Date(b.dueDate).getTime();
+    if (aVal > bVal) {
+      return 1;
+    } else if (aVal < bVal) {
+      return -1;
+    } else {
+      return 0;
+    }
   }
 
   $scope.updateEntry = function(entry) {
@@ -140,10 +166,11 @@ AgendaTodosApp.controller('AgendaTodosListCtl', ['$scope', '$modal', 'Assignment
     });
   }
 
-  $scope.$watch('toggleAll', function(oldValue, newValue) {
+  $scope.$watch('toggleAll', function(newValue, oldValue) {
+    console.log(newValue, oldValue);
     angular.forEach($scope.assignments, function(a) {
       a.completed = !!newValue;
-      Assignment.update({ id: assignment._id }, a);
+      Assignment.update({ id: a._id }, a);
     });
   });
 }]);

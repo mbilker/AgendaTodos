@@ -9,7 +9,7 @@ body{-webkit-font-smoothing:antialiased}
 .task-list .task-item .checkbox{margin-top:0;margin-bottom:0}
 .task-list .task-item.done .view label{color:#777;text-decoration:line-through}
 .task-list .destroy{position:absolute;right:5px;top:20px;display:none;cursor:pointer;width:20px;height:20px;background:url("/img/destroy.png") no-repeat}
-.task-list li:hover .destroy{display:block}
+.task-list .task-item:hover .destroy{display:block}
 .task-list .destroy:hover{background-position:0 -20px}
 .task-list .details,.task-list .edit-text{font-size:12px}
 .task-list .priority0{background-color:#bdc3c7}
@@ -23,8 +23,6 @@ body{-webkit-font-smoothing:antialiased}
 .task-list .priority8{background-color:#6b767e}
 .task-list .priority9{background-color:#626c73}
 .task-list .priority{position:absolute;right:30px;top:20px;cursor:pointer;width:20px;height:20px;-webkit-border-radius:50%;-moz-border-radius:50%;-ms-border-radius:50%;-o-border-radius:50%;border-radius:50%}
-.task-list li .view label{word-break:break-word}
-.task-list li .edit{display:none}
 .clear-completed{float:right;line-height:20px;text-decoration:none;background:rgba(0,0,0,0.1);color:#555;font-size:11px;margin-top:8px;margin-bottom:8px;padding:0 10px 1px;cursor:pointer;-webkit-border-radius:12px;-moz-border-radius:12px;-ms-border-radius:12px;-o-border-radius:12px;-webkit-border-radius:12px;-moz-border-radius:12px;-ms-border-radius:12px;-o-border-radius:12px;border-radius:12px;-webkit-box-shadow:rgba(0,0,0,0.2) 0 -1px 0 0;-moz-box-shadow:rgba(0,0,0,0.2) 0 -1px 0 0;-ms-box-shadow:rgba(0,0,0,0.2) 0 -1px 0 0;-o-box-shadow:rgba(0,0,0,0.2) 0 -1px 0 0;-webkit-box-shadow:rgba(0,0,0,0.2) 0 -1px 0 0;-moz-box-shadow:rgba(0,0,0,0.2) 0 -1px 0 0;-ms-box-shadow:rgba(0,0,0,0.2) 0 -1px 0 0;-o-box-shadow:rgba(0,0,0,0.2) 0 -1px 0 0;box-shadow:rgba(0,0,0,0.2) 0 -1px 0 0}
 .clear-completed:hover{background:rgba(0,0,0,0.15);-webkit-box-shadow:rgba(0,0,0,0.3) 0 -1px 0 0;-moz-box-shadow:rgba(0,0,0,0.3) 0 -1px 0 0;-ms-box-shadow:rgba(0,0,0,0.3) 0 -1px 0 0;-o-box-shadow:rgba(0,0,0,0.3) 0 -1px 0 0;-webkit-box-shadow:rgba(0,0,0,0.3) 0 -1px 0 0;-moz-box-shadow:rgba(0,0,0,0.3) 0 -1px 0 0;-ms-box-shadow:rgba(0,0,0,0.3) 0 -1px 0 0;-o-box-shadow:rgba(0,0,0,0.3) 0 -1px 0 0;box-shadow:rgba(0,0,0,0.3) 0 -1px 0 0}
 .clear-completed:active{position:relative;top:1px}
