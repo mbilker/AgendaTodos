@@ -1,9 +1,5 @@
 /**
-<<<<<<< HEAD
  * @license AngularJS v1.2.11
-=======
- * @license AngularJS v1.2.8
->>>>>>> 8916cf86b93341f7fca80a23a50fb66db6474c09
  * (c) 2010-2014 Google, Inc. http://angularjs.org
  * License: MIT
  */
@@ -396,13 +392,9 @@ angular.module('ngResource', ['ng']).
           val = params.hasOwnProperty(urlParam) ? params[urlParam] : self.defaults[urlParam];
           if (angular.isDefined(val) && val !== null) {
             encodedVal = encodeUriSegment(val);
-<<<<<<< HEAD
             url = url.replace(new RegExp(":" + urlParam + "(\\W|$)", "g"), function(match, p1) {
               return encodedVal + p1;
             });
-=======
-            url = url.replace(new RegExp(":" + urlParam + "(\\W|$)", "g"), encodedVal + "$1");
->>>>>>> 8916cf86b93341f7fca80a23a50fb66db6474c09
           } else {
             url = url.replace(new RegExp("(\/?):" + urlParam + "(\\W|$)", "g"), function(match,
                 leadingSlashes, tail) {

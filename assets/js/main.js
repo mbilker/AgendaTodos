@@ -1,116 +1,151 @@
-var TodosApp = angular.module('TodosApp', ['ngRoute', 'ngResource']);
+var AgendaTodosApp = angular.module('AgendaTodosApp', ['ngRoute', 'ngResource', 'ui.bootstrap']);
 
-<<<<<<< HEAD
-function formatDateInput(d) {
-  var m = (d.getMonth() < 9 ? "0" : "") + (d.getMonth() + 1);
-  var d = (d.getDate() < 10 ? "0" : "") + d.getDate();
-
-  return d.getFullYear() + "-" + m + "-" + d;
-}
-
-$(function() {
-  var Assignment = Backbone.Model.extend({
-    urlRoot: "/assignments/sync",
-    idAttribute: "_id",
-    defaults: {
-      title: "empty assignment...",
-      dueDate: new Date(),
-      priority: 0,
-      completed: false
-    },
-    initialize: function() {
-      if (!this.get("title")) {
-        this.set({
-          title: this.defaults().title
-        });
-      }
-    },
-    toggle: function() {
-      this.save({
-        completed: !this.get("completed")
-      });
-    }
-  });
-
-  var AssignmentList = Backbone.Collection.extend({
-    model: Assignment,
-    url: "/assignments/sync",
-    done: function() {
-      return this.filter(function(assignment) {
-        return assignment.get("completed");
-      });
-    },
-    remaining: function() {
-      return this.without.apply(this, this.done());
-    },
-    comparator: function(assignment) {
-      return -(assignment.get("priority") + 1) + new Date(assignment.get("dueDate")).getTime();
-    }
-  });
-
-  var Assignments = window.Assignments = new AssignmentList();
-  var AssignmentView = Backbone.View.extend({
-    tagName: "li",
-    template: _.template(readScript("/templates/item-template.js")),
-    events: {
-      "click .toggle": "toggleDone",
-      "click .edit-text": "edit",
-      "click a.destroy": "clear",
-      "click .save-changes": "dueDateEdited"
-    },
-    initialize: function() {
-      _.bindAll(this, 'render', 'saveModel', 'toggleDone', 'edit', 'dueDateEdited', 'clear');
-
-      this.listenTo(this.model, "change", this.render);
-      this.listenTo(this.model, "destroy", this.remove);
-    },
-    render: function() {
-      this.$el.html(this.template(this.model.toJSON()));
-      this.$el.toggleClass("done", this.model.get("completed"));
-
-      this.titleEdit = this.$(".title-edit");
-      this.dueDateEdit = this.$(".dueDate-edit");
-      this.priorityEdit = this.$(".priority-edit");
-      this.modal = this.$(".modal");
-      this.modal.on('hidden', this.saveModel);
-
-      return this;
-    },
-    saveModel: function () {
-      var date = this.dueDateEdit.val().split("-");
-      date = new Date(date[0], date[1] - 1, date[2]);
-      var priority = parseInt(this.priorityEdit.val()) || 0;
-
-      this.model.save({
-        title: this.titleEdit.val(),
-        dueDate: date,
-        priority: priority
-      });
-    },
-    toggleDone: function() {
-      this.model.toggle();
-    },
-    edit: function(e) {
-      e.preventDefault();
-      this.modal.modal();
-      return false;
-    },
-    dueDateEdited: function() {
-      this.modal.modal('hide');
-    },
-    clear: function() {
-      this.model.destroy();
-    }
-=======
 TodosApp.config(['$routeProvider', function($routeProvider) {
   $routeProvider.when('/', {
-    templateUrl: 'partials/login.html'
-  }).when('/list', {
     templateUrl: 'partials/list.html',
-    controller: 'TodosListController'
->>>>>>> 8916cf86b93341f7fca80a23a50fb66db6474c09
+    controller: 'TodosListCtl'
+  }).when('/login', {
+    templateUrl: 'partials/login.html'
+  }).when('/register', {
+    templateUrl: 'partials/register.html'
   });
-});
+}]);
 
-TodosApp.controller('MTGInvManagerCtl', ['$scope', '$modal', function($scope, $modal) {
+// title: "empty assignment...",
+// dueDate: new Date(),
+// priority: 0,
+// completed: false
+AgendaTodosApp.factory('Assignment', ['$resource', function($resource) {
+  return $resource('/tasks/:id', null, {
+    'update': { method: 'PUT' }
+  });
+}]);
+
+AgendaTodosApp.directive('dateInput', ['dateFilter', function(dateFilter) {
+  return {
+    require: 'ngModel',
+    template: '<input type="date"></input>',
+    replace: true,
+    link: function(scope, elm, attrs, ngModelCtrl) {
+      ngModelCtrl.$formatters.unshift(function (modelValue) {
+        return dateFilter(modelValue, 'yyyy-MM-dd');
+      });
+
+      ngModelCtrl.$parsers.unshift(function(viewValue) {
+        return new Date(viewValue);
+      });
+    }
+  }
+}]);
+
+AgendaTodosApp.controller('AgendaTodosListCtl', ['$scope', '$modal', 'Assignment', function($scope, $modal, Assignment) {
+  $scope.assignments = Assignment.query();
+  $scope.expand = false;
+
+  function setFormToDefault() {
+    $scope.assignmentTitle = "";
+    $scope.priority = 0;
+    $scope.dueDate = new Date();
+  }
+  setFormToDefault();
+
+  $scope.addNew = function() {
+    if (!$scope.assignmentTitle.length) {
+      return;
+    }
+
+    var assignment = new Assignment();
+    assignment.title = $scope.assignmentTitle;
+    assignment.priority = $scope.priority;
+    assignment.dueDate = $scope.dueDate;
+    assignment.completed = false;
+    assignment.$save(function(a) {
+      $scope.assignments.push(a);
+    });
+
+    setFormToDefault();
+  }
+
+  $scope.remaining = function() {
+    var count = 0;
+    angular.forEach($scope.assignments, function(assignment) {
+      count += assignment.completed ? 0 : 1;
+    });
+    return count;
+  }
+
+  $scope.comparator = function(a) {
+    return -(a.priority + 1) + a.dueDate.getTime();
+  }
+
+  $scope.updateEntry = function(entry) {
+    Assignment.update({ id: entry.id }, entry);
+  }
+
+  $scope.editText = function(entry) {
+    var modalInstance = $modal.open({
+      templateUrl: 'edit-assignment.html',
+      controller: 'AgendaTodosEditCtl',
+      resolve: {
+        entry: function() {
+          return entry;
+        }
+      }
+    });
+
+    modalInstance.result.then(function(entry) {
+      Assignment.update({ id: entry.id }, entry);
+      console.log(' [*] Modal edited entry', entry);
+    }, function() {
+      console.log(' [*] Modal cancelled');
+    });
+  }
+
+  $scope.destroy = function(entry) {
+    $scope.assignments.splice($scope.assignments.indexOf(entry), 1);
+    Assignment.delete({ id: entry.id });
+  }
+
+  $scope.clearCompleted = function() {
+    var oldAssignments = $scope.assignments;
+    $scope.assignments = [];
+    angular.forEach(oldAssignments, function(assignment) {
+      if (assignment.completed) {
+        Assignment.delete({ id: assignment.id });
+      } else {
+        $scope.assignments.push(assignment);
+      }
+    });
+  }
+
+  $scope.$watch('assignmentTitle', function(old, new) {
+    if (!old.length && new.length) {
+      $scope.expand = true;
+    } else if (old.length && !new.length) {
+      $scope.expand = false;
+    }
+  });
+
+  $scope.$watch('toggleAll', function(old, new) {
+    angular.forEach($scope.assignments, function(a) {
+      a.completed = !!new;
+      Assignment.update({ id: assignment.id }, a);
+    });
+  });
+}]);
+
+AgendaTodosApp.controller('AgendaTodosEditCtl', ['$scope', '$modalInstance', 'entry', function($scope, $modalInstance, entry) {
+  $scope.entry = entry;
+
+  $scope.ok = function() {
+    $modalInstance.close($scope.entry);
+  }
+
+  $scope.cancel = function() {
+    $modalInstance.dismiss('cancel');
+  }
+}]);
+
+AgendaTodosApp.controller('AgendaTodosCtl', ['$scope', function($scope) {
+  console.log(' [*] Initialized AgendaTodosCtl');
 }]);

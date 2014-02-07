@@ -10,12 +10,7 @@ module.exports = function() {
     });
   });
 
-<<<<<<< HEAD:src/routes/sessions.js
   app.post('/login', function(req, res) {
-=======
-  app.post('/sessions', function(req, res) {
-    return res.redirect('/');
->>>>>>> 8916cf86b93341f7fca80a23a50fb66db6474c09:src/routes/sessions.js
     User.findOne({ username: req.body.user.username }, function(err, user) {
       if (user && user.authenticate(req.body.user.password)) {
         req.session.user_id = user.id;
