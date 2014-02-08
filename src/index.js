@@ -44,7 +44,6 @@ function App() {
 
   app.configure('production', function() {
     var a = url.parse(process.env.REDISCLOUD_URL);
-    console.log(a);
     store.store = new RedisStore({ port: a.port, host: a.hostname, pass: a.auth.split(":")[1] });
     console.log(store);
   });
