@@ -1,6 +1,6 @@
 html,body{margin:0;padding:0}
 body{-webkit-font-smoothing:antialiased}
-.expand{padding-top:15px;overflow:hidden;-webkit-transition:all .5s;-moz-transition:all .5s;-ms-transition:all .5s;-o-transition:all .5s;-webkit-transition:all .5s;-moz-transition:all .5s;-ms-transition:all .5s;-o-transition:all .5s;transition:all .5s}
+.expand{padding-top:15px;overflow:hidden}
 .app{width:520px;padding:20px;background-color:#dadfe1;}
 .app h1{font-weight:bold;text-align:center}
 .app footer{margin:0 -20px -20px -20px;padding:0 20px;background-color:#5bb75b;line-height:37px;overflow:hidden}

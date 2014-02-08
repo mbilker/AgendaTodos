@@ -45,7 +45,6 @@ function authenticateFromLoginToken(req, res, next) {
 }
 
 module.exports = function loadUser(req, res, next) {
-  return next();
   if (req.session.user_id) {
     User.findById(req.session.user_id, function(err, user) {
       if (user) {
