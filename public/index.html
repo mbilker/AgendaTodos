@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html ng-app="AgendaTodosApp" ng-csp="">
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Agenda Book</title>
+
+  <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/css/style.css">
+
+  <script src="/js/vendor/jquery-1.11.0.min.js"></script>
+  <script src="/js/vendor/angular.min.js"></script>
+  <script src="/js/vendor/angular-route.min.js"></script>
+  <script src="/js/vendor/angular-resource.min.js"></script>
+  <script src="/js/vendor/ui-bootstrap-custom-0.10.0.min.js"></script>
+  <script src="/js/vendor/ui-bootstrap-custom-tpls-0.10.0.min.js"></script>
+  <script src="/bootstrap/js/bootstrap.min.js"></script>
+  <script src="/js/main.js"></script>
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+    ga('create', 'UA-41411244-1', 'mbilker.us');
+    ga('send', 'pageview');
+  </script>
+</head>
+<body ng-controller="AgendaTodosCtl">
+  <div class="container app">
+    <header>
+      <h1>Agenda Book</h1>
+    </header>
+    <div ng-view></div>
+  </div>
+  <footer class="app-footer">
+    Created by <span style="color: #666">TSA Team 2146-100</span>
+  </footer>
+</body>
+</html>

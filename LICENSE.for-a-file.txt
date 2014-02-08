@@ -12,13 +12,3 @@
 
 // You should have received a copy of the GNU General Public License
 // along with Agenda Todos.  If not, see <http://www.gnu.org/licenses/>.
-
-vendor(prop, args)
-  -webkit-{prop} args
-  -moz-{prop} args
-  -ms-{prop} args
-  -o-{prop} args
-  {prop} args
-
-priority(num)
-  background-color #bdc3c7 - unit(num * 5, '%')

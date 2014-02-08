@@ -40,19 +40,22 @@ AgendaTodosApp.directive('dateinput', ['dateFilter', function(dateFilter) {
       });
 
       ngModelCtrl.$parsers.unshift(function(viewValue) {
-        var date = new Date(viewValue);
-        date.setDate(date.getDate() + 1);
-        date.setHours(0);
-        date.setMinutes(0);
-        date.setSeconds(0);
-        return date;
+        var d = new Date(viewValue);
+        d.setDate(d.getDate() + 1);
+        d.setHours(0);
+        d.setMinutes(0);
+        d.setSeconds(0);
+        d.setMilliseconds(0);
+        return d;
       });
     }
   }
 }]);
 
 AgendaTodosApp.controller('AgendaTodosListCtl', ['$scope', '$modal', 'Assignment', function($scope, $modal, Assignment) {
-  $scope.assignments = Assignment.query();
+  $scope.assignments = Assignment.query(function() {
+    //$scope.assignments.sort($scope.comparator);
+  });
 
   function setFormToDefault() {
     $scope.assignmentTitle = "";
@@ -61,6 +64,7 @@ AgendaTodosApp.controller('AgendaTodosListCtl', ['$scope', '$modal', 'Assignment
     d.setHours(0);
     d.setMinutes(0);
     d.setSeconds(0);
+    d.setMilliseconds(0);
     $scope.dueDate = d;
   }
   setFormToDefault();
@@ -70,10 +74,6 @@ AgendaTodosApp.controller('AgendaTodosListCtl', ['$scope', '$modal', 'Assignment
       return;
     }
 
-    console.log($scope.assignmentTitle);
-    console.log($scope.priority);
-    console.log($scope.dueDate);
-
     var assignment = new Assignment();
     assignment.title = $scope.assignmentTitle;
     assignment.priority = $scope.priority;
@@ -81,6 +81,7 @@ AgendaTodosApp.controller('AgendaTodosListCtl', ['$scope', '$modal', 'Assignment
     assignment.completed = false;
 
     $scope.assignments.push(assignment);
+    //$scope.assignments.sort($scope.comparator);
     var index = $scope.assignments.indexOf(assignment);
     assignment.$save(function(a) {
       $scope.assignments[index] = a;
@@ -106,19 +107,15 @@ AgendaTodosApp.controller('AgendaTodosListCtl', ['$scope', '$modal', 'Assignment
   }
 
   $scope.comparator = function(a, b) {
-    console.log(a, b);
-    if (!a || !b) {
-      return 0;
-    }
-
-    var aVal = -(a.priority + 1) + new Date(a.dueDate).getTime();
-    var bVal = -(b.priority + 1) + new Date(b.dueDate).getTime();
-    if (aVal > bVal) {
-      return 1;
-    } else if (aVal < bVal) {
-      return -1;
+    if (!a || !b) return false;
+    var date = new Date(a.dueDate).getTime() - new Date(b.dueDate).getTime();
+    if (date == 0) {
+      var priority = b.priority - a.priority;
+      console.log(a, b, date, priority);
+      return priority;
     } else {
-      return 0;
+      console.log(a, b, date);
+      return date;
     }
   }
 
@@ -143,6 +140,7 @@ AgendaTodosApp.controller('AgendaTodosListCtl', ['$scope', '$modal', 'Assignment
 
     modalInstance.result.then(function(entry) {
       Assignment.update({ id: entry._id }, entry);
+      //$scope.assignments.sort($scope.comparator);
       console.log(' [*] Modal edited entry', entry);
     }, function() {
       console.log(' [*] Modal cancelled');
