@@ -60,7 +60,7 @@ User.method('encryptPassword', function(password) {
 });
 
 User.virtual('fullName').get(function() {
-  return this.firstname + ' ' + this.lastname;
+  return this.firstName + ' ' + this.lastName;
 });
 
 User.virtual('teacherName').get(function() {

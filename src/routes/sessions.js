@@ -26,6 +26,10 @@ module.exports = function() {
   });
 
   app.post('/login', function(req, res) {
+    if (!req.body || !req.body.user || !req.body.user.username) {
+      return res.redirect('/login');
+    }
+
     User.findOne({ username: req.body.user.username }, function(err, user) {
       if (user && user.authenticate(req.body.user.password)) {
         req.session.user_id = user.id;

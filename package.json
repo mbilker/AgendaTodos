@@ -4,7 +4,8 @@
   "version": "0.0.1",
   "main": "bin/app.js",
   "scripts": {
-    "start": "bin/app.js"
+    "start": "bin/app.js",
+    "test": "mocha -R spec"
   },
   "repository": {
     "type": "git",
@@ -30,6 +31,7 @@
     "npm": "1.2.x"
   },
   "devDependencies": {
-    "gulp-nodemon": "~0.1.2"
+    "gulp-nodemon": "~0.1.2",
+    "supertest": "^0.10.0"
   }
 }
